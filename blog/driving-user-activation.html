@@ -1,0 +1,1063 @@
+<!DOCTYPE html><!-- Last Published: Fri May 10 2024 16:46:39 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.warp.dev" data-wf-page="65d72e8571139abe97f94051" data-wf-site="64b6f3636f598299028e8577" lang="en"><head><meta charset="utf-8"/><title>Driving User Activation: A Summer of Growth and Engineering at Warp | Warp</title><meta content="Our intern Rachel describes how she solved the problem of user retention at Warp." name="description"/><meta content="Driving User Activation: A Summer of Growth and Engineering at Warp" property="og:title"/><meta content="Our intern Rachel describes how she solved the problem of user retention at Warp." property="og:description"/><meta content="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65aac7ae9a516bdcff06d5ba_Driving%20User%20Activation_%20A%20Summer%20of%20Growth%20and%20Engineering%20at%20Warp.jpg" property="og:image"/><meta content="Driving User Activation: A Summer of Growth and Engineering at Warp" property="twitter:title"/><meta content="Our intern Rachel describes how she solved the problem of user retention at Warp." property="twitter:description"/><meta content="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65aac7ae9a516bdcff06d5ba_Driving%20User%20Activation_%20A%20Summer%20of%20Growth%20and%20Engineering%20at%20Warp.jpg" property="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="assets-global.website-files.com/64b6f3636f598299028e8577/css/warp-dev.981488a2c.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/" rel="preconnect"/><link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous"/><script src="ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Roboto Mono:100,200,300,regular,500,600,700","Roboto:100,300,regular,500,700,900"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ff9f4bb4e174f770ceb1_Favicon%20-%20Warp.png" rel="shortcut icon" type="image/x-icon"/><link href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png" rel="apple-touch-icon"/><link href="rss.xml" rel="alternate" title="RSS Feed" type="application/rss+xml"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-7VBQFF9QVG"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('set', 'developer_id.dZGVlNj', true);gtag('config', 'G-7VBQFF9QVG');</script><!--
+  Load Sentry for error monitoring.
+
+  This needs to be placed before other scripts, and the `defer` attribute
+  cannot be used; otherwise, it will not capture and report errors
+  occurring during loading.
+
+  The init portion should come before the script loader.
+-->
+<script>
+  window.sentryOnLoad = function () {
+    const { hostname = "" } = window.location;
+    Sentry.init({
+      environment: hostname.endsWith(".webflow.io") ? "staging" : "production",
+    });
+  };
+</script>
+<script
+  crossorigin="anonymous"
+  src="js.sentry-cdn.com/824c13d1b41716a7feff119b47dbb357.min.js"
+></script>
+
+<!-- Refresh styles -->
+<style>
+  body {
+    font-synthesis: none;
+    -moz-font-feature-settings: "kern";
+    font-feature-settings: "kern";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  .refresh-page {
+    --primary-color: 16, 224, 111;
+  }
+
+  .refresh-h2,
+  .text-title {
+    background-color: var(--primary--lighten-70);
+    background-image: linear-gradient(
+      to bottom right,
+      var(--primary--lighten-70),
+      transparent
+    );
+
+    background-size: 100%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .button-v3.button-v3__primary,
+  .button-v3-base.button-v3-base__primary,
+  .copy-action-icon {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 0.8) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+  }
+
+  .button-v3.button-v3__primary:hover,
+  .button-v3-base.button-v3-base__primary:hover,
+  .copy-action-icon:hover {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 1) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.2);
+  }
+
+  .button-v3.button-v3__primary:active,
+  .button-v3-base.button-v3-base__primary:active,
+  .copy-action-icon:active {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 0.6) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+  }
+
+  .button-v3.button-v3__primary:focus-visible,
+  .button-v3-base.button-v3-base__primary:focus-visible {
+    box-shadow: 0 0 0 4px rgba(var(--primary-color), 0.2);
+  }
+
+  html.w-mod-touch [data-cta-root-tag="download-buttons"],
+  html:not(.w-mod-touch) [data-cta-root-tag="send-download-link"] {
+    display: none;
+  }
+
+  .download-button-group__compact .button-v3 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .download-button-group__compact .download-dropdown-toggle {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .download-dropdown-list-item:hover .download-dropdown-platform-hidden-label {
+    opacity: 1;
+  }
+
+  .copy-action-notification {
+    opacity: 0;
+    transition: opacity 160ms ease-in-out;
+    visibility: hidden;
+  }
+
+  .fs-copyclip_active .copy-action-notification {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .fs-copyclip_active .copy-action-copy-icon {
+    opacity: 0;
+  }
+
+  .fs-copyclip_active .copy-action-check-icon {
+    opacity: 1;
+  }
+  
+  .prompt-icon-embeded {
+    color: rgb(var(--primary-color));
+  }
+
+  .unordered-list.with-connector .unordered-list-item {
+    /* use `em` so the bullet position adapts to the font-size */
+    --bullet-offset-top: 0.33em;
+    --bullet-size: 0.75rem;
+    background-position: 0 var(--bullet-offset-top);
+    position: relative;
+  }
+
+  .unordered-list.with-connector
+    .unordered-list-item:not(:first-of-type)::before {
+    background-color: var(--primary--lighten-40);
+    content: "";
+    height: var(--bullet-offset-top);
+    left: 5.5px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .unordered-list.with-connector
+    .unordered-list-item:not(:last-of-type)::after {
+    background-color: var(--primary--lighten-40);
+    /* sync with row-gap on .unordered-list */
+    bottom: -0.75rem;
+    content: "";
+    left: 5.5px;
+    position: absolute;
+    top: calc(var(--bullet-offset-top) + var(--bullet-size));
+    width: 1px;
+  }
+
+  .section.section__pre-footer {
+    background-image: radial-gradient(
+      136.13% 65.09% at 50% 100%,
+      rgba(var(--primary-color), 0.2) 0%,
+      transparent 100%
+    );
+  }
+</style>
+
+<!-- Support OS detection -->
+<style>
+  html.os-linux [data-for-os="mac"],
+  html.os-linux [data-for-os="windows"] {
+    display: none !important;
+  }
+
+  html.os-mac [data-for-os="linux"],
+  html.os-mac [data-for-os="windows"] {
+    display: none !important;
+  }
+
+  html.os-windows [data-for-os="linux"],
+  html.os-windows [data-for-os="mac"] {
+    display: none !important;
+  }
+
+  html.os-linux [data-except-os="linux"],
+  html.os-mac [data-except-os="mac"],
+  html.os-windows [data-except-os="windows"] {
+    display: none !important;
+  }
+</style>
+<script>
+  (() => {
+    if (/linux/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add("os-linux");
+      return;
+    }
+
+    const ua =
+      navigator.userAgentData && navigator.userAgentData.platform
+        ? navigator.userAgentData.platform
+        : navigator.userAgent;
+
+    document.documentElement.classList.add(
+      /mac(intosh| ?OS)?|iOS|iP(hone|od|ad)/i.test(ua) ? "os-mac" : "os-windows"
+    );
+  })();
+</script>
+
+<!-- [Attributes by Finsweet] Copy to clipboard -->
+<script defer src="cdn.jsdelivr.net/npm/%40finsweet/attributes-copyclip%401/copyclip.js"></script>
+
+<link rel="alternate" type="application/rss+xml" 
+  title="RSS Feed for warp.dev" 
+  href="rss.xml" />
+
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "www.googletagmanager.com/gtm5445.html?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-WCCX3ZH");
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10817224442"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-10817224442');
+</script>
+
+<style type="text/css">
+  :root {
+    --warp-navbar-height: 5rem;
+  }
+
+  html {
+    height: auto !important;
+    /* fix sticky header covers the target element when opening a URL with hash */
+    scroll-padding-top: calc(var(--warp-navbar-height) + 1rem);
+  }
+
+  .w-nav-overlay {
+    overflow: scroll !important;
+    height: 100vh !important;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .button-gradient {
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    outline: none;
+    border: none;
+    background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
+    position: relative;
+    color: #000000;
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+      0 4px 24px rgba(0, 0, 0);*/
+    
+  }
+
+  .button-transparent {
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    outline: none;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+      0 4px 24px rgba(0, 0, 0);
+  }
+
+  .button-gradient.start .lines svg,
+  .button-transparent.start .lines svg {
+    animation: stroke 0.3s linear;
+  }
+
+  .button-gradient .lines,
+  .button-transparent .lines {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .button-gradient .lines > div,
+  .button-transparent .lines > div {
+    position: absolute;
+    inset: 0;
+  }
+
+  .button-gradient .lines > div:last-child,
+  .button-transparent .lines > div:last-child {
+    transform: rotate(180deg);
+  }
+
+  .button-gradient .lines > div svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    fill: none;
+    stroke-width: 2;
+    stroke: #01a4ff;
+    width: 100%;
+    height: 100%;
+    stroke-dasharray: 12 12;
+    stroke-dashoffset: 12;
+    opacity: 0;
+    transform: rotate(-1deg) translate3d(0, 0, 0);
+  }
+
+  .button-transparent .lines > div svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    fill: none;
+    stroke-width: 2;
+    stroke: #c9e9ff;
+    width: 100%;
+    height: 100%;
+    stroke-dasharray: 12 12;
+    stroke-dashoffset: 12;
+    opacity: 0;
+    transform: rotate(-1deg) translate3d(0, 0, 0);
+  }
+
+  .button-gradient .lines > div svg:nth-child(1) {
+    stroke: #01ffc2;
+  }
+
+  .button-transparent .lines > div svg:nth-child(1) {
+    stroke: #f8fcff;
+  }
+
+  .button-gradient .lines > div svg:nth-child(2),
+  .button-transparent .lines > div svg:nth-child(2) {
+    stroke-width: 6px;
+    filter: blur(20px);
+  }
+
+  .button-gradient .lines > div svg:nth-child(3),
+  .button-transparent .lines > div svg:nth-child(3) {
+    stroke-width: 5px;
+    filter: blur(6px);
+  }
+
+  .button-gradient .lines > div svg:nth-child(4),
+  .button-transparent .lines > div svg:nth-child(4) {
+    stroke-width: 10px;
+    filter: blur(56px);
+  }
+
+  @keyframes stroke {
+    30%,
+    55% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 5;
+      opacity: 0;
+    }
+  }
+</style>
+
+<!-- Start VWO Async SmartCode -->
+<script type='text/javascript' id='vwoCode'>
+  if (window && window.navigator && window.navigator.platform && window.navigator.platform.toLowerCase().includes('mac')) {
+   // only running on browsers reporting as a mac OS
+window._vwo_code=window._vwo_code || (function() {
+var account_id=686774,
+version = 1.5,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},hide_element_style:function(){return'{'+hide_element_style+'}'},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{'+hide_element_style+'}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
+  }
+</script>
+<!-- End VWO Async SmartCode -->
+
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','t2_fxwvq0qa', {"optOut":false,"useDecimalCurrencyValues":true,"aaid":"<AAID-HERE>","email":"<EMAIL-HERE>"});rdt('track', 'PageVisit');
+</script>
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel -->
+<style>
+  /* Webflow adds these which mess up the layout. */
+  .w-richtext:before,
+  .w-richtext:after {
+    content: unset;
+  }
+
+  .blog-post-rich-text :first-child {
+    margin-top: 0;
+  }
+
+  .blog-post-rich-text :last-child {
+    margin-bottom: 0;
+  }
+
+  .blog-post-rich-text .primary-button {
+    border-radius: var(--border-radius--corner-small);
+    background-color: transparent;
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-80),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-10);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    align-items: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition:
+      box-shadow 0.16s,
+      background-color 0.16s;
+    display: inline-flex;
+    max-width: 100%;
+    color: var(--primary--white);
+    line-height: 1;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .blog-post-rich-text .primary-button {
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  .blog-post-rich-text .primary-button:hover {
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-100),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-20);
+    opacity: 1;
+    text-decoration: none;
+  }
+
+  .blog-post-rich-text .primary-button:active {
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-60),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-10);
+  }
+
+  .blog-post-rich-text .primary-button:focus-visible {
+    box-shadow:
+      inset 0 0 0 1px var(--primary--green-10),
+      0 0 0 4px var(--primary--green-20);
+    outline-style: none;
+  }
+
+  .blog-post-rich-text ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .blog-post-rich-text ul li {
+    /* use `em` so the bullet position adapts to the font-size */
+    --bullet-offset-top: 0.33em;
+    --bullet-size: 0.75rem;
+    background-attachment: scroll;
+    background-image: url("https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc3938abf16d83006d467c_unordered-list-bullet-icon.svg");
+    background-position: 0 var(--bullet-offset-top);
+    background-repeat: no-repeat;
+    background-size: auto;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .blog-post-rich-text ul li:not(:first-of-type)::before {
+    background-color: var(--primary--lighten-40);
+    content: "";
+    height: var(--bullet-offset-top);
+    left: 5.5px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .blog-post-rich-text ul li:not(:last-of-type)::after {
+    background-color: var(--primary--lighten-40);
+    /* sync with row-gap on .unordered-list */
+    bottom: -0.75rem;
+    content: "";
+    left: 5.5px;
+    position: absolute;
+    top: calc(var(--bullet-offset-top) + var(--bullet-size));
+    width: 1px;
+  }
+
+  .blog-post-rich-text .w-embed:has(> .embed-video) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-post-rich-text .embed-video {
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .blog-post-rich-text .w-richtext-figure-type-video {
+    border-radius: var(--border-radius--corner-medium);
+    overflow: hidden;
+  }
+
+  .blog-post-rich-text .w-code-block {
+    border-radius: var(--border-radius--corner-medium);
+    font-family:
+      Matter Mono,
+      sans-serif;
+    font-size: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* TODO: remove after migrating all buttons to the refresh version */
+  .blog-post-rich-text .w-button {
+    color: white;
+  }
+  
+  .blog-post-rich-text .twitter-tweet {
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+</head><body class="refresh-page"><div class="notifications-area"><div class="container-lg"></div></div><div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="small" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b479" role="banner" data-duration="400"><div class="navbar-container"><a href="index.html" class="navbar-logo-link w-nav-brand"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65a6ee1dfad0ee04bccb5086_Logo (1).svg" loading="lazy" alt="" class="navbar-logo-image"/></a><nav role="navigation" class="navbar-item is-page-height-tablet w-nav-menu"><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b47e" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Features</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b486-7327b479" href="warp-drive.html" class="navbar-dropdown-list-item">Warp Drive</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b488-7327b479" href="warp-ai.html" class="navbar-dropdown-list-item">Warp AI</a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/features/warp-ai" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Full Feature List</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a></div></nav></div><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b48e" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Docs</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/getting-started/readme" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>User manual</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/getting-started/changelog" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Changelog</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b49e-7327b479" href="how-warp-works.html" target="_blank" class="navbar-dropdown-list-item">How Warp Works</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a0-7327b479" href="privacy/overview.html" class="navbar-dropdown-list-item">Privacy</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a2-7327b479" href="faq.html" class="navbar-dropdown-list-item">FAQs</a></div></nav></div><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4a4" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Community</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://discord.com/invite/warpdotdev" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Discord</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://github.com/warpdotdev/Warp" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>GitHub</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://twitter.com/warpdotdev" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>X</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a></div></nav></div><a href="blog.html" class="navbar-link w-inline-block"><div>Blog</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z" fill="currentColor"/>
+</svg></div></div></a><a href="pricing.html" class="navbar-link w-inline-block"><div>Pricing</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z" fill="currentColor"/>
+</svg></div></div></a><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4c4" class="navbar-dropdown is-last w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Company</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a href="about.html" class="navbar-dropdown-list-item">About</a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>How we work</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a href="careers.html" class="navbar-dropdown-list-item">Careers</a><a href="contact.html" class="navbar-dropdown-list-item">Contact</a></div></nav></div><div class="navbar-button"><a data-analytics="Download in Header Clicked" href="http://app.warp.dev/get_warp" target="_blank" class="button-v3-base w-button">Download</a></div></nav><div class="navbar-mobile-menu-button w-nav-button"><div class="menu-icon1"><div class="menu-icon1_line-top"></div><div class="menu-icon1_line-middle"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon1_line-bottom"></div></div></div></div></div><section class="section"><div class="w-layout-blockcontainer container-lg w-container"><div class="grid"><h1 id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907b-97f94051" class="blog-post-title">Driving User Activation: A Summer of Growth and Engineering at Warp</h1><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907d-97f94051" class="blog-post-metadata"><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907e-97f94051" class="blog-post-metadata-item">Rachel Park</div><div class="blog-post-metadata-separator"></div><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e689081-97f94051" class="blog-post-metadata-item">October 11, 2022</div></div></div><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a7f6_6427349e1bf2f03e19f73368_Thumbnail%2520op3.png" loading="lazy" alt="" class="blog-post-featured-image"/></div></section><section><div class="w-layout-blockcontainer container-lg w-container"><div class="grid w-condition-invisible"><div id="w-node-_6b8e8ef0-5096-9813-a952-b3d5a786642a-97f94051" class="blog-post-intro-warpper divider-bottom"><div class="blog-post-rich-text w-dyn-bind-empty w-richtext"></div></div></div><div class="grid"><div id="w-node-_6b8e8ef0-5096-9813-a952-b3d5a7866441-97f94051" class="blog-post-rich-text w-richtext"><h4><em>Rachel is a sophomore at Stanford University who interned with Warp during the summer of 2022. She’s worked across a couple early-stage startups and founded a non-profit for STEM education, where she discovered her love for the startup journey and building for impact. In this piece, she unpacks her experience and insights working across Warp’s software engineering and product growth teams.</em></h4><h2>Why I Joined Warp</h2><p>As someone fascinated by the 0 to 1 process of tech, I wanted to take this summer to learn how to build great product, and make a real impact in crafting one. Now those two qualifiers, “great” product and “real” impact, can be hand-wavy and elusive in the start-up world, but when I learned about Warp through a mentor of mine, I figured I could be onto something. Speaking with founder Zach Lloyd and a couple people closely tied to the team, I quickly learned that I would get the opportunity to own meaningful projects that would help me grow as an engineer while being surrounded by<a href="about.html"> some of the most brilliant people</a> in the industry. As someone who is driven by the impact of code in solving real people’s problems, I aligned closely with Warp’s <a href="https://thezbook.com/code-first-vs-product-first" target="_blank">product-first </a>ethos; what’s especially neat about building a product for developers is that engineers can truly drive product as well, since they’re solving a lot of their own problems. Plus, Warp’s recent public beta launch and quickly growing user base meant it was a pretty exciting time at the company—a time that made it the perfect place to learn how to build a product that users love.</p><p>Fast forward to June 8th 2022, the morning after my last exam of the school year, I was on a flight to NYC to kick off my internship with Warp’s all-team retreat and hackathon.</p><p>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a818_6427349e1bf2f08125f73353_633c60fdd78bd6ddc97872fa_3ly6Jl9LcUwVsbM3IcklU5MW8w_KNadhGzU34X9-7adk09KxJrIcsX2vmJ3gUSkIaYuVP-swLG_fqzoBIQHtiA9fMI1jAQEEwp4_HAdlZNkfNFfss_Sl8qL2IrgDAXFxNUy9bTIMFbz6CUw_gu8uJcgxZdT8THhI2tzjKyXpqMeYPUbSoZAoMwyrwQ.jpeg" alt=""/></div><figcaption><em>The Warp team lined up by height for an activity at the 2022 NYC retreat. Didn’t realize how tall the team would be - I’m the 3rd shortest.</em></figcaption></figure><h2>Working on User Activation</h2><p>The key to crafting a great product is developing empathy to discover meaningful user needs, and addressing those needs with a creatively simple and easy-to-use solution. I was originally hired as just a software engineering intern, but after discussing my goals with my Warp mentors, I was excited to develop a deeper sense of user empathy and lean further into the product than the traditional Warp engineer by helping out with product growth as well. I set out to work on improving user activation, a particularly interesting and pressing problem as Warp began to gain virality. </p><p>What is user activation? Activation, the steepest portion of the retention curve, is a critical period in the user journey. This is all about the user’s small but unforgettable first impression of your product’s value, what convinces them to come back for the second time, then the third, and more. Activation can be broken up into several steps using the <a href="https://www.reforge.com/" target="_blank">Reforge</a> model:</p><ol role="list"><li>Sign up: User joins the product</li><li>Setup moment: User is prepared to experience the core value proposition</li><li>Aha moment: User experiences the core value prop for the first time</li><li>Habit moment: User establishes habit around the core value proposition</li></ol><p>Successful activation for Warp means getting new users to build a habit out of using the product (i.e. running terminal commands in Warp) several days a week within the first week. </p><p>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a821_6427349e1bf2f03f6df73351_c.jpeg" alt=""/></div><figcaption><em>Sample retention curve with the activation period marked. As you can see by the pink dotted line, by boosting user activation, we can shift the overall retention curve up.</em></figcaption></figure><p>The coolest part of this activation project was that I could then bring in my engineering background to run the whole product lifecycle: after analyzing the frictions users face within the first week of using the product, I would be able to design solutions to decrease these frictions and improve activation, build what we came up with, and run experiments to see how what I built made an impact.</p><p>A question I’ve often been asked is how I divided my time across growth and engineering. The thing about working on a product lifecycle end-to-end is that the growth and engineering functions are like sine and cosine waves. Over the course of a project, when it’s time to prioritize user-facing tasks, the time spent engineering naturally comes to a lull until we have feedback to implement, and vice versa. This meant that I ended up working on each in roughly 5-week intervals, spending most of my time first tackling growth, then engineering, then a bit more growth again at the end.<br/>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a82b_6427349e1bf2f00988f73360_b.jpeg" alt=""/></div><figcaption><em>How to visualize working on growth and engineering across a product lifecycle. In my case, I spent the first five weeks focusing on user research (growth), then the next few building the product (engineering), and then testing the product and conducting more user research (growth), which then would theoretically become a continuous cycle.</em></figcaption></figure><h3>Activation Study</h3><p>To kick off the project, I needed to conduct research to understand the needs of first-time Warp users and the current state of Warp’s user journey. The goals of my study were (1) analyze the reasons that users dropped off within the first week of usage and (2) break down and define the different user activation stages for Warp. By defining the setup, aha, and habit stages for Warp, I could then work backwards from our goal of an engaged user to tighten the funnel and increase retention. </p><p>To do this, I conducted over a dozen observed onboarding sessions, recruiting people to explore Warp for the first time as we watched. These hands-off user research sessions helped us better understand the entire first-time user experience; we could hear not only how they felt, but also why they felt that way. When a user exclaimed “Ooh!” I noted it down as a potential Aha moment and asked what was going through their mind. When a user asked about something in the app, I noted it down and asked how they would look for an answer, then noted that down. It was fascinating how these user research sessions uncovered so many fixable micro frictions, as well as some larger rough edges, that had been lost in the quantitative data.</p><p>I then combined my observations with an analysis of our overall funnel and retention data to present 3 key findings to the entire team:</p><ol role="list"><li>Warp has a “blank screen” problem. Users land on an empty app and it takes too long  for them to see Warp’s core value prop.</li><li>This core value prop lies in <a href="https://docs.warp.dev/features/blocks" target="_blank">blocks</a> (the unique way that Warp groups together commands and their output). But since most users currently do not understand the concept of blocks during their first time in Warp, they don’t experience a true Aha moment.</li><li>We have a pretty good pulse on upcoming features and the product roadmap, but need to work on leading users to the value of existing features</li></ol><p>We were able to fix some of the low-hanging fruit along the way to bump our retention curve up a bit, but now it was time to build something that made a significant impact.</p><h3>Building Onboarding 2.0</h3><p>With these insights, a couple teammates and I began to brainstorm solutions for a revamped product onboarding experience, coined “Onboarding 2.0”. As we floated everything from flashy animations to block-based tours, I found putting together a spreadsheet that weighed the ideas along a couple dimensions to be helpful in evaluating the best solution:</p><p>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a81e_6427349e1bf2f028f7f7335b_a.jpeg" alt=""/></div><figcaption><em>Weighing ideas along the axes of effort (how much work is it?) vs. impact (how much does it help you reach your goals?) is a reasonable framework for evaluating what to prioritize and build. The blue circle marks the sweet spot, when we can have the highest impact with the least amount of engineering effort.</em></figcaption></figure><p>Using this framework, we decided that a block-based onboarding and gamified “Getting Started” checklist would be the most viable and impactful way to lead users towards discovering our core value prop of blocks, as well as other valuable features in Warp. Prioritization is hard—it was challenging to scope some brilliant ideas out of the v0, but if anything, we could experiment further later.</p><figure style="padding-bottom:56.206088992974244%" class="w-richtext-align-fullwidth w-richtext-figure-type-video"><div><iframe allowfullscreen="true" frameborder="0" scrolling="no" src="https://www.youtube.com/embed/2WDKofGrLFc"></iframe></div></figure><p><em>A demo of the revamped onboarding experience we ended up building. First-time users now land on a “welcome” block, which points to the new permanent resource center. The resource center contains a “Getting Started” checklist for the user to complete, along with other tips and resources to explore.</em></p><p>As we were designing the implementation of these features, I learned how Warp’s codebase is shaped by its user-focused mentality. One of the challenges we faced with the resource center was building a system for easy content updates that was agnostic to product release cycles. The goal was for anyone on the team to be able to run experiments with the features and content highlighted in the resource center to make sure it was helpful for users. We considered, for example, storing the resource center data as a JSON file in the cloud and building an API to retrieve it every so often. However, we ultimately decided that this would be too much engineering overhead for a v0 that didn’t have any user feedback yet—user feedback that would not only help us optimize the UI/UX design, but also the implementation design as we contemplated the format of the JSON data, the update frequency, and other requirements of a cloud-based system. So although a cloud-based system seemed like the correct way to go long-term, we tabled the discussion and decided to temporarily hard-code the content to prioritize shipping the feature as quickly as possible.</p><h3>Testing Onboarding 2.0</h3><p>Once we built the v0 of the welcome block and resource center, we wanted to test our solution by observing real first-time users interact with the product. This time, we took another approach. The first iteration of user research had required a lot of manual coordination and gave us results with some recruiting bias. Many of the people who signed up for an onboarding session were low-intent users and people in our team’s network. They were only trying Warp either because of the cash reward of participating in UX research or because their friend was working at Warp, which biased the way they approached the app for the first time. But these low-intent users were only a subset of those who usually tried out Warp. </p><p>To make sure we weren’t over indexing on problems raised by only a subset of our users, we ran an experiment with live onboardings. By inserting a screen into our sign-up flow that gave users the option to join an onboarding call, we were able to gather live feedback on our new onboarding experience from real users. To build this, we ended up creating a server side app in Retool to make toggling the onboarding screen as easy as possible.</p><p>Through these live onboardings, it was awesome to see some early validation in the product we built and to find a couple more kinks to iron out before the public launch. Users immediately began to understand and play around with blocks; I heard the audible “Ooh!” as users discovered Warp’s core value prop so much earlier in the session than in my previous run of onboardings. And although my internship is coming to an end right as we launch our revamped onboarding experience to the public, I’m excited to follow how it impacts our retention rates over time.</p><h2>What I Learned</h2><p>As I look back all that I’ve learned during my time at Warp, here are some of my greatest takeaways:<br/>‍</p><ol role="list"><li>Listen closely, and use data sensibly to cut through the noise</li></ol><p>It can be tempting to solely optimize for metrics, using metrics. But I learned that only focusing on the quantitative data can turn a blind eye to subtle, yet important details that may break user trust. For example, given that our retention charts indicated relatively higher churn rates for experienced developers, the next logical step would have been to keep building out new features to try and match Warp to their original terminals. <em>It must be because experienced devs are missing X advanced integration or Y feature that they stop using Warp.</em> It’s only by watching and listening to users in our observed onboardings that we found that it didn’t matter what valuable features Warp had: experienced developers tended to have dotfile configurations with custom tools and plugins that created a buggy experience when opening Warp for the first time. The users didn’t know their dotfiles were incompatible, so they immediately churned because they thought the product was just super buggy. Zero value discovery. </p><p>When it comes to developing empathy with users, nothing beats first hand exposure to their experiences and reactions. It may not be as obvious as a bug; everything from the facial expressions they have to the questions they ask to where they move their cursor as they try out the product can help identify subtler user needs. Yet it’s also easy to become overwhelmed by all these qualitative observations, and this is when we can harness quantitative data to help shape our understanding. In my activation study, for instance, this is how I was able to identify our magical Aha moment. Using stickiness data analysis, I was able to narrow down all the “Ooh!”s I observed in the user research sessions to the one most correlated with retention: blocks.</p><p>Striking a balance between qualitative and quantitative data is crucial to building for impact.</p><ol start="2" role="list"><li>Ask “Why not?”, then figure out how to build quickly</li></ol><p>Figuring out how to build the right stuff is tough. Most people ask “Why?” when evaluating what to build. But I’ve learned that framing the question as “Why <em>not</em>?” leans into an idea, promoting a bias towards experimentation that propels you towards creating something that people love. If there isn’t a good enough reason stopping you from trying something out, the execution is most likely a matter of scoping. This is how we decided to go forward with the block-based onboarding; while we were initially hesitant about it because our ideal vision was a bit ambitious, we decided to scope it down to a single “welcome” block and observe how users reacted in order to see if the ultimate vision was worth building out. Now that there was relatively low tradeoff, why not?</p><p>Combined with lesson #1, this risk-tolerant mentality creates a killer iteration cycle for building products people love. Note that you should still keep first principles in mind and evaluate the idea on the axes of engineering effort vs. impact to make sure you’re not hovering too far into the danger zone (high effort/low impact), though you can never truly tell the impact of something without testing it out first. If you can build an MVP of an idea without much effort, do it. If you can’t, figure out how to scope the idea down so that you can.</p><p>Warp encourages its engineers to try out their ideas, accelerating its shipping velocity and delivering impactful results; many of Warp’s most loved features started out as side projects (e.g. <a href="story-behind-ai-command-search.html">AI Command Search</a>). So now, whenever I’m making a decision, I remind myself to lean in and ask, “Why not?”</p><ol start="3" role="list"><li>Communicate clearly and early</li></ol><p>Warp’s team culture is centered around compassionate and efficient communication. Zach sets a precedent for this by outlining the company’s core values and principles in the <a href="https://www.notion.so/How-We-Communicate-at-Warp-062f77e4acd14b7e83864e2bdfa55d4d" target="_blank">How We Work guide</a>, which encompasses everything from hiring the best talent to the art of a Slack message. As I was running the product lifecycle and collaborating across different functions, I learned how building an explicit foundation of written and visual artifacts, like the How We Work guide, helps the team align efficiently and work as productively as possible. When I was running product meetings, this meant sending out agendas, PRDs, mocks, and other important documents beforehand so that the precious meeting time was used for collaboration and discussion. When I was engineering, this meant sharing demos and getting partial features launched internally as quickly as possible to get feedback. Especially for engineering, communicating early and often is important as it’s easy to get sucked into building something that may actually be solving the wrong problem or using an overcomplicated approach (i.e. building a cloud-based system for the resource center content, as mentioned earlier). Warp instills a collaborative culture where everyone believes that there’s a huge advantage in leveraging the team’s collective wisdom to build better and faster, and communicating early and efficiently is key to unlocking this collaboration.</p><p>As a meta point, just as it’s important to develop a product iteratively with users, it’s important to develop these processes iteratively with the team—to communicate about communication. During my time at Warp, the team was growing so quickly that many of the standing company-wide meetings and norms became unwieldy and unsustainable. It was because of Warp’s open culture of communication that we were able to identify this and adapt collaboration norms to a growing team. As I absorbed Warp’s core values, I also loved learning how to iterate on team culture and processes to continue to uphold these values.</p><h1>Conclusion</h1><p>I feel lucky to have been able to work across so many domains at Warp, truly “learning by doing” as I delved into everything from user research to engineering to even some design. Learning how to navigate the codebase efficiently, architect sound code, and of course, develop in Rust, among other learnings, I’ve surely grown exponentially as an engineer. But I think even more valuable is how running the whole product lifecycle with Warp’s pragmatic, collaborative, and user-focused culture fostered my overall growth as a product builder. I developed generalizable principles around decision making, building, and working as a whole this summer that will surely serve me for my entire career and help me pursue my most ambitious dreams. And I learned a bit about user activation, too. </p><p>Thank you, Warp, for helping me learn and grow more than I could have ever imagined.<br/>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e402b9849c58c6a82f_6427349e1bf2f05ec9f7335a_633c60fd29820810a79dea97_bKoxS5seu_hhJQVHv-VuDymgHg_4esG3Nr7hvw8k0xc1ukTzNQ4na6RULBmdOlurRoy-6qMBKsj5A6iLgAQBEwGxfD_33AQKjGPKV8KQqEGNBlTsOHBvh3lcdPfOs0MzD1Zvlye4XMrGCshHhLqEKK0Zb-ooUioyf8EgmLhk-PncVuK4AwL6eJbLOQ.jpeg" alt=""/></div><figcaption><em>Team bonding with Warp SF</em></figcaption></figure></div></div></div></section><section class="section"><div class="w-layout-blockcontainer container-lg w-container"><div class="w-layout-grid blog-post-social-icons"><a href="https://twitter.com/warpdotdev" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg></div></a><a href="https://discord.com/invite/warpdotdev" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path></svg></div></a><a href="https://github.com/warpdotdev/Warp" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" fill="currentColor"></path></svg></div></a></div></div></section><section class="section pt-0"><div class="w-layout-blockcontainer container-lg w-container"><h2 class="text-title-sm font-weight-normal">Related</h2><div class="mt-8 w-dyn-list"><div role="list" class="related-blog-post-list w-dyn-items"><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="internship-at-warp-speed.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e8b9680e2ceb349fc6_6427349e1bf2f0e9bbf73311_Cover%2520Image2.png" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">An Internship at Warp Speed</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Company</div></div></a></div><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="whos-behind-warp-meet-the-team.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970ee42bf257afa08938e_6427349e1bf2f063b5f7329e_Who%25E2%2580%2599s%2520behind%2520Warp_%2520-%2520Meet%2520the%2520team%2520%255BCover%255D.jpg" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">Who’s behind Warp? - Meet the team</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Company</div></div></a></div><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="problems-with-promotion-oriented-cultures.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e9e3261bb5a16f7e59_6427349e1bf2f0f0c3f732c9_spotlight%2520dark%25202.png" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">The Google Incentive Mismatch: Problems with Promotion-Oriented Cultures</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Company</div></div></a></div><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="how-we-design-warp-our-product-philosophy.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e7f2b2687e46074d9a_6427349e1bf2f03486f7329f_Warp%25E2%2580%2599s%2520product%2520principles%2520for%2520reinventing%2520the%2520terminal%2520%255BCover%255D%25201.jpg" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">Warp’s product principles for reinventing the terminal</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Product</div></div></a></div></div></div></div></section><section class="section section__pre-footer divider-top"><div class="w-layout-blockcontainer container-lg w-container"><div class="grid"><div id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8ce-a6add8cb"><div class="grid gap-y-0"><div id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8d0-a6add8cb" class="predownload-feature-headline"><div class="feature-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cb002e67afff45c7554892_feature-icon-check-verified-02.svg" loading="lazy" width="20" height="20" alt="" class="feature-icon-image"/></div><div class="text-subtitle text-lighten-70 text-align-center text-balance">Trusted by hundreds of thousands of professional developers</div><div class="download-cta-group-waitlist download-cta-group-waitlist__hero-layout hidden"><div class="waitlist-form-header"><div class="waitlist-form-header-text">Join the Windows waitlist</div><a data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg" loading="lazy" alt=""/></a></div><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form" data-analytics-form="Windows Waitlist Form Submitted" action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="476f119b-5a49-9061-469a-3883d8acf404"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Sign up for waitlist"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp when the release is available to download.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div><h2 id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8d5-a6add8cb" class="text-title text-align-center mt-4">Download Warp <br/>to get started</h2></div><div class="mt-12"><div data-cta-root-tag="download-buttons" class="cta-root"><div class="download-cta-group-buttons"><div data-for-os="mac" class="download-cta-container"><div class="download-button-group download-button-group__compact"><div class="download-button-wrapper"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="http://app.warp.dev/get_warp?&amp;package=dmg" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1a5ed579320eb9440f33e_apple-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div><div class="button-v3-text__primary">Download for Mac</div></a></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div><div data-for-os="linux" class="download-cta-container"><div class="download-button-group"><div class="download-button-wrapper"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">.deb</div><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><div class="download-button-help-text">Debian, Ubuntu</div></div><div class="download-button-wrapper"><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">.rpm</div><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><div class="download-button-help-text">Fedora, Red Hat</div></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div><div data-for-os="windows" class="download-cta-container"><div class="download-button-group download-button-group__compact"><div class="download-button-wrapper"><a href="#windows-waitlist-form" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">Join the Windows waitlist</div></a></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div></div><div class="download-cta-group-waitlist hidden"><div class="waitlist-form-header"><div class="waitlist-form-header-text">Join the Windows waitlist</div><a data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg" loading="lazy" alt=""/></a></div><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form" data-analytics-form="Windows Waitlist Form Submitted" action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="b854ce33-8049-1529-3f69-2687ea46a250"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Sign up for waitlist"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp when the release is available to download.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div><div data-cta-root-tag="send-download-link" class="cta-root"><div class="download-cta-group-waitlist"><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-Mobile-Download-Link-Form" data-name="Mobile Download Link Form" data-analytics-form="Mobile Email Download Form Submitted" action="https://senddownloadlink-3fkj7yiwuq-uc.a.run.app/" id="wf-form-Mobile-Download-Link-Form" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="1ecc1edc-ecbc-152b-1f58-b2c52c49efe1"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Send download link"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp with the download link.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div></div></div></div><div class="section__pre-footer-background-image"><img src="assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png" loading="lazy" sizes="(max-width: 479px) 87vw, (max-width: 991px) 92vw, 720px" srcset="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-500.png 500w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-800.png 800w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-1080.png 1080w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png 1440w" alt=""/></div></div></section><footer class="footer divider-top"><div class="footer-container"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145260-c414525e" class="footer_content-top"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145261-c414525e" class="footer-left-content"><a href="#" class="footer-logo-link w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/653024a36ae7b9b3ea53d451_Warp - Glyph.svg" loading="lazy" alt="Warp glyph" class="footer-logo"/></a><div class="footer_status-wrapper"><div id="operational" class="footer_status-component operational"><div class="footer_status-item"><div class="footer_status-dot"></div><div>All Systems Operational</div></div></div><div id="partial-outage" class="footer_status-component partial-outage"><div class="footer_status-item"><div class="footer_status-dot is-yellow"></div><div>Partial Systems Outage</div></div></div><div id="major-outage" class="footer_status-component major-outage"><div class="footer_status-item"><div class="footer_status-dot is-red"></div><div>Major Systems Outage</div></div></div><div class="w-embed w-script"><script>
+  // Function to update div block visibility based on status
+  function updateStatus() {
+    fetch('https://status.warp.dev/api/v2/status.json', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      const statusDescription = data.status.description;
+      const footerStatusComponents = document.querySelectorAll('.footer_status-component');
+
+      // Hide all div blocks with the class name "footer_status-component"
+      footerStatusComponents.forEach(component => {
+        component.style.display = 'none';
+      });
+
+      // Show div block based on the status description
+      if (statusDescription === 'All Systems Operational') {
+        document.querySelector('.footer_status-component.operational').style.display = 'block';
+      } else if (statusDescription === 'Partial System Outage') {
+        document.querySelector('.footer_status-component.partial-outage').style.display = 'block';
+      } else if (statusDescription === 'Major Service Outage') {
+        document.querySelector('.footer_status-component.major-outage').style.display = 'block';
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching status data:', error);
+    });
+  }
+
+  // Call the function to initially set the div block visibility
+  updateStatus();
+</script></div></div></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145278-c414525e" class="footer_link-wrapper"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145279-c414525e" class="footer_link-column is-1"><div class="footer-column-title">Product</div><a href="warp-drive.html" class="footer_link-refresh">Warp Drive</a><a href="warp-ai.html" class="footer_link-refresh">Warp AI</a><a href="security.html" class="footer_link-refresh">Security</a><a href="https://docs.warp.dev/features/warp-ai" target="_blank" class="footer_link-refresh">Full Feature List</a><a href="https://docs.warp.dev/getting-started/changelog" target="_blank" class="footer_link-refresh">Changelog</a><a href="mac-terminal.html" class="footer_link-refresh">Mac Terminal</a><a href="text-editor.html" class="footer_link-refresh">Terminal Text Editor</a><a href="mac-terminal-themes.html" class="footer_link-refresh">Mac Terminal Themes</a><a href="linux-terminal.html" class="footer_link-refresh">Linux Terminal</a></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414528c-c414525e" class="footer_link-column is-2"><div class="footer-column-title">Explore</div><a href="https://docs.warp.dev/getting-started/readme" target="_blank" class="footer_link-refresh">User Manual</a><a href="pricing.html" class="footer_link-refresh">Pricing</a><a href="how-warp-works.html" target="_blank" class="footer_link-refresh">How Warp Works</a><a href="https://www.commands.dev/" target="_blank" class="footer_link-refresh">Commands.dev</a><a href="terminus.html" class="footer_link-refresh">Terminus</a><a href="compare-terminal-tools.html" class="footer_link-refresh">Compare Terminal Tools</a></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414529d-c414525e" class="footer_link-column is-3"><div class="footer-column-title">Company</div><a href="about.html" class="footer_link-refresh">About</a><a href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48" target="_blank" class="footer_link-refresh">How We work</a><a href="careers.html" class="footer_link-refresh">Careers</a><a href="contact.html" class="footer_link-refresh">Contact</a><a href="blog.html" class="footer_link-refresh">Blog</a><a href="privacy/overview.html" class="footer_link-refresh">Privacy</a><a href="faq.html" class="footer_link-refresh">FAQs</a><a href="terms-of-service.html" class="footer_link-refresh">Terms</a></div></div></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b0-c414525e" class="footer_content-bottom"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b1-c414525e" class="footer-legal-text">All Rights Reserved ©️ 2024</div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b3-c414525e" class="w-layout-grid footer_social-list"><a Title="X" href="https://twitter.com/warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon is-twitter w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_279_74)">
+<path d="M9.51577 6.77566L15.4681 0H14.0581L8.8875 5.88201L4.76082 0H0L6.24171 8.89549L0 15.9999H1.41002L6.86679 9.78701L11.2258 15.9999H15.9866M1.91893 1.04126H4.08512L14.057 15.0098H11.8903" fill="currentColor"/>
+</g>
+<defs>
+<clipPath id="clip0_279_74">
+<rect width="15.9866" height="16" fill="currentColor"/>
+</clipPath>
+</defs>
+<title>X</title>
+</svg></div></a><a Title="Youtube" href="https://www.youtube.com/@warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+<path fill="currentColor" d="M29.41 9.26a3.5 3.5 0 0 0-2.47-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.94.59a3.5 3.5 0 0 0-2.47 2.47A36.13 36.13 0 0 0 2 16a36.13 36.13 0 0 0 .59 6.74a3.5 3.5 0 0 0 2.47 2.47c2.18.59 10.94.59 10.94.59s8.76 0 10.94-.59a3.5 3.5 0 0 0 2.47-2.47A36.13 36.13 0 0 0 30 16a36.13 36.13 0 0 0-.59-6.74ZM13.2 20.2v-8.4l7.27 4.2Z"></path>
+<title>Youtube</title>
+</svg></div></a><a Title="TikTok " href="https://www.tiktok.com/@warp.dev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"></path>
+<title>Tiktok</title>
+</svg></div></a><a Title="Discord" href="https://discord.com/invite/warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path>
+<title>Discord</title>
+</svg></div></a><a Title="Github" href="https://github.com/warpdotdev/Warp" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" fill="currentColor"></path>
+<title>Github</title>
+</svg></div></a><a Title="RSS" href="rss.xml" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18" fill="currentColor"></circle><path fill="currentColor" d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path>
+<title>RSS</title>
+</svg></div></a></div></div></div></footer><script src="d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c810bb.js?site=64b6f3636f598299028e8577" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="assets-global.website-files.com/64b6f3636f598299028e8577/js/warp-dev.95b7f2bf0.js" type="text/javascript"></script><script type="text/javascript">
+  _linkedin_partner_id = "4810452";
+  window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+  window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+  (function (l) {
+    if (!l) {
+      window.lintrk = function (a, b) {
+        window.lintrk.q.push([a, b]);
+      };
+      window.lintrk.q = [];
+    }
+    var s = document.getElementsByTagName("script")[0];
+    var b = document.createElement("script");
+    b.type = "text/javascript";
+    b.async = true;
+    b.src = "snap.licdn.com/li.lms-analytics/insight.min.js";
+    s.parentNode.insertBefore(b, s);
+  })(window.lintrk);
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display: none"
+    alt=""
+    src="https://px.ads.linkedin.com/collect/?pid=4810452&amp;fmt=gif"
+  />
+</noscript>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript
+  ><iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-WCCX3ZH"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe
+></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script>
+  !(function () {
+    var analytics = (window.analytics = window.analytics || []);
+    if (!analytics.initialize)
+      if (analytics.invoked)
+        window.console &&
+          console.error &&
+          console.error("Segment snippet included twice.");
+      else {
+        analytics.invoked = !0;
+        analytics.methods = [
+          "trackSubmit",
+          "trackClick",
+          "trackLink",
+          "trackForm",
+          "pageview",
+          "identify",
+          "reset",
+          "group",
+          "track",
+          "ready",
+          "alias",
+          "debug",
+          "page",
+          "once",
+          "off",
+          "on",
+          "addSourceMiddleware",
+          "addIntegrationMiddleware",
+          "setAnonymousId",
+          "addDestinationMiddleware",
+        ];
+        analytics.factory = function (e) {
+          return function () {
+            var t = Array.prototype.slice.call(arguments);
+            t.unshift(e);
+            analytics.push(t);
+            return analytics;
+          };
+        };
+        for (var e = 0; e < analytics.methods.length; e++) {
+          var key = analytics.methods[e];
+          analytics[key] = analytics.factory(key);
+        }
+        analytics.load = function (key, e) {
+          var t = document.createElement("script");
+          t.type = "text/javascript";
+          t.async = !0;
+          t.src = "https://app.warp.dev/_seg/cdn/" + key + "/analytics.min.js";
+          var n = document.getElementsByTagName("script")[0];
+          n.parentNode.insertBefore(t, n);
+          analytics._loadOptions = e;
+        };
+        analytics._writeKey = "ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e";
+        analytics._cdn = "https://app.warp.dev/_seg/cdn";
+        analytics.SNIPPET_VERSION = "4.15.3";
+        analytics.load("ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e", {
+          integrations: {
+            "Segment.io": { apiHost: "app.warp.dev/_seg/api/v1" },
+          },
+        });
+        analytics.page();
+      }
+  })();
+
+  $(document).ready(function () {
+    function sendAnalytics(event, attributes) {
+      let properties;
+      $.each(attributes, (_, attr) => {
+        if (attr.name.startsWith("data-property-")) {
+          if (!properties) {
+            properties = {};
+          }
+          const property = attr.name.split("data-property-")[1];
+          properties[property] = attr.value;
+        }
+      });
+      analytics.track(event, properties);
+    }
+
+    $("[data-analytics]").on("click", (e) => {
+      const event = e.currentTarget.dataset.analytics;
+      const attributes = e.currentTarget.attributes;
+      sendAnalytics(event, attributes);
+    });
+
+    $("form[data-analytics-form]").on("submit", (e) => {
+      const event = e.currentTarget.dataset.analyticsForm;
+      const attributes = e.currentTarget.attributes;
+      sendAnalytics(event, attributes);
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".toggle-header-menu").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const body = document.body;
+
+        if (body.style.overflow === "hidden") {
+          body.style.overflow = "";
+          return;
+        }
+
+        body.style.overflow = "hidden";
+      });
+    });
+
+    const createSVG = (width, height, radius) => {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+      const rectangle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
+
+      svg.setAttributeNS(
+        "http://www.w3.org/2000/svg",
+        "viewBox",
+        `0 0 ${width} ${height}`
+      );
+
+      rectangle.setAttribute("x", "0");
+      rectangle.setAttribute("y", "0");
+      rectangle.setAttribute("width", "100%");
+      rectangle.setAttribute("height", "100%");
+      rectangle.setAttribute("rx", `${radius}`);
+      rectangle.setAttribute("ry", `${radius}`);
+      rectangle.setAttribute("pathLength", "10");
+
+      svg.appendChild(rectangle);
+
+      return svg;
+    };
+
+    document
+      .querySelectorAll(".button-gradient, .button-transparent")
+      .forEach((button) => {
+        const style = getComputedStyle(button);
+
+        const lines = document.createElement("div");
+
+        lines.classList.add("lines");
+
+        const groupTop = document.createElement("div");
+        const groupBottom = document.createElement("div");
+
+        const svg = createSVG(
+          button.offsetWidth,
+          button.offsetHeight,
+          parseInt(style.borderRadius, 10)
+        );
+
+        groupTop.appendChild(svg);
+        groupTop.appendChild(svg.cloneNode(true));
+        groupTop.appendChild(svg.cloneNode(true));
+        groupTop.appendChild(svg.cloneNode(true));
+
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+
+        lines.appendChild(groupTop);
+        lines.appendChild(groupBottom);
+
+        button.appendChild(lines);
+
+        button.addEventListener("pointerenter", () => {
+          button.classList.add("start");
+        });
+
+        svg.addEventListener("animationend", () => {
+          button.classList.remove("start");
+        });
+      });
+  });
+</script>
+
+<script>
+  /**
+   * Custom Form Handling:
+   *
+   * This code provides an option to opt out of Webflow's native form handler
+   * and use a custom form handler instead. By default, the custom form handler is used.
+   * Adding the `data-webflow-form` attribute to the `form` element opts in
+   * to use Webflow's native form handler.
+   *
+   * This code gives us control over which forms will submit data to
+   * our external CRM system. It also enables us to continue using Webflow's
+   * native form submission for selected forms.
+   *
+   * This code is applied site-wide and should not be duplicated across different pages.
+   * Duplicating this code will cause multiple submissions.
+   */
+
+  $("form").submit(function (e) {
+    const $form = $(this); // The submitted form
+
+    if ($form.data("webflow-form") != null) {
+      return true;
+    }
+
+    const $submit = $("[type=submit]", $form); // Submit button of form
+    const buttonText = $submit.val(); // Original button text
+    const buttonWaitingText = $submit.attr("data-wait"); // Waiting button text value
+    const formMethod = $form.attr("method"); // Form method (GET/POST)
+    const formAction = $form.attr("action"); // Form action (the URL we are posting to)
+    const formDataArray = $form.serializeArray(); // Form data
+
+    if ($form.data("include-anonymousid") != null) {
+      const anonymousIdCookie = document.cookie
+        .split("; ")
+        .find((c) => c.startsWith("ajs_anonymous_id="));
+
+      if (anonymousIdCookie) {
+        formDataArray.push({
+          name: "anonymousid",
+          value: anonymousIdCookie.replace("ajs_anonymous_id=", ""),
+        });
+      }
+    }
+
+    // Set waiting text
+    if (buttonWaitingText) {
+      $submit.val(buttonWaitingText);
+    }
+
+    $.ajax(formAction, {
+      data: $.param(formDataArray),
+      method: formMethod,
+    })
+      .done((res) => {
+        $form
+          .hide() // optional hiding of form
+          .siblings(".w-form-done")
+          .show() // Show success
+          .siblings(".w-form-fail")
+          .hide(); // Hide failure
+      })
+      .fail((res) => {
+        $form
+          .siblings(".w-form-done")
+          .hide() // Hide success
+          .siblings(".w-form-fail")
+          .show(); // show failure
+      })
+      .always(() => {
+        // Reset text
+        $submit.val(buttonText);
+      });
+
+    // Prevent Webflow's default form handler from executing
+    return false;
+  });
+
+  // need to enqueue it to Webflow otherwise `submit.disabled` won't take effect
+  Webflow.push(() => {
+    // Validate the form action URL and display an error if the URL is invalid.
+    for (const f of document.querySelectorAll("form")) {
+      // Ignore native Webflow forms
+      if (f.dataset.hasOwnProperty("webflowForm")) {
+        continue;
+      }
+
+      const action = f.getAttribute("action");
+      try {
+        // Check that the action is a valid URL
+        new URL(action.html);
+      } catch {
+        console.error(
+          `Invalid form action: "${action}" for form ${f.name}. Submissions will fail.`
+        );
+
+        // show error
+        $(f)
+          .siblings(".w-form-fail")
+          .text(
+            "Form configuration error. Please contact support for assistance."
+          )
+          .show();
+
+        // disable the submit button
+        const submit = f.querySelector("input[type=submit]");
+        if (submit) {
+          submit.disabled = true;
+        }
+      }
+    }
+  });
+</script>
+
+<!-- handle switching platform-specific CTA when clicking on a link -->
+<style>
+  .waitlist_component-wrapper[data-show-os] .waitlist_component {
+    display: none;
+  }
+  .waitlist_component-wrapper[data-show-os="linux"]
+    .waitlist_component[data-for-os="linux"],
+  .waitlist_component-wrapper[data-show-os="mac"]
+    .waitlist_component[data-for-os="mac"],
+  .waitlist_component-wrapper[data-show-os="windows"]
+    .waitlist_component[data-for-os="windows"] {
+    display: block !important;
+  }
+</style>
+<script>
+  for (const w of document.querySelectorAll(".waitlist_component-wrapper")) {
+    w.addEventListener("click", (event) => {
+      const os = event.target.dataset.activateOs;
+      if (os) {
+        event.preventDefault();
+        w.setAttribute("data-show-os", os);
+      }
+    });
+  }
+</script>
+<!-- handle open/close Windows waitlist form -->
+<style>
+  /* sanity in case someone "clean up" CSS classes in Webflow */
+  .download-cta-group-buttons.hidden,
+  .download-cta-group-waitlist.hidden {
+    display: none;
+  }
+</style>
+<script>
+  (() => {
+    const $roots = $(".cta-root[data-cta-root-tag='download-buttons']");
+    const groups = new Map(
+      $roots.toArray().map((root) => [
+        root,
+        {
+          buttons: root.querySelector(".download-cta-group-buttons"),
+          waitlist: root.querySelector(".download-cta-group-waitlist"),
+        },
+      ])
+    );
+
+    function showButtons({ buttons, waitlist }) {
+      buttons.classList.remove("hidden");
+      waitlist.classList.add("hidden");
+    }
+
+    function showWaitlist({ buttons, waitlist }) {
+      buttons.classList.add("hidden");
+      waitlist.classList.remove("hidden");
+    }
+
+    $roots.on("click", "[href='#windows-waitlist-form']", (event) => {
+      event.preventDefault();
+      showWaitlist(groups.get(event.delegateTarget));
+    });
+
+    $roots.on(
+      "click",
+      "[data-element-tag='waitlist-form-close-button']",
+      (event) => {
+        event.preventDefault();
+        showButtons(groups.get(event.delegateTarget));
+      }
+    );
+
+    // if the page loads with `?windows_waitlist=true`, open the waitlist
+    // by default regardless of the platform.
+    const { searchParams } = new URL(window.html);
+    // loop through search params instead of doing .get to handle case sensitivity
+    for (const [k, v] of searchParams) {
+      if (
+        k.toLowerCase() === "windows_waitlist" &&
+        v.toLowerCase() === "true"
+      ) {
+        for (const group of groups.values()) {
+          showWaitlist(group);
+        }
+      }
+    }
+  })();
+</script>
+
+<script src="cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+<script>
+  // define the load gist function
+  var loadGist = function (elem) {
+    var gistUrl = $(elem)
+      .text()
+      .match(/\bhttps?:\/\/\S+(.js)/gi);
+    if (
+      typeof gistUrl === "undefined" ||
+      gistUrl === null ||
+      gistUrl.length == 0
+    )
+      return;
+    //load gist
+    $(elem).show();
+    $(elem).empty();
+    postscribe(elem, "<script src=" + gistUrl + "><\/script>");
+  };
+
+  var gists = $('p:contains("CODE:")');
+  gists.hide();
+  gists.toArray().forEach(loadGist);
+</script>
+</body></html>

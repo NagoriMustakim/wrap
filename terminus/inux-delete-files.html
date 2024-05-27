@@ -1,0 +1,2774 @@
+<!DOCTYPE html><!-- Last Published: Fri May 10 2024 16:46:39 GMT+0000 (Coordinated Universal Time) -->
+<html data-wf-domain="www.warp.dev" data-wf-page="65d72e8571139abe97f940ae" data-wf-site="64b6f3636f598299028e8577"
+  lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>How To Delete Files In Linux</title>
+  <meta content="Learn how to selectively delete files in Linux based on patterns and properties using the rm command."
+    name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="assets-global.website-files.com/64b6f3636f598299028e8577/css/warp-dev.981488a2c.min.css"
+    rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/" rel="preconnect" />
+  <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous" />
+  <script src="ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script
+    type="text/javascript">WebFont.load({ google: { families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic", "Roboto Mono:100,200,300,regular,500,600,700", "Roboto:100,300,regular,500,700,900"] } });</script>
+  <script
+    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+  <link
+    href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ff9f4bb4e174f770ceb1_Favicon%20-%20Warp.png"
+    rel="shortcut icon" type="image/x-icon" />
+  <link
+    href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png"
+    rel="apple-touch-icon" />
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-7VBQFF9QVG"></script>
+  <script
+    type="text/javascript">window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('set', 'developer_id.dZGVlNj', true); gtag('config', 'G-7VBQFF9QVG');</script><!--
+  Load Sentry for error monitoring.
+
+  This needs to be placed before other scripts, and the `defer` attribute
+  cannot be used; otherwise, it will not capture and report errors
+  occurring during loading.
+
+  The init portion should come before the script loader.
+-->
+  <script>
+    window.sentryOnLoad = function () {
+      const { hostname = "" } = window.location;
+      Sentry.init({
+        environment: hostname.endsWith(".webflow.io") ? "staging" : "production",
+      });
+    };
+  </script>
+  <script crossorigin="anonymous" src="js.sentry-cdn.com/824c13d1b41716a7feff119b47dbb357.min.js"></script>
+
+  <!-- Refresh styles -->
+  <style>
+    body {
+      font-synthesis: none;
+      -moz-font-feature-settings: "kern";
+      font-feature-settings: "kern";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeSpeed;
+    }
+
+    .refresh-page {
+      --primary-color: 16, 224, 111;
+    }
+
+    .refresh-h2,
+    .text-title {
+      background-color: var(--primary--lighten-70);
+      background-image: linear-gradient(to bottom right,
+          var(--primary--lighten-70),
+          transparent);
+
+      background-size: 100%;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .button-v3.button-v3__primary,
+    .button-v3-base.button-v3-base__primary,
+    .copy-action-icon {
+      background-image: radial-gradient(84.3% 100% at 50% 93.48%,
+          rgba(var(--primary-color), 0.8) 0%,
+          rgba(var(--primary-color), 0) 100%);
+      box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+    }
+
+    .button-v3.button-v3__primary:hover,
+    .button-v3-base.button-v3-base__primary:hover,
+    .copy-action-icon:hover {
+      background-image: radial-gradient(84.3% 100% at 50% 93.48%,
+          rgba(var(--primary-color), 1) 0%,
+          rgba(var(--primary-color), 0) 100%);
+      box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.2);
+    }
+
+    .button-v3.button-v3__primary:active,
+    .button-v3-base.button-v3-base__primary:active,
+    .copy-action-icon:active {
+      background-image: radial-gradient(84.3% 100% at 50% 93.48%,
+          rgba(var(--primary-color), 0.6) 0%,
+          rgba(var(--primary-color), 0) 100%);
+      box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+    }
+
+    .button-v3.button-v3__primary:focus-visible,
+    .button-v3-base.button-v3-base__primary:focus-visible {
+      box-shadow: 0 0 0 4px rgba(var(--primary-color), 0.2);
+    }
+
+    html.w-mod-touch [data-cta-root-tag="download-buttons"],
+    html:not(.w-mod-touch) [data-cta-root-tag="send-download-link"] {
+      display: none;
+    }
+
+    .download-button-group__compact .button-v3 {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .download-button-group__compact .download-dropdown-toggle {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .download-dropdown-list-item:hover .download-dropdown-platform-hidden-label {
+      opacity: 1;
+    }
+
+    .copy-action-notification {
+      opacity: 0;
+      transition: opacity 160ms ease-in-out;
+      visibility: hidden;
+    }
+
+    .fs-copyclip_active .copy-action-notification {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .fs-copyclip_active .copy-action-copy-icon {
+      opacity: 0;
+    }
+
+    .fs-copyclip_active .copy-action-check-icon {
+      opacity: 1;
+    }
+
+    .prompt-icon-embeded {
+      color: rgb(var(--primary-color));
+    }
+
+    .unordered-list.with-connector .unordered-list-item {
+      /* use `em` so the bullet position adapts to the font-size */
+      --bullet-offset-top: 0.33em;
+      --bullet-size: 0.75rem;
+      background-position: 0 var(--bullet-offset-top);
+      position: relative;
+    }
+
+    .unordered-list.with-connector .unordered-list-item:not(:first-of-type)::before {
+      background-color: var(--primary--lighten-40);
+      content: "";
+      height: var(--bullet-offset-top);
+      left: 5.5px;
+      position: absolute;
+      top: 0;
+      width: 1px;
+    }
+
+    .unordered-list.with-connector .unordered-list-item:not(:last-of-type)::after {
+      background-color: var(--primary--lighten-40);
+      /* sync with row-gap on .unordered-list */
+      bottom: -0.75rem;
+      content: "";
+      left: 5.5px;
+      position: absolute;
+      top: calc(var(--bullet-offset-top) + var(--bullet-size));
+      width: 1px;
+    }
+
+    .section.section__pre-footer {
+      background-image: radial-gradient(136.13% 65.09% at 50% 100%,
+          rgba(var(--primary-color), 0.2) 0%,
+          transparent 100%);
+    }
+  </style>
+
+  <!-- Support OS detection -->
+  <style>
+    html.os-linux [data-for-os="mac"],
+    html.os-linux [data-for-os="windows"] {
+      display: none !important;
+    }
+
+    html.os-mac [data-for-os="linux"],
+    html.os-mac [data-for-os="windows"] {
+      display: none !important;
+    }
+
+    html.os-windows [data-for-os="linux"],
+    html.os-windows [data-for-os="mac"] {
+      display: none !important;
+    }
+
+    html.os-linux [data-except-os="linux"],
+    html.os-mac [data-except-os="mac"],
+    html.os-windows [data-except-os="windows"] {
+      display: none !important;
+    }
+  </style>
+  <script>
+    (() => {
+      if (/linux/i.test(navigator.userAgent)) {
+        document.documentElement.classList.add("os-linux");
+        return;
+      }
+
+      const ua =
+        navigator.userAgentData && navigator.userAgentData.platform
+          ? navigator.userAgentData.platform
+          : navigator.userAgent;
+
+      document.documentElement.classList.add(
+        /mac(intosh| ?OS)?|iOS|iP(hone|od|ad)/i.test(ua) ? "os-mac" : "os-windows"
+      );
+    })();
+  </script>
+
+  <!-- [Attributes by Finsweet] Copy to clipboard -->
+  <script defer src="cdn.jsdelivr.net/npm/%40finsweet/attributes-copyclip%401/copyclip.js"></script>
+
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for warp.dev" href="blog/rss.xml" />
+
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "www.googletagmanager.com/gtm5445.html?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-WCCX3ZH");
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10817224442"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-10817224442');
+  </script>
+
+  <style type="text/css">
+    :root {
+      --warp-navbar-height: 5rem;
+    }
+
+    html {
+      height: auto !important;
+      /* fix sticky header covers the target element when opening a URL with hash */
+      scroll-padding-top: calc(var(--warp-navbar-height) + 1rem);
+    }
+
+    .w-nav-overlay {
+      overflow: scroll !important;
+      height: 100vh !important;
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .button-gradient {
+      -webkit-tap-highlight-color: transparent;
+      appearance: none;
+      outline: none;
+      border: none;
+      background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
+      position: relative;
+      color: #000000;
+      /*box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+      0 4px 24px rgba(0, 0, 0);*/
+
+    }
+
+    .button-transparent {
+      -webkit-tap-highlight-color: transparent;
+      appearance: none;
+      outline: none;
+      position: relative;
+      box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+        0 4px 24px rgba(0, 0, 0);
+    }
+
+    .button-gradient.start .lines svg,
+    .button-transparent.start .lines svg {
+      animation: stroke 0.3s linear;
+    }
+
+    .button-gradient .lines,
+    .button-transparent .lines {
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: hard-light;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .button-gradient .lines>div,
+    .button-transparent .lines>div {
+      position: absolute;
+      inset: 0;
+    }
+
+    .button-gradient .lines>div:last-child,
+    .button-transparent .lines>div:last-child {
+      transform: rotate(180deg);
+    }
+
+    .button-gradient .lines>div svg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      overflow: visible;
+      fill: none;
+      stroke-width: 2;
+      stroke: #01a4ff;
+      width: 100%;
+      height: 100%;
+      stroke-dasharray: 12 12;
+      stroke-dashoffset: 12;
+      opacity: 0;
+      transform: rotate(-1deg) translate3d(0, 0, 0);
+    }
+
+    .button-transparent .lines>div svg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      overflow: visible;
+      fill: none;
+      stroke-width: 2;
+      stroke: #c9e9ff;
+      width: 100%;
+      height: 100%;
+      stroke-dasharray: 12 12;
+      stroke-dashoffset: 12;
+      opacity: 0;
+      transform: rotate(-1deg) translate3d(0, 0, 0);
+    }
+
+    .button-gradient .lines>div svg:nth-child(1) {
+      stroke: #01ffc2;
+    }
+
+    .button-transparent .lines>div svg:nth-child(1) {
+      stroke: #f8fcff;
+    }
+
+    .button-gradient .lines>div svg:nth-child(2),
+    .button-transparent .lines>div svg:nth-child(2) {
+      stroke-width: 6px;
+      filter: blur(20px);
+    }
+
+    .button-gradient .lines>div svg:nth-child(3),
+    .button-transparent .lines>div svg:nth-child(3) {
+      stroke-width: 5px;
+      filter: blur(6px);
+    }
+
+    .button-gradient .lines>div svg:nth-child(4),
+    .button-transparent .lines>div svg:nth-child(4) {
+      stroke-width: 10px;
+      filter: blur(56px);
+    }
+
+    @keyframes stroke {
+
+      30%,
+      55% {
+        opacity: 1;
+      }
+
+      100% {
+        stroke-dashoffset: 5;
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <!-- Start VWO Async SmartCode -->
+  <script type='text/javascript' id='vwoCode'>
+    if (window && window.navigator && window.navigator.platform && window.navigator.platform.toLowerCase().includes('mac')) {
+      // only running on browsers reporting as a mac OS
+      window._vwo_code = window._vwo_code || (function () {
+        var account_id = 686774,
+          version = 1.5,
+          settings_tolerance = 2000,
+          library_tolerance = 2500,
+          use_existing_jquery = false,
+          is_spa = 1,
+          hide_element = 'body',
+          hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+          /* DO NOT EDIT BELOW THIS LINE */
+          f = false, d = document, vwoCodeEl = d.querySelector('#vwoCode'), code = { use_existing_jquery: function () { return use_existing_jquery }, library_tolerance: function () { return library_tolerance }, hide_element_style: function () { return '{' + hide_element_style + '}' }, finish: function () { if (!f) { f = true; var e = d.getElementById('_vis_opt_path_hides'); if (e) e.parentNode.removeChild(e) } }, finished: function () { return f }, load: function (e) { var t = d.createElement('script'); t.fetchPriority = 'high'; t.src = e; t.type = 'text/javascript'; t.innerText; t.onerror = function () { _vwo_code.finish() }; d.getElementsByTagName('head')[0].appendChild(t) }, getVersion: function () { return version }, getMatchedCookies: function (e) { var t = []; if (document.cookie) { t = document.cookie.match(e) || [] } return t }, getCombinationCookie: function () { var e = code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi); e = e.map(function (e) { try { var t = decodeURIComponent(e); if (!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)) { return '' } return t } catch (e) { return '' } }); var i = []; e.forEach(function (e) { var t = e.match(/([\d,]+)/g); t && i.push(t.join('-')) }); return i.join('|') }, init: function () { if (d.URL.indexOf('__vwo_disable__') > -1) return; window.settings_timer = setTimeout(function () { _vwo_code.finish() }, settings_tolerance); var e = d.createElement('style'), t = hide_element ? hide_element + '{' + hide_element_style + '}' : '', i = d.getElementsByTagName('head')[0]; e.setAttribute('id', '_vis_opt_path_hides'); vwoCodeEl && e.setAttribute('nonce', vwoCodeEl.nonce); e.setAttribute('type', 'text/css'); if (e.styleSheet) e.styleSheet.cssText = t; else e.appendChild(d.createTextNode(t)); i.appendChild(e); var n = this.getCombinationCookie(); this.load('https://dev.visualwebsiteoptimizer.com/j.php?a=' + account_id + '&u=' + encodeURIComponent(d.URL) + '&f=' + +is_spa + '&vn=' + version + (n ? '&c=' + n : '')); return settings_timer } }; window._vwo_settings_timer = code.init(); return code;
+      }());
+    }
+  </script>
+  <!-- End VWO Async SmartCode -->
+
+  <!-- Reddit Pixel -->
+  <script>
+    !function (w, d) { if (!w.rdt) { var p = w.rdt = function () { p.sendEvent ? p.sendEvent.apply(p, arguments) : p.callQueue.push(arguments) }; p.callQueue = []; var t = d.createElement("script"); t.src = "www.redditstatic.com/ads/pixel.js", t.async = !0; var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(t, s) } }(window, document); rdt('init', 't2_fxwvq0qa', { "optOut": false, "useDecimalCurrencyValues": true, "aaid": "<AAID-HERE>", "email": "<EMAIL-HERE>" }); rdt('track', 'PageVisit');
+  </script>
+  <!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+  <!-- End Reddit Pixel -->
+  <script async src="cdn.jsdelivr.net/npm/%40finsweet/attributes-cmsnest%401/cmsnest.js"></script>
+
+  <style>
+    /* keep it the same as the global .text-title */
+    .terminus-article-title-refresh {
+      background-color: var(--primary--lighten-70);
+      background-image: linear-gradient(to bottom right,
+          var(--primary--lighten-70),
+          transparent);
+
+      background-size: 100%;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    /* Start collapsible styles */
+    .terminus-collapsible-toggle-icon {
+      transform: rotate(0);
+      transition: transform 0.24s cubic-bezier(0.5, 1, 0.89, 1);
+    }
+
+    .terminus-collapsible-root.is-open .terminus-collapsible-toggle-icon {
+      transform: rotate(90deg);
+    }
+
+    .terminus-collapsible-panel {
+      max-height: 0;
+      transition: max-height 0.24s cubic-bezier(0.5, 1, 0.89, 1);
+    }
+
+    .terminus-collapsible-root.is-open .terminus-collapsible-panel {
+      max-height: 100vh;
+    }
+
+    /* End collapsible styles */
+
+    .contents-link:not(:first-of-type) {
+      padding-top: 0.25rem;
+    }
+
+    .contents-link.ml-1 {
+      margin-left: 0.5rem;
+    }
+
+    .contents-link a {
+      color: var(--primary--lighten-90);
+      text-decoration: none;
+    }
+
+    .contents-link a:hover {
+      color: var(--primary--lighten-100);
+    }
+
+    /* Start rich text styles */
+    .terminus-article-rich-text-refresh>blockquote {
+      position: relative;
+    }
+
+    .terminus-article-rich-text-refresh>blockquote::before {
+      background-color: var(--primary--lighten-60);
+      border-radius: 0.125rem;
+      bottom: 0;
+      content: "";
+      flex-shrink: 0;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 0.125rem;
+    }
+
+    .terminus-article-rich-text-refresh> :first-child {
+      margin-top: 0;
+    }
+
+    .terminus-article-rich-text-refresh> :last-child {
+      margin-bottom: 0;
+    }
+
+    @media screen and (min-width: 1280px) {
+
+      .terminus-article-header,
+      .terminus-article-footer,
+      .terminus-article-rich-text-refresh> :not(figure) {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 36.5rem;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .terminus-article-rich-text-refresh>.w-embed {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .terminus-article-rich-text-refresh>.w-embed {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .terminus-article-rich-text-refresh>.w-embed:has(> pre) {
+      background-color: var(--primary--lighten-5);
+      border-radius: var(--border-radius--corner-medium);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    .terminus-article-rich-text-refresh>.w-embed:has(> pre)::before,
+    .terminus-article-rich-text-refresh>.w-embed:has(> pre)::after {
+      content: unset;
+    }
+
+    .terminus-article-rich-text-refresh pre {
+      margin: 0;
+    }
+
+    .terminus-article-rich-text-refresh pre code {
+      display: block;
+      line-height: 1.5;
+      /* clear styles */
+      background: unset;
+      border-radius: unset;
+      padding: unset;
+    }
+
+    .run-in-warp-button {
+      /* need important to overrides .terminus-article-rich-text a */
+      color: var(--primary--white) !important;
+      text-decoration: none !important;
+    }
+
+    .run-in-warp-button:active,
+    .run-in-warp-button:hover,
+    .run-in-warp-button:focus-visible {
+      /* need important to overrides .terminus-article-rich-text a */
+      text-decoration: none !important;
+    }
+
+    .run-in-warp-button>img {
+      /* need important to overrides .terminus-article-rich-text img */
+      width: auto !important;
+    }
+
+    .inline-code {
+      border-radius: var(--border-radius--corner-medium);
+      background-color: var(--primary--lighten-10);
+      letter-spacing: 0.7px;
+      padding: 0.25rem 0.5rem;
+      font-family:
+        Matter Mono,
+        sans-serif;
+      font-size: 0.875rem;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    @media screen and (min-width: 1280px) {
+      .inline-code {
+        letter-spacing: 0.8px;
+        font-size: 1rem;
+      }
+    }
+
+    /* End rich text styles */
+
+    .w-dyn-item:last-of-type .terminus-more-list-item {
+      padding-bottom: 0;
+    }
+
+    .terminus-more-list-item-link:focus-visible .terminus-more-list-item-background,
+    .terminus-more-list-item-link:hover .terminus-more-list-item-background {
+      opacity: 100%;
+      transform: scale(1);
+    }
+
+    .terminus-more-list-item-link:active .terminus-more-list-item-background {
+      opacity: 50%;
+      transform: scale(0.99);
+    }
+  </style>
+
+  <!-- Prism Theme based on Atom Dark -->
+  <style>
+    pre[class*="language-"] {
+      text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+      direction: ltr;
+      text-align: left;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      line-height: 1.5;
+
+      -moz-tab-size: 4;
+      -o-tab-size: 4;
+      tab-size: 4;
+
+      -webkit-hyphens: none;
+      -moz-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: var(--primary--lighten-40);
+    }
+
+    .token.punctuation {
+      color: #c5c8c6;
+    }
+
+    .namespace {
+      opacity: 0.7;
+    }
+
+    .token.property,
+    .token.keyword {
+      color: #96cbfe;
+    }
+
+    .token.boolean,
+    .token.constant {
+      color: #99cc99;
+    }
+
+    .token.symbol,
+    .token.deleted {
+      color: #f92672;
+    }
+
+    .token.number {
+      color: #ff73fd;
+    }
+
+    .token.selector,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted,
+    .token.attr-value {
+      color: var(--secondary--green-60);
+    }
+
+    .token.atrule,
+    .token.attr-name,
+    .token.function {
+      color: #fb99f7;
+    }
+
+    .token.variable {
+      color: #c6c5fe;
+    }
+
+    .token.operator {
+      color: #ededed;
+    }
+
+    .token.entity {
+      color: #ffffb6;
+      cursor: help;
+    }
+
+    .token.url {
+      color: #96cbfe;
+    }
+
+    .language-css .token.string,
+    .style .token.string {
+      color: #87c38a;
+    }
+
+    .token.regex {
+      color: #e9c062;
+    }
+
+    .token.important {
+      color: #fd971f;
+    }
+
+    .token.important,
+    .token.bold {
+      font-weight: bold;
+    }
+
+    .token.italic {
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body class="refresh-page">
+  <div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav"
+    data-easing="ease" data-collapse="small" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b479" role="banner"
+    data-duration="400">
+    <div class="navbar-container"><a href="index.html" class="navbar-logo-link w-nav-brand"><img
+          src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65a6ee1dfad0ee04bccb5086_Logo (1).svg"
+          loading="lazy" alt="" class="navbar-logo-image" /></a>
+      <nav role="navigation" class="navbar-item is-page-height-tablet w-nav-menu">
+        <div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b47e"
+          class="navbar-dropdown w-dropdown">
+          <div class="navbar-dropdown-toggle w-dropdown-toggle">
+            <div>Features</div>
+            <div class="navbar-dropdown-trigger-mobile">
+              <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                  viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z"
+                    fill="currentColor" />
+                </svg></div>
+            </div>
+          </div>
+          <nav class="navbar-dropdown-list w-dropdown-list">
+            <div class="navbar-dropdown-list-container"><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b486-7327b479"
+                href="warp-drive.html" class="navbar-dropdown-list-item">Warp Drive</a><a
+                id="w-node-e9aadf04-ea12-4177-64aa-faf87327b488-7327b479" href="warp-ai.html"
+                class="navbar-dropdown-list-item">Warp AI</a><a
+                id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/features/warp-ai"
+                target="_blank" class="navbar-dropdown-list-item w-inline-block">
+                <div>Full Feature List</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a></div>
+          </nav>
+        </div>
+        <div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b48e"
+          class="navbar-dropdown w-dropdown">
+          <div class="navbar-dropdown-toggle w-dropdown-toggle">
+            <div>Docs</div>
+            <div class="navbar-dropdown-trigger-mobile">
+              <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                  viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z"
+                    fill="currentColor" />
+                </svg></div>
+            </div>
+          </div>
+          <nav class="navbar-dropdown-list w-dropdown-list">
+            <div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00"
+                href="https://docs.warp.dev/getting-started/readme" target="_blank"
+                class="navbar-dropdown-list-item w-inline-block">
+                <div>User manual</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00"
+                href="https://docs.warp.dev/getting-started/changelog" target="_blank"
+                class="navbar-dropdown-list-item w-inline-block">
+                <div>Changelog</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b49e-7327b479" href="blog/how-warp-works.html"
+                target="_blank" class="navbar-dropdown-list-item">How Warp Works</a><a
+                id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a0-7327b479" href="privacy/overview.html"
+                class="navbar-dropdown-list-item">Privacy</a><a
+                id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a2-7327b479" href="faq.html"
+                class="navbar-dropdown-list-item">FAQs</a></div>
+          </nav>
+        </div>
+        <div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4a4"
+          class="navbar-dropdown w-dropdown">
+          <div class="navbar-dropdown-toggle w-dropdown-toggle">
+            <div>Community</div>
+            <div class="navbar-dropdown-trigger-mobile">
+              <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                  viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z"
+                    fill="currentColor" />
+                </svg></div>
+            </div>
+          </div>
+          <nav class="navbar-dropdown-list w-dropdown-list">
+            <div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00"
+                href="https://discord.com/invite/warpdotdev" target="_blank"
+                class="navbar-dropdown-list-item w-inline-block">
+                <div>Discord</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00"
+                href="https://github.com/warpdotdev/Warp" target="_blank"
+                class="navbar-dropdown-list-item w-inline-block">
+                <div>GitHub</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://twitter.com/warpdotdev"
+                target="_blank" class="navbar-dropdown-list-item w-inline-block">
+                <div>X</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a></div>
+          </nav>
+        </div><a href="blog.html" class="navbar-link w-inline-block">
+          <div>Blog</div>
+          <div class="navbar-dropdown-trigger-mobile">
+            <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z"
+                  fill="currentColor" />
+              </svg></div>
+          </div>
+        </a><a href="pricing.html" class="navbar-link w-inline-block">
+          <div>Pricing</div>
+          <div class="navbar-dropdown-trigger-mobile">
+            <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z"
+                  fill="currentColor" />
+              </svg></div>
+          </div>
+        </a>
+        <div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4c4"
+          class="navbar-dropdown is-last w-dropdown">
+          <div class="navbar-dropdown-toggle w-dropdown-toggle">
+            <div>Company</div>
+            <div class="navbar-dropdown-trigger-mobile">
+              <div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%"
+                  viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z"
+                    fill="currentColor" />
+                </svg></div>
+            </div>
+          </div>
+          <nav class="navbar-dropdown-list w-dropdown-list">
+            <div class="navbar-dropdown-list-container"><a href="about.html"
+                class="navbar-dropdown-list-item">About</a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00"
+                href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48"
+                target="_blank" class="navbar-dropdown-list-item w-inline-block">
+                <div>How we work</div>
+                <div class="button-v3-icon button-v3-icon__small"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg"
+                    loading="lazy" width="16" height="16" alt="" /></div>
+              </a><a href="careers.html" class="navbar-dropdown-list-item">Careers</a><a href="contact.html"
+                class="navbar-dropdown-list-item">Contact</a></div>
+          </nav>
+        </div>
+        <div class="navbar-button"><a data-analytics="Download in Header Clicked" href="index.html"
+            target="_blank" class="button-v3-base w-button">Download</a></div>
+      </nav>
+      <div class="navbar-mobile-menu-button w-nav-button">
+        <div class="menu-icon1">
+          <div class="menu-icon1_line-top"></div>
+          <div class="menu-icon1_line-middle">
+            <div class="menu-icon_line-middle-inner"></div>
+          </div>
+          <div class="menu-icon1_line-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <div class="w-layout-blockcontainer container-lg w-container">
+        <div class="terminus-breadcrumb"><a href="terminus.html" class="terminus-breadcrumb-item">Terminus</a><img
+            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/661e17972f30839913e53846_caret-right-lighten-60.svg"
+            loading="lazy" width="12" height="12" alt="" />
+          <div class="w-dyn-list">
+            <div role="list" class="w-dyn-items">
+              <div role="listitem" class="w-dyn-item"><a href="topic/linux.html"
+                  class="terminus-breadcrumb-item">Linux</a></div>
+            </div>
+          </div><img
+            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/661e17972f30839913e53846_caret-right-lighten-60.svg"
+            loading="lazy" width="12" height="12" alt="" />
+          <div class="terminus-breadcrumb-current-item">Delete Files In Linux</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="w-layout-blockcontainer container-lg w-container">
+        <article class="terminus-body">
+          <main id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a3d4-97f940ae">
+            <div class="terminus-article-header">
+              <h1 class="terminus-article-title-refresh">Delete Files In Linux</h1>
+              <div class="mt-8">
+                <div class="w-dyn-list">
+                  <div role="list" class="w-dyn-items">
+                    <div role="listitem" class="terminus-article-author w-dyn-item"><img
+                        src="assets-global.website-files.com/64b6f3636f598299028e8577/65dfc603ff7652f0f35ad963_Media.png"
+                        loading="lazy" alt="Sarah Majeed" class="terminus-article-author-image w-dyn-bind-empty" />
+                      <div class="terminus-article-author-info">
+                        <div class="terminus-article-author-name">Sarah Majeed</div>
+                        <div class="terminus-article-author-role w-dyn-bind-empty"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-row mt-6">
+                <div class="w-dyn-list">
+                  <div role="list" class="terminus-topics-list w-dyn-items">
+                    <div role="listitem" class="w-dyn-item"><a href="topic/linux.html"
+                        class="terminus-topic-tag">Linux</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="terminus-article-rich-text-refresh w-richtext">
+              <h2>The short answer</h2>
+              <p>In Unix-like operating systems like Linux and macOS, to delete one or more files, you can use the
+                [.inline-code] rm[.inline-code] command as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm &lt;file ...&gt;
+</pre></code>
+              </div>
+              <p>Where:</p>
+              <ul role="list">
+                <li>[.inline-code] file[.inline-code] is a list of paths to the files you want to delete.</li>
+              </ul>
+              <p>For example, this command will remove the [.inline-code] index.js[.inline-code] file located in the
+                [.inline-code] app[.inline-code] directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm ./app/index.js
+</pre></code>
+              </div>
+              <p>It is important to note that the [.inline-code] rm[.inline-code]  command will not place the files you
+                want to remove into the trash folder, but will <strong>immediately</strong> and
+                <strong>irrevocably</strong> erase them from your system!</p>
+              <p>You should therefore use this command with extreme caution as there is no <em>undelete</em> command.
+              </p>
+              <p>If you want to learn more about deleting entire directories, you can read our other article on <a
+                  href="https://www.warp.dev/terminus/removing-directories-in-linux">how to delete directories in
+                  Linux</a>.</p>
+              <h3>[#easily-recall-syntax-with-ai] Easily retrieve this command using Warp’s AI Command Suggestions
+                [#easily-recall-syntax-with-ai] </h3>
+              <p>If you’re using Warp as your terminal, you can easily retrieve this command using the Warp <a
+                  href="https://docs.warp.dev/features/warp-ai/ai-command-suggestions">AI Command Suggestions
+                  feature</a>:</p>
+              <figure style="max-width:1600pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+                <div><img
+                    src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/663a70a24fd209c53fcc2690_0VPjgNZT9QcXmtWm34qpZUGQJMYnzhIAf8yU2Gy_PVZpr0TGdtEND-WeWshvjP0khxZTkTlcjMa3n_H4qH-DWh_0zBUOF4EGLSQOvL0a8YEwCVsbdkvZ6xTwecusYrbQ5shWqtUyTbI2dH2_0QxWuck.gif"
+                    alt="" /></div>
+              </figure>
+              <p>Entering [.inline-code] remove file[.inline-code]  in the AI Command Suggestions will prompt
+                [.inline-code] rm[.inline-code] command that can then be quickly inserted in your shell by doing
+                [.inline-code] CMD+ENTER[.inline-code] .</p>
+              <h2>[#delete-files-with-force] Forcing the deletion of files [#delete-files-with-force] </h2>
+              <p>To attempt to forcefully remove files without prompting for confirmation, like write-protected files
+                for instance, you can use the [.inline-code] rm[.inline-code]  command with the [.inline-code]
+                -f[.inline-code]  flag as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm -f &lt;file ...&gt;
+</pre></code>
+              </div>
+              <h3>[#delete-files-from-other-users] Deleting files belonging to another user
+                [#delete-files-from-other-users] </h3>
+              <p>To delete files that belong to other users, groups you’re not a member of, or you don’t have sufficient
+                permissions over, you will need to combined the [.inline-code] rm[.inline-code]  command with the
+                [.inline-code] sudo[.inline-code]  command to gain superuser privileges as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ sudo rm -f &lt;file ...&gt;
+</pre></code>
+              </div>
+              <p>You can learn more about this command by reading our other article on <a
+                  href="https://www.warp.dev/terminus/how-to-use-sudo-rm-rf-safely">how to safely use the rm command
+                  with sudo</a>.</p>
+              <h2>[#delete-files-with-patterns] Deleting files based on patterns [#delete-files-with-patterns] </h2>
+              <p>To remove multiples files at once based on patterns, you can use shell features such as wildcards and
+                brace expansions, where:</p>
+              <ul role="list">
+                <li>[.inline-code] *[.inline-code] will match one or more characters.</li>
+                <li>[.inline-code] ?[.inline-code] will match a single character.</li>
+                <li>[.inline-code]{}[.inline-code] will match the patterns enclosed in braces.</li>
+              </ul>
+              <p>For example, this command will remove all the files with a [.inline-code] .pdf[.inline-code] file
+                extension in the current working directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm *.pdf
+</pre></code>
+              </div>
+              <p>This command will remove all the files like [.inline-code] hallo.txt[.inline-code] , [.inline-code]
+                hello.txt[.inline-code] , etc from the current working directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm h?llo.txt
+</pre></code>
+              </div>
+              <p>This command will remove all the files with either a [.inline-code] .js[.inline-code] or [.inline-code]
+                .json[.inline-code] file extension in the [.inline-code] app[.inline-code] directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm app/*.{js,json}
+</pre></code>
+              </div>
+              <h2>[#safely-delete-files] Safely removing files [#safely-delete-files] </h2>
+              <p>As the [.inline-code] rm[.inline-code] command is quite dangerous and potentially harmful to the
+                operating system, there are essentially two ways you can use it in a safer way.</p>
+              <h3>[#delete-files-in-interactive-mode] Deleting files in interactive
+                mode[#delete-files-in-interactive-mode] </h3>
+              <p>One option for safely removing files, is to use the [.inline-code] rm[.inline-code]  command with the
+                [.inline-code] -i[.inline-code] flag (short for <em>interactive</em>), which will prompt you for
+                confirmation before attempting to remove any of them:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm -i &lt;file ...&gt;
+</pre></code>
+              </div>
+              <p>You can then either type [.inline-code] y[.inline-code] to confirm or [.inline-code] n[.inline-code] 
+                to skip the file, followed by [.inline-code] ENTER[.inline-code]  to confirm your choice.</p>
+              <h3>[#test-patterns-before-deletion] Testing a wildcard pattern with
+                [.inline-code]ls[.inline-code] [#test-patterns-before-deletion] </h3>
+              <p>Another option for safely removing files when using <a
+                  href="https://www.warp.dev/terminus/linux-wildcards">wildcards</a> is to first test your pattern using
+                the [.inline-code] ls[.inline-code]  command, which will display the list of matched entries:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ ls &lt;pattern&gt;
+</pre></code>
+              </div>
+              <p>Then replace [.inline-code] ls[.inline-code] with [.inline-code] rm[.inline-code]  to actually remove
+                them:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm &lt;pattern&gt;
+</pre></code>
+              </div>
+              <h2>[#delete-files-with-spaces-in-name] Deleting files with a space character in the name
+                [#delete-files-with-spaces-in-name]</h2>
+              <p>To delete files containing one or more space characters in their name, you can enclose their path in
+                single ([.inline-code] &#x27;[.inline-code] ) or double quotes ([.inline-code] &quot;[.inline-code] ) as
+                follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm "./Documents/my cv.pdf"
+</pre></code>
+              </div>
+              <p>Alternatively, you can escape each space character with a backslash character ([.inline-code]
+                \[.inline-code] ) as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ rm ./Documents/my\ cv.pdf
+</pre></code>
+              </div>
+              <h2>[#delete-files-by-date]Deleting files older than a specified time [#delete-files-by-date]</h2>
+              <p>To delete files that are older than a specified time, you can execute the [.inline-code]
+                rm[.inline-code] command through the [.inline-code] find[.inline-code] command as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ find &lt;directory&gt; -type f -mmin +&lt;time&gt; -exec rm {} \;
+</pre></code>
+              </div>
+              <p>Where:</p>
+              <ul role="list">
+                <li>[.inline-code] directory[.inline-code] is the path to the directory you want to perform a file
+                  search in.</li>
+              </ul>
+              <ul role="list">
+                <li>[.inline-code] -type f[.inline-code] is used to specify that the [.inline-code]
+                  find[.inline-code] command should only search for regular files.</li>
+              </ul>
+              <ul role="list">
+                <li>[.inline-code] -mmin +&lt;time&gt;[.inline-code] is used to specify the time expressed in minutes.
+                </li>
+              </ul>
+              <ul role="list">
+                <li>[.inline-code] -exec rm {} \;[.inline-code] is used to execute the [.inline-code] rm[.inline-code] 
+                  command on each file found, where [.inline-code] {}[.inline-code]  is a placeholder that represents
+                  the filename, and [.inline-code] \;[.inline-code] marks the end of the command.</li>
+              </ul>
+              <p>For example, this command will remove all the files created or modified 15 minutes ago or earlier in
+                the [.inline-code] /home/app[.inline-code] directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ find /home/app -type f -mmin +15 -exec rm {} \;
+</pre></code>
+              </div>
+              <p>Note that to search for files in terms of days and not minutes, you can use the [.inline-code]
+                -mtime[.inline-code] flag instead.</p>
+              <h2>[#delete-files-by-size] Deleting files with a size greater than a specific value
+                [#delete-files-by-size] </h2>
+              <p>To delete files with a size greater than a specified value, you can execute the [.inline-code]
+                rm[.inline-code] command through the [.inline-code] find[.inline-code]  command as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ find &lt;directory&gt; -type f -size &lt;size&gt; -exec rm {} \;
+</pre></code>
+              </div>
+              <p>Where:</p>
+              <ul role="list">
+                <li>[.inline-code] -size &lt;size&gt;[.inline-code]  is used to specify the file size suffixed with a
+                  size indicator, such as [.inline-code] K[.inline-code]  for kilobytes, [.inline-code]
+                  M[.inline-code] for megabytes,[.inline-code] G[.inline-code] for gigabytes, and so on. By default, the
+                  size is assumed in bytes.</li>
+              </ul>
+              <p>For example, this command will remove all the files with a size greater than 1 gigabytes in the
+                [.inline-code] /tmp/data/logs[.inline-code] directory:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ find /tmp/data/logs -type f -size +1G -exec rm {} \;
+</pre></code>
+              </div>
+              <h2>[#delete-files-by-contents] Deleting the contents of a file [#delete-files-by-contents] </h2>
+              <p>To erase the contents of a file without actually deleting the file, you can use the output redirection
+                operator ([.inline-code] &gt;[.inline-code])as follows:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">$ &gt; &lt;file&gt;
+</pre></code>
+              </div>
+              <p>Where:</p>
+              <ul role="list">
+                <li>[.inline-code] file[.inline-code] is the path to the file.</li>
+              </ul>
+              <p>For example, this command will erase the contents of the file named [.inline-code]
+                hello.txt[.inline-code],but preserve the file in the filesystem:</p>
+              <div class="w-embed">
+                <pre><code class="language-shell">bash
+$ cat hello.txt
+Hello, World!
+$ &gt; hello.txt
+$ ls
+hello.txt
+$ cat hello.txt
+$
+</pre></code>
+              </div>
+            </div><a href="https://app.warp.dev/get_warp" target="_blank"
+              class="run-in-warp-button hidden w-inline-block"><img
+                src="https://assets-global.website-files.com/64b6f3636f598299028e8577/66330824ce838bdf5d9dd4ad_warp-logo-solid-white.svg"
+                loading="lazy" width="20" height="16" alt="" />
+              <div>Run in Warp</div>
+            </a>
+            <div class="terminus-article-footer">
+              <div class="terminus-article-footer-row">
+                <div class="terminus-mono-label">Written by</div>
+                <div class="w-dyn-list">
+                  <div role="list" class="w-dyn-items">
+                    <div role="listitem" class="terminus-article-author w-dyn-item"><img
+                        src="assets-global.website-files.com/64b6f3636f598299028e8577/65dfc603ff7652f0f35ad963_Media.png"
+                        loading="lazy" alt="Sarah Majeed" class="terminus-article-author-image w-dyn-bind-empty" />
+                      <div class="terminus-article-author-info">
+                        <div class="terminus-article-author-name">Sarah Majeed</div>
+                        <div class="terminus-article-author-role w-dyn-bind-empty"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="terminus-article-footer-row">
+                <div class="terminus-mono-label">Filed under</div>
+                <div class="w-dyn-list">
+                  <div role="list" class="terminus-topics-list w-dyn-items">
+                    <div role="listitem" class="w-dyn-item"><a href="topic/linux.html"
+                        class="terminus-topic-tag">Linux</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <footer id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a43b-97f940ae" class="terminus-related-articles-section">
+            <h2 class="terminus-related-articles-section-title">Related articles</h2>
+            <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6a-97f940ae" class="w-dyn-list">
+              <div fs-cmsnest-element="list" role="list" class="terminus-more-list w-dyn-items">
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="linux-remove-user.html"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Remover Users in Linux</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Learn how to remove local and
+                          remote user accounts and associated groups and files in Linux using the userdel and deluser
+                          commands.</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-printf"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Bash printf</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">How to use string formatting with
+                          bash printf</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/add-user-to-sudoers"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">How to Add a User to Sudoers</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Grant elevated privileges to
+                          users</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-concatenate-strings"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Bash Concatenate Strings</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Join two strings together in Bash
+                        </div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-case-statement"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Bash Case Statement</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">A popular alternative to the
+                          if-then-else statement</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-aliases"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Bash Aliases</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Create an alias for common
+                          commands</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-comments"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Bash Comments</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Comments will help make your
+                          scripts more readable</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/chown-recursive"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Chown Recursively</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">How to recursively change the
+                          ownership of files</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/bash-reading-user-input"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Reading User Input</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Via command line arguments and
+                          prompting users for input</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/chmod-x"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Chmod +X</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">An overview of chmod +x and how
+                          to use it</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/chmod-755"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Chmod 755</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">General meaning, examples, and
+                          flags for chmod 755</div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+                <div role="listitem" class="w-dyn-item">
+                  <div class="terminus-more-list-item"><a href="https://www.warp.dev/terminus/curl-post-request"
+                      class="terminus-more-list-item-link w-inline-block">
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc6f-97f940ae">
+                        <h4 class="terminus-related-article-title">Curl Post Request</h4>
+                        <div class="terminus-related-article-description-refresh mt-1">Use cURL to send data to a server
+                        </div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc72-97f940ae"
+                        class="terminus-more-tags-and-author-group">
+                        <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc73-97f940ae"></div>
+                        <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-target"
+                          id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc74-97f940ae"></div>
+                      </div>
+                      <div id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc75-97f940ae"
+                        class="terminus-more-list-item-background"></div>
+                      <div fs-cmsfilter-field="popular" id="w-node-_6510e186-f5b4-1aef-0003-383e6c75fc76-97f940ae"
+                        class="hidden w-embed">false</div>
+                    </a></div>
+                </div>
+              </div>
+            </div>
+          </footer>
+          <aside id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a45a-97f940ae" class="relative">
+            <div class="terminus-sidebar-sticky-container">
+              <div class="terminus-ads"><img
+                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/6638848ecef3fa26ef5d6f65_terminus-ads%402x.webp"
+                  loading="lazy" sizes="(max-width: 767px) 107.546875px, 96.7890625px"
+                  srcset="https://assets-global.website-files.com/64b6f3636f598299028e8577/6638848ecef3fa26ef5d6f65_terminus-ads%402x-p-500.webp 500w, https://assets-global.website-files.com/64b6f3636f598299028e8577/6638848ecef3fa26ef5d6f65_terminus-ads%402x-p-800.webp 800w, https://assets-global.website-files.com/64b6f3636f598299028e8577/6638848ecef3fa26ef5d6f65_terminus-ads%402x-p-1080.webp 1080w, https://assets-global.website-files.com/64b6f3636f598299028e8577/6638848ecef3fa26ef5d6f65_terminus-ads%402x.webp 1600w"
+                  alt="" class="terminus-ads-image" />
+                <div class="terminus-ads-content mt-4">
+                  <h4 class="terminus-ads-title">Your terminal, reimagined.</h4>
+                  <div class="terminus-ads-description">Warp is a modern, Rust-based terminal with AI built in so you
+                    and your team can build great software, faster.</div><a
+                    data-analytics="Download in Terminus Ads Clicked" href="http://app.warp.dev/get_warp"
+                    target="_blank" class="button-v3-base terminus-cta-download-btn w-button">Download App</a>
+                  <div class="text-align-center mt-2">Or <a href="index.html" class="terminus-link">learn more</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <aside id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a45d-97f940ae" class="relative">
+            <div class="terminus-sidebar-sticky-container">
+              <div id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a45f-97f940ae" class="terminus-nav">
+                <div class="terminus-nav-header">
+                  <div class="terminus-mono-label">Terminus by Warp</div>
+                </div>
+                <div class="terminus-nav-body">
+                  <div class="terminus-nav-group">
+                    <div class="terminus-collapsible-root is-open"><a href="#"
+                        class="terminus-collapsible-toggle w-inline-block">
+                        <div class="terminus-mono-label">Contents</div><img
+                          src="https://assets-global.website-files.com/64b6f3636f598299028e8577/6622e4562bb99c260f7034b8_CaretRight.svg"
+                          loading="lazy" width="Auto" alt="" class="terminus-collapsible-toggle-icon" />
+                      </a>
+                      <div class="terminus-collapsible-panel">
+                        <div class="terminus-nav-list">
+                          <div class="w-richtext">
+                            <div class="w-embed">
+                              <p class="contents-link">
+                                <a href="#easilt-recall-syntax-with-ai"> Easily recall syntax with AI</a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-with-force"> Delete files with force </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-from-other-users"> Delete files from other users </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-with-patterns"> Delete files with patterns </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#safely-delete-files">Safely delete files </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-in-interactive-mode">Delete files in interactive mode </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#test-patterns-before-deletion"> Test patterns before deletion </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-with-spaces-in-name"> Delete files with spaces in name </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-by-date"> Delete files by date </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-by-size"> Delete files by size </a>
+                              </p>
+                              <p class="contents-link">
+                                <a href="#delete-files-contents"> Delete files contents </a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminus-nav-divider"></div>
+                  <div class="terminus-nav-group">
+                    <div class="terminus-collapsible-root is-open"><a href="#"
+                        class="terminus-collapsible-toggle w-inline-block">
+                        <div class="terminus-mono-label">Topics</div><img
+                          src="https://assets-global.website-files.com/64b6f3636f598299028e8577/6622e4562bb99c260f7034b8_CaretRight.svg"
+                          loading="lazy" width="Auto" alt="" class="terminus-collapsible-toggle-icon" />
+                      </a>
+                      <div class="terminus-collapsible-panel">
+                        <div class="w-dyn-list">
+                          <div role="list" class="terminus-nav-list w-dyn-items">
+                            <div role="listitem" class="w-dyn-item"><a href="topic/grep.html"
+                                class="terminus-nav-link">Grep</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="topic/kubernetes.html"
+                                class="terminus-nav-link">Kubernetes</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="topic/vim.html"
+                                class="terminus-nav-link">Vim</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="topic/vi.html"
+                                class="terminus-nav-link">Vi</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="topic/unix.html"
+                                class="terminus-nav-link">Unix</a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><a href="terminus-topics.html" class="terminus-nav-link font-weight-medium mt-8">View all
+                    topics</a>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </article>
+      </div>
+    </section>
+    <section class="section section__pre-footer divider-top">
+      <div class="w-layout-blockcontainer container-lg w-container">
+        <div class="grid">
+          <div id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a486-97f940ae">
+            <div class="grid gap-y-0">
+              <div id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a488-97f940ae" class="predownload-feature-headline">
+                <div class="feature-icon"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65deae60f8704c73a202bc75_feature-icon-check-verified-green.svg"
+                    loading="lazy" width="20" height="20" alt="" class="feature-icon-image" /></div>
+                <div class="text-subtitle text-lighten-70 text-align-center text-balance">Trusted by hundreds of
+                  thousands of professional developers</div>
+                <div class="download-cta-group-waitlist download-cta-group-waitlist__hero-layout hidden">
+                  <div class="waitlist-form-header">
+                    <div class="waitlist-form-header-text">Join the Windows waitlist</div><a
+                      data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img
+                        src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg"
+                        loading="lazy" alt="" /></a>
+                  </div>
+                  <div class="waitlist-form-wrapper w-form">
+                    <form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form"
+                      data-analytics-form="Windows Waitlist Form Submitted"
+                      action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6"
+                      data-wf-page-id="65d72e8571139abe97f940ae"
+                      data-wf-element-id="476f119b-5a49-9061-469a-3883d8acf404"><input
+                        class="form-input-refresh w-input" maxlength="256" name="field" data-name="field"
+                        placeholder="Enter your email" type="email" required="" />
+                      <div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit"
+                          data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button"
+                          value="Sign up for waitlist" />
+                        <div class="button-v3-icon-float-right">
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="waitlist-form-success w-form-done">
+                      <div class="text-align-left">Success! You will receive an email from Warp when the release is
+                        available to download.</div>
+                    </div>
+                    <div class="waitlist-form-error w-form-fail">
+                      <div class="text-align-left">Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 id="w-node-ecf95155-b53d-36f8-1d9a-18427a35a48d-97f940ae" class="text-title text-align-center mt-4">
+                Install Warp <br />to get started</h2>
+            </div>
+            <div class="mt-12">
+              <div data-cta-root-tag="download-buttons" class="cta-root">
+                <div class="download-cta-group-buttons">
+                  <div data-for-os="mac" class="download-cta-container">
+                    <div class="download-button-group download-button-group__compact">
+                      <div class="download-button-wrapper"><a data-property-download_package="dmg"
+                          data-analytics="Download in Hero Clicked" data-property-os_category="MacOS"
+                          href="http://app.warp.dev/get_warp?&amp;package=dmg" target="_blank"
+                          class="button-v3 button-v3__primary w-inline-block">
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1a5ed579320eb9440f33e_apple-icon-white.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                          <div class="button-v3-text__primary">Download for Mac</div>
+                        </a></div>
+                      <div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4"
+                        class="download-dropdown w-dropdown">
+                        <div class="download-dropdown-toggle w-dropdown-toggle"><img
+                            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg"
+                            loading="lazy" alt="" class="download-dropdown-toggle-icon" /></div>
+                        <address class="download-dropdown-list w-dropdown-list">
+                          <div class="download-dropdown-list-group download-dropdown-list-group__first"><a
+                              data-property-download_package="dmg" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div>macOS</div>
+                              <div class="download-dropdown-list-item-pkg"><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" /></div>
+                            </a></div>
+                          <div class="download-dropdown-list-group"><a data-property-download_package="deb"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=deb" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div>Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.deb</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.rpm</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="pkg.tar.zst"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=pacman" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div class="download-dropdown-list-item-pkg-label">
+                                  <div>.pkg.tar.zst</div>
+                                  <div class="download-dropdown-list-item-pkg-help">Arch Linux</div>
+                                </div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>AppImage</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-activate-os="windows" href="#windows-waitlist-form"
+                              class="download-dropdown-list-item text-align-center w-inline-block">
+                              <div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">
+                                Warp for Windows is coming soon.<br />‍<strong data-activate-os="windows"
+                                  class="text-weight-medium">Sign up for the waitlist</strong><br /></div>
+                            </a></div>
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-for-os="linux" class="download-cta-container">
+                    <div class="download-button-group">
+                      <div class="download-button-wrapper"><a data-property-download_package="deb"
+                          data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                          href="https://app.warp.dev/get_warp?package=deb" target="_blank"
+                          class="button-v3 button-v3__primary w-inline-block">
+                          <div class="button-v3-text__primary">.deb</div>
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                        </a>
+                        <div class="download-button-help-text">Debian, Ubuntu</div>
+                      </div>
+                      <div class="download-button-wrapper"><a data-property-download_package="rpm"
+                          data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                          href="https://app.warp.dev/get_warp?package=rpm" target="_blank"
+                          class="button-v3 button-v3__primary w-inline-block">
+                          <div class="button-v3-text__primary">.rpm</div>
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                        </a>
+                        <div class="download-button-help-text">Fedora, Red Hat</div>
+                      </div>
+                      <div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4"
+                        class="download-dropdown w-dropdown">
+                        <div class="download-dropdown-toggle w-dropdown-toggle"><img
+                            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg"
+                            loading="lazy" alt="" class="download-dropdown-toggle-icon" /></div>
+                        <address class="download-dropdown-list w-dropdown-list">
+                          <div class="download-dropdown-list-group download-dropdown-list-group__first"><a
+                              data-property-download_package="dmg" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div>macOS</div>
+                              <div class="download-dropdown-list-item-pkg"><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" /></div>
+                            </a></div>
+                          <div class="download-dropdown-list-group"><a data-property-download_package="deb"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=deb" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div>Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.deb</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.rpm</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="pkg.tar.zst"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=pacman" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div class="download-dropdown-list-item-pkg-label">
+                                  <div>.pkg.tar.zst</div>
+                                  <div class="download-dropdown-list-item-pkg-help">Arch Linux</div>
+                                </div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>AppImage</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-activate-os="windows" href="#windows-waitlist-form"
+                              class="download-dropdown-list-item text-align-center w-inline-block">
+                              <div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">
+                                Warp for Windows is coming soon.<br />‍<strong data-activate-os="windows"
+                                  class="text-weight-medium">Sign up for the waitlist</strong><br /></div>
+                            </a></div>
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-for-os="windows" class="download-cta-container">
+                    <div class="download-button-group download-button-group__compact">
+                      <div class="download-button-wrapper"><a href="#windows-waitlist-form"
+                          class="button-v3 button-v3__primary w-inline-block">
+                          <div class="button-v3-text__primary">Join the Windows waitlist</div>
+                        </a></div>
+                      <div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4"
+                        class="download-dropdown w-dropdown">
+                        <div class="download-dropdown-toggle w-dropdown-toggle"><img
+                            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg"
+                            loading="lazy" alt="" class="download-dropdown-toggle-icon" /></div>
+                        <address class="download-dropdown-list w-dropdown-list">
+                          <div class="download-dropdown-list-group download-dropdown-list-group__first"><a
+                              data-property-download_package="dmg" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div>macOS</div>
+                              <div class="download-dropdown-list-item-pkg"><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" /></div>
+                            </a></div>
+                          <div class="download-dropdown-list-group"><a data-property-download_package="deb"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=deb" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div>Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.deb</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>.rpm</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="pkg.tar.zst"
+                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
+                              href="https://app.warp.dev/get_warp?package=pacman" target="_blank"
+                              class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div class="download-dropdown-list-item-pkg-label">
+                                  <div>.pkg.tar.zst</div>
+                                  <div class="download-dropdown-list-item-pkg-help">Arch Linux</div>
+                                </div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked"
+                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage"
+                              target="_blank" class="download-dropdown-list-item w-inline-block">
+                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
+                              <div class="download-dropdown-list-item-pkg">
+                                <div>AppImage</div><img
+                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
+                                  loading="lazy" width="20" height="20" alt="" />
+                              </div>
+                            </a><a data-activate-os="windows" href="#windows-waitlist-form"
+                              class="download-dropdown-list-item text-align-center w-inline-block">
+                              <div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">
+                                Warp for Windows is coming soon.<br />‍<strong data-activate-os="windows"
+                                  class="text-weight-medium">Sign up for the waitlist</strong><br /></div>
+                            </a></div>
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="download-cta-group-waitlist hidden">
+                  <div class="waitlist-form-header">
+                    <div class="waitlist-form-header-text">Join the Windows waitlist</div><a
+                      data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img
+                        src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg"
+                        loading="lazy" alt="" /></a>
+                  </div>
+                  <div class="waitlist-form-wrapper w-form">
+                    <form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form"
+                      data-analytics-form="Windows Waitlist Form Submitted"
+                      action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6"
+                      data-wf-page-id="65d72e8571139abe97f940ae"
+                      data-wf-element-id="b854ce33-8049-1529-3f69-2687ea46a250"><input
+                        class="form-input-refresh w-input" maxlength="256" name="field" data-name="field"
+                        placeholder="Enter your email" type="email" required="" />
+                      <div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit"
+                          data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button"
+                          value="Sign up for waitlist" />
+                        <div class="button-v3-icon-float-right">
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="waitlist-form-success w-form-done">
+                      <div class="text-align-left">Success! You will receive an email from Warp when the release is
+                        available to download.</div>
+                    </div>
+                    <div class="waitlist-form-error w-form-fail">
+                      <div class="text-align-left">Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-cta-root-tag="send-download-link" class="cta-root">
+                <div class="download-cta-group-waitlist">
+                  <div class="waitlist-form-wrapper w-form">
+                    <form data-include-anonymousid="" method="post" name="wf-form-Mobile-Download-Link-Form"
+                      data-name="Mobile Download Link Form" data-analytics-form="Mobile Email Download Form Submitted"
+                      action="https://senddownloadlink-3fkj7yiwuq-uc.a.run.app/" id="wf-form-Mobile-Download-Link-Form"
+                      data-wf-page-id="65d72e8571139abe97f940ae"
+                      data-wf-element-id="1ecc1edc-ecbc-152b-1f58-b2c52c49efe1"><input
+                        class="form-input-refresh w-input" maxlength="256" name="field" data-name="field"
+                        placeholder="Enter your email" type="email" required="" />
+                      <div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit"
+                          data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button"
+                          value="Send download link" />
+                        <div class="button-v3-icon-float-right">
+                          <div class="button-v3-icon"><img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg"
+                              loading="lazy" width="20" height="20" alt="" /></div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="waitlist-form-success w-form-done">
+                      <div class="text-align-left">Success! You will receive an email from Warp with the download link.
+                      </div>
+                    </div>
+                    <div class="waitlist-form-error w-form-fail">
+                      <div class="text-align-left">Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="download-cta-group-waitlist download-cta-group-waitlist__hero-layout hidden">
+              <div class="waitlist-form-header">
+                <div class="waitlist-form-header-text">Join the Windows waitlist</div><a
+                  data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img
+                    src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg"
+                    loading="lazy" alt="" /></a>
+              </div>
+              <div class="waitlist-form-wrapper w-form">
+                <form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form"
+                  data-analytics-form="Windows Waitlist Form Submitted"
+                  action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6"
+                  data-wf-page-id="65d72e8571139abe97f940ae" data-wf-element-id="476f119b-5a49-9061-469a-3883d8acf404">
+                  <input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field"
+                    placeholder="Enter your email" type="email" required="" />
+                  <div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit"
+                      data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button"
+                      value="Sign up for waitlist" />
+                    <div class="button-v3-icon-float-right">
+                      <div class="button-v3-icon"><img
+                          src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg"
+                          loading="lazy" width="20" height="20" alt="" /></div>
+                    </div>
+                  </div>
+                </form>
+                <div class="waitlist-form-success w-form-done">
+                  <div class="text-align-left">Success! You will receive an email from Warp when the release is
+                    available to download.</div>
+                </div>
+                <div class="waitlist-form-error w-form-fail">
+                  <div class="text-align-left">Oops! Something went wrong while submitting the form.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section__pre-footer-background-image"><img
+            src="assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png"
+            loading="lazy" sizes="(max-width: 479px) 87vw, (max-width: 991px) 92vw, 720px"
+            srcset="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-500.png 500w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-800.png 800w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-1080.png 1080w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png 1440w"
+            alt="" class="full-width-image" /></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer divider-top">
+    <div class="footer-container">
+      <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145260-c414525e" class="footer_content-top">
+        <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145261-c414525e" class="footer-left-content"><a href="#"
+            class="footer-logo-link w-inline-block"><img
+              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/653024a36ae7b9b3ea53d451_Warp - Glyph.svg"
+              loading="lazy" alt="Warp glyph" class="footer-logo" /></a>
+          <div class="footer_status-wrapper">
+            <div id="operational" class="footer_status-component operational">
+              <div class="footer_status-item">
+                <div class="footer_status-dot"></div>
+                <div>All Systems Operational</div>
+              </div>
+            </div>
+            <div id="partial-outage" class="footer_status-component partial-outage">
+              <div class="footer_status-item">
+                <div class="footer_status-dot is-yellow"></div>
+                <div>Partial Systems Outage</div>
+              </div>
+            </div>
+            <div id="major-outage" class="footer_status-component major-outage">
+              <div class="footer_status-item">
+                <div class="footer_status-dot is-red"></div>
+                <div>Major Systems Outage</div>
+              </div>
+            </div>
+            <div class="w-embed w-script">
+              <script>
+                // Function to update div block visibility based on status
+                function updateStatus() {
+                  fetch('https://status.warp.dev/api/v2/status.json', {
+                    method: 'GET',
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                      const statusDescription = data.status.description;
+                      const footerStatusComponents = document.querySelectorAll('.footer_status-component');
+
+                      // Hide all div blocks with the class name "footer_status-component"
+                      footerStatusComponents.forEach(component => {
+                        component.style.display = 'none';
+                      });
+
+                      // Show div block based on the status description
+                      if (statusDescription === 'All Systems Operational') {
+                        document.querySelector('.footer_status-component.operational').style.display = 'block';
+                      } else if (statusDescription === 'Partial System Outage') {
+                        document.querySelector('.footer_status-component.partial-outage').style.display = 'block';
+                      } else if (statusDescription === 'Major Service Outage') {
+                        document.querySelector('.footer_status-component.major-outage').style.display = 'block';
+                      }
+                    })
+                    .catch(error => {
+                      console.error('Error fetching status data:', error);
+                    });
+                }
+
+                // Call the function to initially set the div block visibility
+                updateStatus();
+              </script>
+            </div>
+          </div>
+        </div>
+        <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145278-c414525e" class="footer_link-wrapper">
+          <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145279-c414525e" class="footer_link-column is-1">
+            <div class="footer-column-title">Product</div><a href="warp-drive.html" class="footer_link-refresh">Warp
+              Drive</a><a href="warp-ai.html" class="footer_link-refresh">Warp AI</a><a href="security.html"
+              class="footer_link-refresh">Security</a><a href="https://docs.warp.dev/features/warp-ai" target="_blank"
+              class="footer_link-refresh">Full Feature List</a><a href="https://docs.warp.dev/getting-started/changelog"
+              target="_blank" class="footer_link-refresh">Changelog</a><a href="mac-terminal.html"
+              class="footer_link-refresh">Mac Terminal</a><a href="text-editor.html"
+              class="footer_link-refresh">Terminal Text Editor</a><a href="mac-terminal-themes.html"
+              class="footer_link-refresh">Mac Terminal Themes</a><a href="linux-terminal.html"
+              class="footer_link-refresh">Linux Terminal</a>
+          </div>
+          <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414528c-c414525e" class="footer_link-column is-2">
+            <div class="footer-column-title">Explore</div><a href="https://docs.warp.dev/getting-started/readme"
+              target="_blank" class="footer_link-refresh">User Manual</a><a href="pricing.html"
+              class="footer_link-refresh">Pricing</a><a href="blog/how-warp-works.html" target="_blank"
+              class="footer_link-refresh">How Warp Works</a><a href="https://www.commands.dev/" target="_blank"
+              class="footer_link-refresh">Commands.dev</a><a href="terminus.html"
+              class="footer_link-refresh">Terminus</a><a href="compare-terminal-tools.html"
+              class="footer_link-refresh">Compare Terminal Tools</a>
+          </div>
+          <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414529d-c414525e" class="footer_link-column is-3">
+            <div class="footer-column-title">Company</div><a href="about.html"
+              class="footer_link-refresh">About</a><a
+              href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48"
+              target="_blank" class="footer_link-refresh">How We work</a><a href="careers.html"
+              class="footer_link-refresh">Careers</a><a href="contact.html" class="footer_link-refresh">Contact</a><a
+              href="blog.html" class="footer_link-refresh">Blog</a><a href="privacy/overview.html"
+              class="footer_link-refresh">Privacy</a><a href="faq.html" class="footer_link-refresh">FAQs</a><a
+              href="terms-of-service.html" class="footer_link-refresh">Terms</a>
+          </div>
+        </div>
+      </div>
+      <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b0-c414525e" class="footer_content-bottom">
+        <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b1-c414525e" class="footer-legal-text">All Rights Reserved ©️
+          2024</div>
+        <div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b3-c414525e" class="w-layout-grid footer_social-list"><a
+            Title="X" href="https://twitter.com/warpdotdev" target="_blank" class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon is-twitter w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_279_74)">
+                  <path
+                    d="M9.51577 6.77566L15.4681 0H14.0581L8.8875 5.88201L4.76082 0H0L6.24171 8.89549L0 15.9999H1.41002L6.86679 9.78701L11.2258 15.9999H15.9866M1.91893 1.04126H4.08512L14.057 15.0098H11.8903"
+                    fill="currentColor" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_279_74">
+                    <rect width="15.9866" height="16" fill="currentColor" />
+                  </clipPath>
+                </defs>
+                <title>X</title>
+              </svg></div>
+          </a><a Title="Youtube" href="https://www.youtube.com/@warpdotdev" target="_blank"
+            class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon"
+                width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                <path fill="currentColor"
+                  d="M29.41 9.26a3.5 3.5 0 0 0-2.47-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.94.59a3.5 3.5 0 0 0-2.47 2.47A36.13 36.13 0 0 0 2 16a36.13 36.13 0 0 0 .59 6.74a3.5 3.5 0 0 0 2.47 2.47c2.18.59 10.94.59 10.94.59s8.76 0 10.94-.59a3.5 3.5 0 0 0 2.47-2.47A36.13 36.13 0 0 0 30 16a36.13 36.13 0 0 0-.59-6.74ZM13.2 20.2v-8.4l7.27 4.2Z">
+                </path>
+                <title>Youtube</title>
+              </svg></div>
+          </a><a Title="TikTok " href="https://www.tiktok.com/@warp.dev" target="_blank"
+            class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic"
+                width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z">
+                </path>
+                <title>Tiktok</title>
+              </svg></div>
+          </a><a Title="Discord" href="https://discord.com/invite/warpdotdev" target="_blank"
+            class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic"
+                width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z">
+                </path>
+                <title>Discord</title>
+              </svg></div>
+          </a><a Title="Github" href="https://github.com/warpdotdev/Warp" target="_blank"
+            class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx"
+                width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z"
+                  fill="currentColor"></path>
+                <title>Github</title>
+              </svg></div>
+          </a><a Title="RSS" href="blog/rss.xml" target="_blank" class="footer_social-link w-inline-block">
+            <div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic"
+                width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <circle cx="6.18" cy="17.82" r="2.18" fill="currentColor"></circle>
+                <path fill="currentColor"
+                  d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z">
+                </path>
+                <title>RSS</title>
+              </svg></div>
+          </a></div>
+      </div>
+    </div>
+  </footer>
+  <div class="hidden">
+    <div class="w-dyn-list">
+      <div fs-cmsnest-element="template-reference" fs-cmsnest-collection="contributor-profiles" role="list"
+        class="w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><a href="contributors/sarah-majeed.html">Sarah Majeed</a></div>
+      </div>
+    </div>
+    <div class="w-dyn-list">
+      <div fs-cmsnest-element="template-reference" fs-cmsnest-collection="contributor-avatars" role="list"
+        class="w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><a href="contributors/sarah-majeed.html">Sarah Majeed</a></div>
+      </div>
+    </div>
+    <div class="w-dyn-list">
+      <div fs-cmsnest-element="template-reference" fs-cmsnest-collection="topic-tags" role="list" class="w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><a href="topic/linux.html">Linux</a></div>
+      </div>
+    </div>
+    <div class="w-dyn-list">
+      <div fs-cmsnest-element="template-reference" fs-cmsnest-collection="topic-symbols" role="list"
+        class="w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><a href="topic/linux.html">Li</a></div>
+      </div>
+    </div>
+  </div>
+  <div id="w-node-fbf32b28-024c-d10f-4c6f-a6a6cd4e9557-97f940ae" class="hidden">
+    <div id="w-node-fbf32b28-024c-d10f-4c6f-a6a6cd4e9558-97f940ae" class="w-dyn-list">
+      <div fs-cmsnest-collection="contributor-avatars" fs-cmsnest-element="nest-source" role="list" class="w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Winnie Ondara" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/winnie-ondara.html" class="hidden">Winnie Ondara</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Sarah Majeed" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/sarah-majeed.html" class="hidden">Sarah Majeed</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt=" Durojaye Olusegun" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/durojaye-olusegun.html" class="hidden"> Durojaye Olusegun</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Jeremiah Muchiri" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/jeremiah-muchiri.html" class="hidden">Jeremiah Muchiri</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Emmanuel Oyibo " class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/emmanuel-oyibo.html" class="hidden">Emmanuel Oyibo </a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Muhammad Khabbab" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/muhammad-khabbab.html" class="hidden">Muhammad Khabbab</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Oscar Mauricio Forero Carrillo" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/oscar-mauricio-forero-carrillo.html" class="hidden">Oscar Mauricio Forero Carrillo</a>
+        </div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Oscar Forero" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/oscar-forero.html" class="hidden">Oscar Forero</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65c0ef9843da67dca6cb64df_Aayush_mittal-150x150-1.webp"
+            loading="lazy" alt="Aayush Mittal" class="terminus-author-image" /><a
+            href="contributors/aayush-mittal-2.html" class="hidden">Aayush Mittal</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Aayush Mittal " class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/aayush-mittal.html" class="hidden">Aayush Mittal </a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65b8105c1d594b306e10a413_photo_12312.png"
+            loading="lazy" alt="Utsav Poudel" sizes="100vw"
+            srcset="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65b8105c1d594b306e10a413_photo_12312-p-500.png 500w, https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65b8105c1d594b306e10a413_photo_12312-p-800.png 800w, https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65b8105c1d594b306e10a413_photo_12312.png 986w"
+            class="terminus-author-image" /><a href="contributors/utsav-poudel-2.html" class="hidden">Utsav
+            Poudel</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Nitish Singh " class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/nitish-singh.html" class="hidden">Nitish Singh </a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Utsav Poudel" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/utsav-poudel.html" class="hidden">Utsav Poudel</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="https://assets-global.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy"
+            alt="Sudha Bulusu" class="terminus-author-image w-dyn-bind-empty" /><a
+            href="contributors/sudha-bulusu.html" class="hidden">Sudha Bulusu</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/651435f51b1f19f45575f284_ekene-ejike-passport_480.jpg"
+            loading="lazy" alt="Ekene Ejike" class="terminus-author-image" /><a href="contributors/ekene-ejike.html"
+            class="hidden">Ekene Ejike</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/6511a5f2f18eef49b0708f39_Mansi%20pic%20.png"
+            loading="lazy" alt=" Mansi Manhas" class="terminus-author-image" /><a
+            href="contributors/mansi-manhas.html" class="hidden"> Mansi Manhas</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64e506fe83734f4a704dbc9b_image_6487327.jpg"
+            loading="lazy" alt=" Gabriel Manricks" sizes="100vw"
+            srcset="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64e506fe83734f4a704dbc9b_image_6487327-p-500.jpg 500w, https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64e506fe83734f4a704dbc9b_image_6487327-p-800.jpg 800w, https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64e506fe83734f4a704dbc9b_image_6487327.JPG 900w"
+            class="terminus-author-image" /><a href="contributors/gabriel-manricks.html" class="hidden"> Gabriel
+            Manricks</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e2af4ddd2deef02dac6_6427349e1bf2f0713bf7335e_zev.jpg"
+            loading="lazy" alt="Zev Stravitz" class="terminus-author-image" /><a
+            href="contributors/zev-stravitz.html" class="hidden">Zev Stravitz</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e2938f98d846b587457_6427349e1bf2f0abbef733eb_tom_wagner.jpg"
+            loading="lazy" alt="Tom Wagner" class="terminus-author-image" /><a href="contributors/tom-wagner.html"
+            class="hidden">Tom Wagner</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e295ad3340152337105_6427349e1bf2f02eb1f7332a_prianka.jpg"
+            loading="lazy" alt="Prianka Subrahmanyam" class="terminus-author-image" /><a
+            href="contributors/prianka-subrahmanyam.html" class="hidden">Prianka Subrahmanyam</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e2342bf257afa053c05_6427349e1bf2f0b39ff732f0_jess%25201.png"
+            loading="lazy" alt="Zach Bai" class="terminus-author-image" /><a href="contributors/zach-bai.html"
+            class="hidden">Zach Bai</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e293aa60570809b3f7e_6427349e1bf2f015e8f73393_shawn.jpg"
+            loading="lazy" alt="Shawn Tabai" class="terminus-author-image" /><a href="contributors/shawn-tabai.html"
+            class="hidden">Shawn Tabai</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e292b35859686a32c58_6427349e1bf2f04113f7339f_spencer.jpg"
+            loading="lazy" alt="Spencer Evans" class="terminus-author-image" /><a
+            href="contributors/spencer-evans.html" class="hidden">Spencer Evans</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e292785e6db2d268535_6427349e1bf2f06bd8f7335f_rachel.jpg"
+            loading="lazy" alt="Rachel Hong" class="terminus-author-image" /><a href="contributors/rachel-hong.html"
+            class="hidden">Rachel Hong</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e29549c6e9d2cdc7d53_6427349e1bf2f07c78f73372_prestontunnelwilson.jpg"
+            loading="lazy" alt="Preston Tunnell Wilson" class="terminus-author-image" /><a
+            href="contributors/preston-tunnell-wilson.html" class="hidden">Preston Tunnell Wilson</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e29a6cdbc311c36ed8f_6427349e1bf2f01306f73365_neerangul%25201.jpg"
+            loading="lazy" alt="Neeran Gul" class="terminus-author-image" /><a href="contributors/neeran-gul.html"
+            class="hidden">Neeran Gul</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e2342bf257afa053c05_6427349e1bf2f0b39ff732f0_jess%25201.png"
+            loading="lazy" alt="Jessica Wang" class="terminus-author-image" /><a
+            href="contributors/jessica-wang.html" class="hidden">Jessica Wang</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e239b6548d50739861e_6427349e1bf2f0befcf7336c_amanda%25201.jpg"
+            loading="lazy" alt="Amanda Khoo" class="terminus-author-image" /><a href="contributors/amanda-khoo.html"
+            class="hidden">Amanda Khoo</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e24bc71d1ff593539e7_6427349e1bf2f0059cf73332_1627336398240.jpg"
+            loading="lazy" alt="Amit Jotwani" class="terminus-author-image" /><a
+            href="contributors/amit-jotwani.html" class="hidden">Amit Jotwani</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e24f4ddd2deef02d0df_6427349e1bf2f03891f73356_brett.jpg"
+            loading="lazy" alt="Brett Terpstra" class="terminus-author-image" /><a
+            href="contributors/brett-terpstra.html" class="hidden">Brett Terpstra</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e23f5c366e72c29bcce_6427349e1bf2f0bd57f73329_andycarlson.jpg"
+            loading="lazy" alt="Andrew Carlson" class="terminus-author-image" /><a
+            href="contributors/andrew-carlson.html" class="hidden">Andrew Carlson</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e23b9680e2ceb314f24_6427349e1bf2f00060f7337d_amberchen.jpg"
+            loading="lazy" alt="Amber Chen" class="terminus-author-image" /><a href="contributors/amber-chen.html"
+            class="hidden">Amber Chen</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c96e2342bf257afa053c05_6427349e1bf2f0b39ff732f0_jess%25201.png"
+            loading="lazy" alt="Agata Cieplik" class="terminus-author-image" /><a
+            href="contributors/agata-cieplik.html" class="hidden">Agata Cieplik</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c168bb7ca7e75dd09b53db_6427349e1bf2f04437f7336f_philipwilkinson%25201.jpg"
+            loading="lazy" alt="Philip Wilkinson" class="terminus-author-image" /><a
+            href="contributors/philip-wilkinson.html" class="hidden">Philip Wilkinson</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c168bb953316635531e908_6427349e1bf2f043c8f73375_glorykim%25201.jpg"
+            loading="lazy" alt="Glory Kim" class="terminus-author-image" /><a href="contributors/glory-kim.html"
+            class="hidden">Glory Kim</a></div>
+        <div role="listitem" class="w-dyn-item"><img
+            src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c168bb0e830e4977c1e646_6427349e1bf2f07d38f73371_razvan_ludosanu_profile%25201.jpg"
+            loading="lazy" alt="Razvan Ludosanu" class="terminus-author-image" /><a
+            href="contributors/razvan-ludosanu.html" class="hidden">Razvan Ludosanu</a></div>
+      </div>
+    </div>
+    <div id="w-node-fbf32b28-024c-d10f-4c6f-a6a6cd4e9560-97f940ae" class="w-dyn-list">
+      <div fs-cmsnest-collection="topic-tags" fs-cmsnest-element="nest-source" role="list"
+        class="terminus-topics-list w-dyn-items">
+        <div role="listitem" class="w-dyn-item"><a href="topic/bash.html" class="terminus-topic-tag">Bash</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/docker.html" class="terminus-topic-tag">Docker</a>
+        </div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/git.html" class="terminus-topic-tag">Git</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/grep.html" class="terminus-topic-tag">Grep</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/homebrew.html" class="terminus-topic-tag">Homebrew</a>
+        </div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/kubernetes.html"
+            class="terminus-topic-tag">Kubernetes</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/linux.html" class="terminus-topic-tag">Linux</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/npm.html" class="terminus-topic-tag">Npm</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/psql.html" class="terminus-topic-tag">Psql</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/python.html" class="terminus-topic-tag">Python</a>
+        </div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/sql.html" class="terminus-topic-tag">SQL</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/unix.html" class="terminus-topic-tag">Unix</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/vi.html" class="terminus-topic-tag">Vi</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/vim.html" class="terminus-topic-tag">Vim</a></div>
+        <div role="listitem" class="w-dyn-item"><a href="topic/yarn.html" class="terminus-topic-tag">Yarn</a></div>
+      </div>
+    </div>
+  </div>
+  <script src="d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c810bb.js?site=64b6f3636f598299028e8577"
+    type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+  <script src="assets-global.website-files.com/64b6f3636f598299028e8577/js/warp-dev.95b7f2bf0.js"
+    type="text/javascript"></script>
+  <script type="text/javascript">
+    _linkedin_partner_id = "4810452";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+  </script>
+  <script type="text/javascript">
+    (function (l) {
+      if (!l) {
+        window.lintrk = function (a, b) {
+          window.lintrk.q.push([a, b]);
+        };
+        window.lintrk.q = [];
+      }
+      var s = document.getElementsByTagName("script")[0];
+      var b = document.createElement("script");
+      b.type = "text/javascript";
+      b.async = true;
+      b.src = "snap.licdn.com/li.lms-analytics/insight.min.js";
+      s.parentNode.insertBefore(b, s);
+    })(window.lintrk);
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display: none" alt=""
+      src="https://px.ads.linkedin.com/collect/?pid=4810452&amp;fmt=gif" />
+  </noscript>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCCX3ZH" height="0" width="0"
+      style="display: none; visibility: hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <script>
+    !(function () {
+      var analytics = (window.analytics = window.analytics || []);
+      if (!analytics.initialize)
+        if (analytics.invoked)
+          window.console &&
+            console.error &&
+            console.error("Segment snippet included twice.");
+        else {
+          analytics.invoked = !0;
+          analytics.methods = [
+            "trackSubmit",
+            "trackClick",
+            "trackLink",
+            "trackForm",
+            "pageview",
+            "identify",
+            "reset",
+            "group",
+            "track",
+            "ready",
+            "alias",
+            "debug",
+            "page",
+            "once",
+            "off",
+            "on",
+            "addSourceMiddleware",
+            "addIntegrationMiddleware",
+            "setAnonymousId",
+            "addDestinationMiddleware",
+          ];
+          analytics.factory = function (e) {
+            return function () {
+              var t = Array.prototype.slice.call(arguments);
+              t.unshift(e);
+              analytics.push(t);
+              return analytics;
+            };
+          };
+          for (var e = 0; e < analytics.methods.length; e++) {
+            var key = analytics.methods[e];
+            analytics[key] = analytics.factory(key);
+          }
+          analytics.load = function (key, e) {
+            var t = document.createElement("script");
+            t.type = "text/javascript";
+            t.async = !0;
+            t.src = "https://app.warp.dev/_seg/cdn/" + key + "/analytics.min.js";
+            var n = document.getElementsByTagName("script")[0];
+            n.parentNode.insertBefore(t, n);
+            analytics._loadOptions = e;
+          };
+          analytics._writeKey = "ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e";
+          analytics._cdn = "https://app.warp.dev/_seg/cdn";
+          analytics.SNIPPET_VERSION = "4.15.3";
+          analytics.load("ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e", {
+            integrations: {
+              "Segment.io": { apiHost: "app.warp.dev/_seg/api/v1" },
+            },
+          });
+          analytics.page();
+        }
+    })();
+
+    $(document).ready(function () {
+      function sendAnalytics(event, attributes) {
+        let properties;
+        $.each(attributes, (_, attr) => {
+          if (attr.name.startsWith("data-property-")) {
+            if (!properties) {
+              properties = {};
+            }
+            const property = attr.name.split("data-property-")[1];
+            properties[property] = attr.value;
+          }
+        });
+        analytics.track(event, properties);
+      }
+
+      $("[data-analytics]").on("click", (e) => {
+        const event = e.currentTarget.dataset.analytics;
+        const attributes = e.currentTarget.attributes;
+        sendAnalytics(event, attributes);
+      });
+
+      $("form[data-analytics-form]").on("submit", (e) => {
+        const event = e.currentTarget.dataset.analyticsForm;
+        const attributes = e.currentTarget.attributes;
+        sendAnalytics(event, attributes);
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".toggle-header-menu").forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const body = document.body;
+
+          if (body.style.overflow === "hidden") {
+            body.style.overflow = "";
+            return;
+          }
+
+          body.style.overflow = "hidden";
+        });
+      });
+
+      const createSVG = (width, height, radius) => {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+        const rectangle = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect"
+        );
+
+        svg.setAttributeNS(
+          "http://www.w3.org/2000/svg",
+          "viewBox",
+          `0 0 ${width} ${height}`
+        );
+
+        rectangle.setAttribute("x", "0");
+        rectangle.setAttribute("y", "0");
+        rectangle.setAttribute("width", "100%");
+        rectangle.setAttribute("height", "100%");
+        rectangle.setAttribute("rx", `${radius}`);
+        rectangle.setAttribute("ry", `${radius}`);
+        rectangle.setAttribute("pathLength", "10");
+
+        svg.appendChild(rectangle);
+
+        return svg;
+      };
+
+      document
+        .querySelectorAll(".button-gradient, .button-transparent")
+        .forEach((button) => {
+          const style = getComputedStyle(button);
+
+          const lines = document.createElement("div");
+
+          lines.classList.add("lines");
+
+          const groupTop = document.createElement("div");
+          const groupBottom = document.createElement("div");
+
+          const svg = createSVG(
+            button.offsetWidth,
+            button.offsetHeight,
+            parseInt(style.borderRadius, 10)
+          );
+
+          groupTop.appendChild(svg);
+          groupTop.appendChild(svg.cloneNode(true));
+          groupTop.appendChild(svg.cloneNode(true));
+          groupTop.appendChild(svg.cloneNode(true));
+
+          groupBottom.appendChild(svg.cloneNode(true));
+          groupBottom.appendChild(svg.cloneNode(true));
+          groupBottom.appendChild(svg.cloneNode(true));
+          groupBottom.appendChild(svg.cloneNode(true));
+
+          lines.appendChild(groupTop);
+          lines.appendChild(groupBottom);
+
+          button.appendChild(lines);
+
+          button.addEventListener("pointerenter", () => {
+            button.classList.add("start");
+          });
+
+          svg.addEventListener("animationend", () => {
+            button.classList.remove("start");
+          });
+        });
+    });
+  </script>
+
+  <script>
+    /**
+     * Custom Form Handling:
+     *
+     * This code provides an option to opt out of Webflow's native form handler
+     * and use a custom form handler instead. By default, the custom form handler is used.
+     * Adding the `data-webflow-form` attribute to the `form` element opts in
+     * to use Webflow's native form handler.
+     *
+     * This code gives us control over which forms will submit data to
+     * our external CRM system. It also enables us to continue using Webflow's
+     * native form submission for selected forms.
+     *
+     * This code is applied site-wide and should not be duplicated across different pages.
+     * Duplicating this code will cause multiple submissions.
+     */
+
+    $("form").submit(function (e) {
+      const $form = $(this); // The submitted form
+
+      if ($form.data("webflow-form") != null) {
+        return true;
+      }
+
+      const $submit = $("[type=submit]", $form); // Submit button of form
+      const buttonText = $submit.val(); // Original button text
+      const buttonWaitingText = $submit.attr("data-wait"); // Waiting button text value
+      const formMethod = $form.attr("method"); // Form method (GET/POST)
+      const formAction = $form.attr("action"); // Form action (the URL we are posting to)
+      const formDataArray = $form.serializeArray(); // Form data
+
+      if ($form.data("include-anonymousid") != null) {
+        const anonymousIdCookie = document.cookie
+          .split("; ")
+          .find((c) => c.startsWith("ajs_anonymous_id="));
+
+        if (anonymousIdCookie) {
+          formDataArray.push({
+            name: "anonymousid",
+            value: anonymousIdCookie.replace("ajs_anonymous_id=", ""),
+          });
+        }
+      }
+
+      // Set waiting text
+      if (buttonWaitingText) {
+        $submit.val(buttonWaitingText);
+      }
+
+      $.ajax(formAction, {
+        data: $.param(formDataArray),
+        method: formMethod,
+      })
+        .done((res) => {
+          $form
+            .hide() // optional hiding of form
+            .siblings(".w-form-done")
+            .show() // Show success
+            .siblings(".w-form-fail")
+            .hide(); // Hide failure
+        })
+        .fail((res) => {
+          $form
+            .siblings(".w-form-done")
+            .hide() // Hide success
+            .siblings(".w-form-fail")
+            .show(); // show failure
+        })
+        .always(() => {
+          // Reset text
+          $submit.val(buttonText);
+        });
+
+      // Prevent Webflow's default form handler from executing
+      return false;
+    });
+
+    // need to enqueue it to Webflow otherwise `submit.disabled` won't take effect
+    Webflow.push(() => {
+      // Validate the form action URL and display an error if the URL is invalid.
+      for (const f of document.querySelectorAll("form")) {
+        // Ignore native Webflow forms
+        if (f.dataset.hasOwnProperty("webflowForm")) {
+          continue;
+        }
+
+        const action = f.getAttribute("action");
+        try {
+          // Check that the action is a valid URL
+          new URL(https://www.warp.dev/terminus/action);
+      } catch {
+          console.error(
+            `Invalid form action: "${action}" for form ${f.name}. Submissions will fail.`
+          );
+
+          // show error
+          $(f)
+            .siblings(".w-form-fail")
+            .text(
+              "Form configuration error. Please contact support for assistance."
+            )
+            .show();
+
+          // disable the submit button
+          const submit = f.querySelector("input[type=submit]");
+          if (submit) {
+            submit.disabled = true;
+          }
+        }
+      }
+    });
+  </script>
+
+  <!-- handle switching platform-specific CTA when clicking on a link -->
+  <style>
+    .waitlist_component-wrapper[data-show-os] .waitlist_component {
+      display: none;
+    }
+
+    .waitlist_component-wrapper[data-show-os="linux"] .waitlist_component[data-for-os="linux"],
+    .waitlist_component-wrapper[data-show-os="mac"] .waitlist_component[data-for-os="mac"],
+    .waitlist_component-wrapper[data-show-os="windows"] .waitlist_component[data-for-os="windows"] {
+      display: block !important;
+    }
+  </style>
+  <script>
+    for (const w of document.querySelectorAll(".waitlist_component-wrapper")) {
+      w.addEventListener("click", (event) => {
+        const os = event.target.dataset.activateOs;
+        if (os) {
+          event.preventDefault();
+          w.setAttribute("data-show-os", os);
+        }
+      });
+    }
+  </script>
+  <!-- Add Rich Text Enhancer -->
+  <script src="https://tools.refokus.com/rich-text-enhancer/bundle.v1.0.0.js"></script>
+
+  <!-- Start Prism -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <!-- End Prism -->
+
+  <!-- handle open/close Windows waitlist form -->
+  <style>
+    /* sanity in case someone "clean up" CSS classes in Webflow */
+    .download-cta-group-buttons.hidden,
+    .download-cta-group-waitlist.hidden {
+      display: none;
+    }
+  </style>
+  <script>
+    (() => {
+      const $roots = $(".cta-root[data-cta-root-tag='download-buttons']");
+      const groups = new Map(
+        $roots.toArray().map((root) => [
+          root,
+          {
+            buttons: root.querySelector(".download-cta-group-buttons"),
+            waitlist: root.querySelector(".download-cta-group-waitlist"),
+          },
+        ])
+      );
+
+      function showButtons({ buttons, waitlist }) {
+        buttons.classList.remove("hidden");
+        waitlist.classList.add("hidden");
+      }
+
+      function showWaitlist({ buttons, waitlist }) {
+        buttons.classList.add("hidden");
+        waitlist.classList.remove("hidden");
+      }
+
+      $roots.on("click", "[href='#windows-waitlist-form']", (event) => {
+        event.preventDefault();
+        showWaitlist(groups.get(event.delegateTarget));
+      });
+
+      $roots.on(
+        "click",
+        "[data-element-tag='waitlist-form-close-button']",
+        (event) => {
+          event.preventDefault();
+          showButtons(groups.get(event.delegateTarget));
+        }
+      );
+
+      // if the page loads with `?windows_waitlist=true`, open the waitlist
+      // by default regardless of the platform.
+      const { searchParams } = new URL(https://www.warp.dev/terminus/window.location);
+    // loop through search params instead of doing .get to handle case sensitivity
+    for (const [k, v] of searchParams) {
+        if (
+          k.toLowerCase() === "windows_waitlist" &&
+          v.toLowerCase() === "true"
+        ) {
+          for (const group of groups.values()) {
+            showWaitlist(group);
+          }
+        }
+      }
+    })();
+  </script>
+
+  <!-- Open/Close Terminus Collapsible -->
+  <script>
+    (() => {
+      const $roots = $(".terminus-collapsible-root");
+
+      $roots.on("click", ".terminus-collapsible-toggle", (event) => {
+        event.preventDefault();
+        const root = event.delegateTarget;
+        root.classList.toggle("is-open");
+      });
+    })();
+  </script>
+
+  <!-- "Run in Warp" button -->
+  <script>
+    $(document).ready(() => {
+      if (
+        document.documentElement.classList.contains("os-linux") ||
+        document.documentElement.classList.contains("os-mac")
+      ) {
+        const button = document.querySelector(".run-in-warp-button");
+        const richText = document.querySelector(
+          ".terminus-article-rich-text-refresh"
+        );
+        for (const codeBlock of richText.querySelectorAll("pre.language-shell")) {
+          const el = document.importNode(button, true);
+          el.classList.remove("hidden");
+          el.addEventListener("click", () =>
+            analytics.track("Run In Warp Clicked")
+          );
+          codeBlock.after(el);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

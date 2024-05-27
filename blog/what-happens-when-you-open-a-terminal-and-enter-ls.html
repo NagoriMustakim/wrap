@@ -1,0 +1,1250 @@
+<!DOCTYPE html><!-- Last Published: Fri May 10 2024 16:46:39 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.warp.dev" data-wf-page="65d72e8571139abe97f94051" data-wf-site="64b6f3636f598299028e8577" lang="en"><head><meta charset="utf-8"/><title>What happens when you open a terminal and enter ‘ls’ | Warp</title><meta content="" name="description"/><meta content="What happens when you open a terminal and enter ‘ls’" property="og:title"/><meta content="" property="og:description"/><meta content="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65aac56e2c6a4a935d5e75ee_What%20happens%20when%20you%20open%20a%20terminal%20and%20enter%20%E2%80%98ls%E2%80%99.jpg" property="og:image"/><meta content="What happens when you open a terminal and enter ‘ls’" property="twitter:title"/><meta content="" property="twitter:description"/><meta content="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/65aac56e2c6a4a935d5e75ee_What%20happens%20when%20you%20open%20a%20terminal%20and%20enter%20%E2%80%98ls%E2%80%99.jpg" property="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="assets-global.website-files.com/64b6f3636f598299028e8577/css/warp-dev.981488a2c.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/" rel="preconnect"/><link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous"/><script src="ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Roboto Mono:100,200,300,regular,500,600,700","Roboto:100,300,regular,500,700,900"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ff9f4bb4e174f770ceb1_Favicon%20-%20Warp.png" rel="shortcut icon" type="image/x-icon"/><link href="assets-global.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png" rel="apple-touch-icon"/><link href="rss.xml" rel="alternate" title="RSS Feed" type="application/rss+xml"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-7VBQFF9QVG"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('set', 'developer_id.dZGVlNj', true);gtag('config', 'G-7VBQFF9QVG');</script><!--
+  Load Sentry for error monitoring.
+
+  This needs to be placed before other scripts, and the `defer` attribute
+  cannot be used; otherwise, it will not capture and report errors
+  occurring during loading.
+
+  The init portion should come before the script loader.
+-->
+<script>
+  window.sentryOnLoad = function () {
+    const { hostname = "" } = window.location;
+    Sentry.init({
+      environment: hostname.endsWith(".webflow.io") ? "staging" : "production",
+    });
+  };
+</script>
+<script
+  crossorigin="anonymous"
+  src="js.sentry-cdn.com/824c13d1b41716a7feff119b47dbb357.min.js"
+></script>
+
+<!-- Refresh styles -->
+<style>
+  body {
+    font-synthesis: none;
+    -moz-font-feature-settings: "kern";
+    font-feature-settings: "kern";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  .refresh-page {
+    --primary-color: 16, 224, 111;
+  }
+
+  .refresh-h2,
+  .text-title {
+    background-color: var(--primary--lighten-70);
+    background-image: linear-gradient(
+      to bottom right,
+      var(--primary--lighten-70),
+      transparent
+    );
+
+    background-size: 100%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .button-v3.button-v3__primary,
+  .button-v3-base.button-v3-base__primary,
+  .copy-action-icon {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 0.8) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+  }
+
+  .button-v3.button-v3__primary:hover,
+  .button-v3-base.button-v3-base__primary:hover,
+  .copy-action-icon:hover {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 1) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.2);
+  }
+
+  .button-v3.button-v3__primary:active,
+  .button-v3-base.button-v3-base__primary:active,
+  .copy-action-icon:active {
+    background-image: radial-gradient(
+      84.3% 100% at 50% 93.48%,
+      rgba(var(--primary-color), 0.6) 0%,
+      rgba(var(--primary-color), 0) 100%
+    );
+    box-shadow: inset 0 0 0 1px rgba(var(--primary-color), 0.1);
+  }
+
+  .button-v3.button-v3__primary:focus-visible,
+  .button-v3-base.button-v3-base__primary:focus-visible {
+    box-shadow: 0 0 0 4px rgba(var(--primary-color), 0.2);
+  }
+
+  html.w-mod-touch [data-cta-root-tag="download-buttons"],
+  html:not(.w-mod-touch) [data-cta-root-tag="send-download-link"] {
+    display: none;
+  }
+
+  .download-button-group__compact .button-v3 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .download-button-group__compact .download-dropdown-toggle {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .download-dropdown-list-item:hover .download-dropdown-platform-hidden-label {
+    opacity: 1;
+  }
+
+  .copy-action-notification {
+    opacity: 0;
+    transition: opacity 160ms ease-in-out;
+    visibility: hidden;
+  }
+
+  .fs-copyclip_active .copy-action-notification {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .fs-copyclip_active .copy-action-copy-icon {
+    opacity: 0;
+  }
+
+  .fs-copyclip_active .copy-action-check-icon {
+    opacity: 1;
+  }
+  
+  .prompt-icon-embeded {
+    color: rgb(var(--primary-color));
+  }
+
+  .unordered-list.with-connector .unordered-list-item {
+    /* use `em` so the bullet position adapts to the font-size */
+    --bullet-offset-top: 0.33em;
+    --bullet-size: 0.75rem;
+    background-position: 0 var(--bullet-offset-top);
+    position: relative;
+  }
+
+  .unordered-list.with-connector
+    .unordered-list-item:not(:first-of-type)::before {
+    background-color: var(--primary--lighten-40);
+    content: "";
+    height: var(--bullet-offset-top);
+    left: 5.5px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .unordered-list.with-connector
+    .unordered-list-item:not(:last-of-type)::after {
+    background-color: var(--primary--lighten-40);
+    /* sync with row-gap on .unordered-list */
+    bottom: -0.75rem;
+    content: "";
+    left: 5.5px;
+    position: absolute;
+    top: calc(var(--bullet-offset-top) + var(--bullet-size));
+    width: 1px;
+  }
+
+  .section.section__pre-footer {
+    background-image: radial-gradient(
+      136.13% 65.09% at 50% 100%,
+      rgba(var(--primary-color), 0.2) 0%,
+      transparent 100%
+    );
+  }
+</style>
+
+<!-- Support OS detection -->
+<style>
+  html.os-linux [data-for-os="mac"],
+  html.os-linux [data-for-os="windows"] {
+    display: none !important;
+  }
+
+  html.os-mac [data-for-os="linux"],
+  html.os-mac [data-for-os="windows"] {
+    display: none !important;
+  }
+
+  html.os-windows [data-for-os="linux"],
+  html.os-windows [data-for-os="mac"] {
+    display: none !important;
+  }
+
+  html.os-linux [data-except-os="linux"],
+  html.os-mac [data-except-os="mac"],
+  html.os-windows [data-except-os="windows"] {
+    display: none !important;
+  }
+</style>
+<script>
+  (() => {
+    if (/linux/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add("os-linux");
+      return;
+    }
+
+    const ua =
+      navigator.userAgentData && navigator.userAgentData.platform
+        ? navigator.userAgentData.platform
+        : navigator.userAgent;
+
+    document.documentElement.classList.add(
+      /mac(intosh| ?OS)?|iOS|iP(hone|od|ad)/i.test(ua) ? "os-mac" : "os-windows"
+    );
+  })();
+</script>
+
+<!-- [Attributes by Finsweet] Copy to clipboard -->
+<script defer src="cdn.jsdelivr.net/npm/%40finsweet/attributes-copyclip%401/copyclip.js"></script>
+
+<link rel="alternate" type="application/rss+xml" 
+  title="RSS Feed for warp.dev" 
+  href="rss.xml" />
+
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "www.googletagmanager.com/gtm5445.html?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-WCCX3ZH");
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10817224442"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-10817224442');
+</script>
+
+<style type="text/css">
+  :root {
+    --warp-navbar-height: 5rem;
+  }
+
+  html {
+    height: auto !important;
+    /* fix sticky header covers the target element when opening a URL with hash */
+    scroll-padding-top: calc(var(--warp-navbar-height) + 1rem);
+  }
+
+  .w-nav-overlay {
+    overflow: scroll !important;
+    height: 100vh !important;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .button-gradient {
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    outline: none;
+    border: none;
+    background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
+    position: relative;
+    color: #000000;
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+      0 4px 24px rgba(0, 0, 0);*/
+    
+  }
+
+  .button-transparent {
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    outline: none;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+      0 4px 24px rgba(0, 0, 0);
+  }
+
+  .button-gradient.start .lines svg,
+  .button-transparent.start .lines svg {
+    animation: stroke 0.3s linear;
+  }
+
+  .button-gradient .lines,
+  .button-transparent .lines {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .button-gradient .lines > div,
+  .button-transparent .lines > div {
+    position: absolute;
+    inset: 0;
+  }
+
+  .button-gradient .lines > div:last-child,
+  .button-transparent .lines > div:last-child {
+    transform: rotate(180deg);
+  }
+
+  .button-gradient .lines > div svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    fill: none;
+    stroke-width: 2;
+    stroke: #01a4ff;
+    width: 100%;
+    height: 100%;
+    stroke-dasharray: 12 12;
+    stroke-dashoffset: 12;
+    opacity: 0;
+    transform: rotate(-1deg) translate3d(0, 0, 0);
+  }
+
+  .button-transparent .lines > div svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    fill: none;
+    stroke-width: 2;
+    stroke: #c9e9ff;
+    width: 100%;
+    height: 100%;
+    stroke-dasharray: 12 12;
+    stroke-dashoffset: 12;
+    opacity: 0;
+    transform: rotate(-1deg) translate3d(0, 0, 0);
+  }
+
+  .button-gradient .lines > div svg:nth-child(1) {
+    stroke: #01ffc2;
+  }
+
+  .button-transparent .lines > div svg:nth-child(1) {
+    stroke: #f8fcff;
+  }
+
+  .button-gradient .lines > div svg:nth-child(2),
+  .button-transparent .lines > div svg:nth-child(2) {
+    stroke-width: 6px;
+    filter: blur(20px);
+  }
+
+  .button-gradient .lines > div svg:nth-child(3),
+  .button-transparent .lines > div svg:nth-child(3) {
+    stroke-width: 5px;
+    filter: blur(6px);
+  }
+
+  .button-gradient .lines > div svg:nth-child(4),
+  .button-transparent .lines > div svg:nth-child(4) {
+    stroke-width: 10px;
+    filter: blur(56px);
+  }
+
+  @keyframes stroke {
+    30%,
+    55% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 5;
+      opacity: 0;
+    }
+  }
+</style>
+
+<!-- Start VWO Async SmartCode -->
+<script type='text/javascript' id='vwoCode'>
+  if (window && window.navigator && window.navigator.platform && window.navigator.platform.toLowerCase().includes('mac')) {
+   // only running on browsers reporting as a mac OS
+window._vwo_code=window._vwo_code || (function() {
+var account_id=686774,
+version = 1.5,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},hide_element_style:function(){return'{'+hide_element_style+'}'},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{'+hide_element_style+'}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
+  }
+</script>
+<!-- End VWO Async SmartCode -->
+
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','t2_fxwvq0qa', {"optOut":false,"useDecimalCurrencyValues":true,"aaid":"<AAID-HERE>","email":"<EMAIL-HERE>"});rdt('track', 'PageVisit');
+</script>
+<!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
+<!-- End Reddit Pixel -->
+<style>
+  /* Webflow adds these which mess up the layout. */
+  .w-richtext:before,
+  .w-richtext:after {
+    content: unset;
+  }
+
+  .blog-post-rich-text :first-child {
+    margin-top: 0;
+  }
+
+  .blog-post-rich-text :last-child {
+    margin-bottom: 0;
+  }
+
+  .blog-post-rich-text .primary-button {
+    border-radius: var(--border-radius--corner-small);
+    background-color: transparent;
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-80),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-10);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    align-items: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition:
+      box-shadow 0.16s,
+      background-color 0.16s;
+    display: inline-flex;
+    max-width: 100%;
+    color: var(--primary--white);
+    line-height: 1;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .blog-post-rich-text .primary-button {
+      padding: 0.75rem 1.25rem;
+    }
+  }
+
+  .blog-post-rich-text .primary-button:hover {
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-100),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-20);
+    opacity: 1;
+    text-decoration: none;
+  }
+
+  .blog-post-rich-text .primary-button:active {
+    background-image: radial-gradient(
+      circle farthest-corner at 50% 100%,
+      var(--primary--green-60),
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px var(--primary--green-10);
+  }
+
+  .blog-post-rich-text .primary-button:focus-visible {
+    box-shadow:
+      inset 0 0 0 1px var(--primary--green-10),
+      0 0 0 4px var(--primary--green-20);
+    outline-style: none;
+  }
+
+  .blog-post-rich-text ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .blog-post-rich-text ul li {
+    /* use `em` so the bullet position adapts to the font-size */
+    --bullet-offset-top: 0.33em;
+    --bullet-size: 0.75rem;
+    background-attachment: scroll;
+    background-image: url("https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc3938abf16d83006d467c_unordered-list-bullet-icon.svg");
+    background-position: 0 var(--bullet-offset-top);
+    background-repeat: no-repeat;
+    background-size: auto;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .blog-post-rich-text ul li:not(:first-of-type)::before {
+    background-color: var(--primary--lighten-40);
+    content: "";
+    height: var(--bullet-offset-top);
+    left: 5.5px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .blog-post-rich-text ul li:not(:last-of-type)::after {
+    background-color: var(--primary--lighten-40);
+    /* sync with row-gap on .unordered-list */
+    bottom: -0.75rem;
+    content: "";
+    left: 5.5px;
+    position: absolute;
+    top: calc(var(--bullet-offset-top) + var(--bullet-size));
+    width: 1px;
+  }
+
+  .blog-post-rich-text .w-embed:has(> .embed-video) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-post-rich-text .embed-video {
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .blog-post-rich-text .w-richtext-figure-type-video {
+    border-radius: var(--border-radius--corner-medium);
+    overflow: hidden;
+  }
+
+  .blog-post-rich-text .w-code-block {
+    border-radius: var(--border-radius--corner-medium);
+    font-family:
+      Matter Mono,
+      sans-serif;
+    font-size: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* TODO: remove after migrating all buttons to the refresh version */
+  .blog-post-rich-text .w-button {
+    color: white;
+  }
+  
+  .blog-post-rich-text .twitter-tweet {
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+</head><body class="refresh-page"><div class="notifications-area"><div class="container-lg"></div></div><div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="small" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b479" role="banner" data-duration="400"><div class="navbar-container"><a href="index.html" class="navbar-logo-link w-nav-brand"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65a6ee1dfad0ee04bccb5086_Logo (1).svg" loading="lazy" alt="" class="navbar-logo-image"/></a><nav role="navigation" class="navbar-item is-page-height-tablet w-nav-menu"><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b47e" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Features</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b486-7327b479" href="warp-drive.html" class="navbar-dropdown-list-item">Warp Drive</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b488-7327b479" href="warp-ai.html" class="navbar-dropdown-list-item">Warp AI</a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/features/warp-ai" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Full Feature List</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a></div></nav></div><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b48e" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Docs</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/getting-started/readme" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>User manual</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://docs.warp.dev/getting-started/changelog" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Changelog</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b49e-7327b479" href="how-warp-works.html" target="_blank" class="navbar-dropdown-list-item">How Warp Works</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a0-7327b479" href="privacy/overview.html" class="navbar-dropdown-list-item">Privacy</a><a id="w-node-e9aadf04-ea12-4177-64aa-faf87327b4a2-7327b479" href="faq.html" class="navbar-dropdown-list-item">FAQs</a></div></nav></div><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4a4" class="navbar-dropdown w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Community</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://discord.com/invite/warpdotdev" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>Discord</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://github.com/warpdotdev/Warp" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>GitHub</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://twitter.com/warpdotdev" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>X</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a></div></nav></div><a href="blog.html" class="navbar-link w-inline-block"><div>Blog</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z" fill="currentColor"/>
+</svg></div></div></a><a href="pricing.html" class="navbar-link w-inline-block"><div>Pricing</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.0309 6.30688C16.7734 6.44313 16.4309 6.79188 16.2959 7.05563C16.1534 7.33563 16.1534 7.66563 16.2984 7.95438C16.3747 8.10813 17.2622 9.03063 19.1897 10.9631L21.9709 13.7506H13.3684C4.13094 13.7506 4.51344 13.7406 4.15094 13.9994C3.87344 14.1969 3.77344 14.4606 3.77344 15.0006C3.77344 15.4144 3.78969 15.5044 3.89844 15.6981C4.03594 15.9444 4.26594 16.1231 4.54219 16.1994C4.66094 16.2331 7.72469 16.2506 13.3472 16.2506H21.9709L19.1897 19.0381C17.2622 20.9706 16.3747 21.8931 16.2984 22.0469C16.0772 22.4881 16.1884 22.9431 16.6222 23.3769C17.0559 23.8106 17.5109 23.9219 17.9522 23.7006C18.1072 23.6231 19.3047 22.4644 21.9497 19.8331C24.0272 17.7669 25.7897 16.0331 25.8684 15.9806C26.0609 15.8531 26.3097 15.2994 26.3097 15.0006C26.3097 14.6806 26.0622 14.1519 25.8434 14.0019C25.7497 13.9381 23.9859 12.2044 21.9234 10.1481C19.4072 7.64063 18.1047 6.37563 17.9634 6.30563C17.6884 6.16813 17.2922 6.16938 17.0309 6.30688Z" fill="currentColor"/>
+</svg></div></div></a><div data-hover="true" data-delay="200" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b4c4" class="navbar-dropdown is-last w-dropdown"><div class="navbar-dropdown-toggle w-dropdown-toggle"><div>Company</div><div class="navbar-dropdown-trigger-mobile"><div class="navbar-dropdown-trigger-mobile-icon w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5159 5.07179C14.2197 5.16429 14.0134 5.32679 13.8847 5.56679L13.7734 5.77554L13.7597 9.76304L13.7459 13.7505H9.87969C5.74719 13.7505 5.74969 13.7505 5.40094 13.9993C5.12344 14.1968 5.02344 14.4605 5.02344 15.0005C5.02344 15.4143 5.03969 15.5043 5.14844 15.698C5.28594 15.9443 5.51594 16.123 5.79219 16.1993C5.90594 16.2318 7.41094 16.2505 9.86094 16.2505H13.7484V20.138C13.7484 22.588 13.7672 24.093 13.7997 24.2068C13.9334 24.688 14.2947 24.953 14.8684 24.9893C15.4747 25.028 15.8722 24.853 16.0984 24.448L16.2234 24.2255L16.2372 20.238L16.2509 16.2505H20.1372C22.5859 16.2505 24.0909 16.2318 24.2047 16.1993C24.4809 16.123 24.7109 15.9443 24.8484 15.698C24.9572 15.503 24.9734 15.4155 24.9722 15.0005C24.9709 14.4593 24.8709 14.1943 24.5959 13.9993C24.2472 13.7505 24.2497 13.7505 20.1172 13.7505H16.2509L16.2372 9.76304L16.2234 5.77554L16.1122 5.56679C16.0509 5.45304 15.9309 5.30929 15.8459 5.24929C15.5159 5.01304 14.9447 4.93804 14.5159 5.07179Z" fill="currentColor"/>
+</svg></div></div></div><nav class="navbar-dropdown-list w-dropdown-list"><div class="navbar-dropdown-list-container"><a href="about.html" class="navbar-dropdown-list-item">About</a><a id="w-node-_872dd4f1-cfa5-fdbf-a484-db9dc5387a00-c5387a00" href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48" target="_blank" class="navbar-dropdown-list-item w-inline-block"><div>How we work</div><div class="button-v3-icon button-v3-icon__small"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65fa87921a34b9fe3f84b4bb_arrow-up-right.svg" loading="lazy" width="16" height="16" alt=""/></div></a><a href="careers.html" class="navbar-dropdown-list-item">Careers</a><a href="contact.html" class="navbar-dropdown-list-item">Contact</a></div></nav></div><div class="navbar-button"><a data-analytics="Download in Header Clicked" href="http://app.warp.dev/get_warp" target="_blank" class="button-v3-base w-button">Download</a></div></nav><div class="navbar-mobile-menu-button w-nav-button"><div class="menu-icon1"><div class="menu-icon1_line-top"></div><div class="menu-icon1_line-middle"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon1_line-bottom"></div></div></div></div></div><section class="section"><div class="w-layout-blockcontainer container-lg w-container"><div class="grid"><h1 id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907b-97f94051" class="blog-post-title">What happens when you open a terminal and enter ‘ls’</h1><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907d-97f94051" class="blog-post-metadata"><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e68907e-97f94051" class="blog-post-metadata-item">Suraj Gupta &amp; Andy Carlson</div><div class="blog-post-metadata-separator"></div><div id="w-node-_43989645-ea08-ac1b-a6c7-e6a17e689081-97f94051" class="blog-post-metadata-item">January 11, 2023</div></div></div><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea43c4_6427349e1bf2f0656af733b3_Python%2520thumb%252013.png" loading="lazy" alt="" class="blog-post-featured-image"/></div></section><section><div class="w-layout-blockcontainer container-lg w-container"><div class="grid w-condition-invisible"><div id="w-node-_6b8e8ef0-5096-9813-a952-b3d5a786642a-97f94051" class="blog-post-intro-warpper divider-bottom"><div class="blog-post-rich-text w-dyn-bind-empty w-richtext"></div></div></div><div class="grid"><div id="w-node-_6b8e8ef0-5096-9813-a952-b3d5a7866441-97f94051" class="blog-post-rich-text w-richtext"><ul role="list"><li><a href="#Introduction">Introduction</a></li><li><a href="#history-from-teletypes-to-terminal-emulators">History - From Teletypes to Terminal Emulators</a><a href="#opening-the-terminal-app">‍</a></li><li><a href="#opening-the-terminal-app"> Opening the Terminal App</a><a href="#what-needs-to-be-initialized">‍</a></li><li><a href="#what-needs-to-be-initialized"> What Needs to Be Initialized</a><a href="#creating-a-pty">‍</a></li><li><a href="#creating-a-pty"> Creating a “PTY”</a><a href="#spawn-the-shell">‍</a></li><li><a href="#spawn-the-shell"> Spawning the Shell</a></li><li><a href="#shell-initialization"> Shell Initialization</a></li><li><a href="#login-vs-non-login-shells"> Login vs Non-login Shells</a></li><li><a href="#running-a-command">Running a command</a></li><li><a href="#entering-keystrokes"> Entering keystrokes</a></li><li><a href="#entering-keystrokes"> Hitting Enter</a></li><li><a href="#parsing-a-command"> Parsing a command</a></li><li><a href="#returning-output"> Returning output</a></li><li><a href="#escape-sequences"> Escape Sequences</a></li><li><a href="#closing-the-terminal"> Closing the terminal</a></li></ul><p><a href="#login-vs-non-login-shells">‍</a>‍</p><div class="w-embed"><h2 id="Introduction">Introduction</h2></div><p>“What happens when you open a web browser and enter google.com?” Many of us recall being asked this question before. I think it leaves an impression because navigating web pages is this magical process that we take for granted. We do it hundreds, if not thousands of times per day without knowing how it works. Most developers and engineers can explain <em>parts</em> of it, but the depth at which you can <a href="https://github.com/alex/what-happens-when" target="_blank">discuss</a> this question is infinite.</p><p>Today, we’ll discuss the details of something else we take for granted: the terminal. What happens when you open a terminal emulator and enter “ls”? Like with browsers, there is too much content to fit into one blog post. We’ll give you what we think are the interesting details.</p><div class="w-embed"><h2 id="history-from-teletypes-to-terminal-emulators">History - From Teletypes to Terminal Emulators</h2></div><p>Much of how modern terminal apps work comes from their historical predecessors: <strong>teletypes</strong> (TTY for short). These machines were designed for an era when entire institutions might’ve had just one or a few mainframe computers, when data was stored on magnetic tape, and when a computer’s memory was measured in kB.</p><p>‍</p><figure style="max-width:800pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4460_6427349e1bf2f032e1f733b4_63b88a3e44daba6f4e7989ba_Bhh3GL6ponzyJW8kEYx0gi_Btv6IjzRXmdoF_h524jgvx_0_H4YqMSPkp6_3ottd7Lq38L0Ubj_xOOuivFfLjSxicbIWLMa2dGGEEo9-E90VP_QsMEwHJuGAV1Z8wIIVu17Kx5Lv7anKVUBNTZ312OK7Yl5O2zOxD5u9oSNwz3a87DoHNv9RbrYVFp8ebA.png" alt=""/></div><figcaption><strong>‍</strong></figcaption></figure><div class="w-embed"><p>
+<small>
+<center>
+<b>Figure 1</b>: An IBM 2741 teletype<sup><a href="#footnote-one">1</a></sup> and the IBM System/360 Mo. 40 mainframe computer.<sup><a href="#footnote-two">2</a></sup> These were released in the late 60s, and were prevalent until the 70s. The purchase of one of these mainframes (>$200k at the time) included a teletype.<sup><a href="#footnote-three">3</a></sup>
+</center>
+</small>
+</p></div><p><br/>Teletypes were basic text clients to allow users to interact with a computer. It’s short for “teletypewriter” because they descend from typewriters, and are partly mechanical devices. They communicated with the computer via a physical wire connecting the two devices. The communication worked like this:</p><ol role="list"><li>ASCII text would be transmitted character-by-character over the wire as the user typed.</li><li>The kernel of the mainframe would receive the input and decode it.</li><li>The text gets sent to a driver called the <strong>TTY driver</strong>. This kernel module was responsible for sending this input to user programs and collecting the output.</li><li>Finally, the kernel sends that output back to the teletype for display to the user.</li></ol><p>One thing to mention is the <strong>line discipline</strong>, which buffered the characters in kernel memory. The program wouldn’t receive the input until “Enter” was pressed. The line discipline allowed this buffer to be editable and provided some program-independent shortcuts, e.g. ctrl-w. It was also an important performance optimization at the time because asking the program to react to every individual character was highly inefficient.<a href="#footnote-four"><sup>4</sup></a></p><p>As computing advanced, many of these individual components modernized. For example, teletypes were replaced by terminals which were fully electronic machines, including electronic displays.</p><p>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4495_6427349e1bf2f0abcbf733b7_63b88a40cf6d006e62512f60_EJsHTPAHH5j6Ub29Uz6RImWVy3ypUWFxjk8jMwjNiGFBxgzenAgdNKkHdun55KaMhADIzWuXqYA-jK0j9JxLvAK6DFxVUw7XdhrpoX2me82wdJKosK0wn2Xp63sKxC9lk161tJBBCGvdv0eR-ngOF5OtN9ZE_U6zXqKDvbFNw1CHVbCsy7Zr3siV7IKLIg.png" alt=""/></div></figure><div class="w-embed"><p>
+<small>
+<center>
+<b>Figure 2</b>: A VT100 (VT = video terminal), released in 1978 by DEC.<sup><a href="#footnote-five">5</a></sup> This model implemented and popularized the ANSI escape codes which are still used today.
+</center>
+</small>
+</p></div><p>‍</p><p>With electronic terminals came new affordances like colors and bell sounds. Fundamentally, however, this machine did exactly the same thing that the teletype did: send a stream of input characters and display output. </p><p>Of course, computing has changed a lot since then. But curiously, much of the workings of modern terminal apps resembles this classic teletype architecture. Like with other systems with multiple interfacing parts, individual components can improve but still be subject to compatibility requirements with other components. With this convoluted history in mind, it&#x27;s a bit easier to understand why the terminal ended up the way it did.</p><div class="w-embed"><h2 id="opening-the-terminal-app">Opening the Terminal App</h2></div><p>Finally, let’s fast-forward to today. Terminals are no longer dedicated pieces of hardware. Now everyone has a general-purpose computer that runs an operating system which oversees many user apps. The terminal is just one of these apps.</p><p>‍</p><figure style="max-width:486pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4442_6427349e1bf2f02a47f733a9_63b88a3e44daba02027989b9_Shf6wLNBUBplREfoTxUwbGfkXa0l62r1YgJtfValFqsUwCC-XinMm30nuBDAtLDhj6yjICb1cqmC999Bey9Q0ZpR38ghbARppJOq8izXSFp7-klJiz5dKSOGxiiCSdXuK2CEmNPxpCSYtK9tNTp5bs90oHiV2Tj-f0PNJFMf30iqDzJawwavXsq4DgnoFw.png" alt=""/></div></figure><p>‍</p><p>Like a typical GUI app, the terminal is a process under the supervision of the operating system and will listen for events and input from the user, and tell the OS what to display in a window. Note that the app doesn’t <em>directly</em> interface with these peripherals, there are things like drivers and a window manager sitting in between.</p><p>You’ll sometimes hear these apps referred to as <strong>“terminal emulators”</strong> instead of simply “terminals”. Since the term “terminal” used to refer to a dedicated piece of hardware, we consider these apps as emulating that device. However, most people simply say “terminal.” So what happens when you open your terminal?</p><div class="w-embed"><h3 id="what-needs-to-be-initialized">What Needs to Be Initialized</h3></div><div class="w-embed"><p>
+Fundamentally, the terminal is an app that enables you to “use your computer,” i.e. run programs on it. You’ve probably written commands like <code>ls</code>, <code>rm -rf node_modules</code>, <code>mv file folder</code>, and the like. <code>ls</code>, <code>rm</code> and <code>mv</code> are programs (<a target="_blank" href="https://github.com/wertarbyte/coreutils">written in C</a> if you’re curious). Using your computer may involve more than issuing simple commands like these. We may want to automate things with scripts which group together a sequence of many commands, use branching conditional logic, run repeated loops, or parallelize commands, etc. To service the full spectrum of use-cases, we want a full, interactive, interpreted programming environment. These are not implemented in the terminal emulator. The work of running other programs as processes and interpreting the commands you write is done by a shell. There are several choices of shell. Popular ones include <a target="_blank" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a>, <a target="_blank" href="https://en.wikipedia.org/wiki/Z_shell">Zsh</a>, and <a target="_blank" href="https://en.wikipedia.org/wiki/Fish_(Unix_shell)">fish</a>. The terminal and the shell are separate programs with separate concerns: the shell with the content of the commands you type and the terminal with the UI-related things, e.g. fonts, colors, tabs, scrolling.
+</p></div><p>To get things started, the terminal needs to spawn a process for the shell the user wants, as well as a method for communicating with the shell and with any processes the shell starts.</p><div class="w-embed"><h3 id="creating-a-pty">Creating a “PTY”</h3></div><p>Before the terminal spawns a child process for the shell, it establishes a way to communicate with it. Much like their teletype ancestors, terminal emulators work by streaming characters as the user types them. Streaming into <em>what</em>, though? There is no longer a wire to another computer because everything is happening on one system. Instead, the wires of the traditional TTY are replaced with pairs of file descriptors known as the <a href="https://www.baeldung.com/linux/pty-vs-tty#bd-what-is-a-pty" target="_blank">PTY</a>, short for pseudo-TTY. These files are like the two ends of that wire that transmits user-entered input to programs and sends back the output. </p><p>The terminal asks the kernel to create these files. There is still a TTY driver in the kernel with a line discipline responsible for mediating the data between the two ends of the PTY. One end is the <strong>leader</strong><a href="#footnote-six"><strong><sup>6</sup></strong></a>, intended for the terminal to interface with, write user input to, and read output from for display to the user. The other end is the <strong>follower</strong>, which will be used by the shell and all other processes created in the session.</p><p>‍</p><figure style="max-width:1467pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4477_6427349e1bf2f0295df733b5_63b88a3ed5dfaae16140bd88_sd-A0WvqqtBMegfa3CDlnIsjoh1B4y7xcDGYXadzYg8FFziY3rkYHx4wfVEPmxVUmsWOVBzPAKYcWneVxTObjcx0IlIw5Dy8uRXOQwt8mJy_AQ9QvsaR_2s09_o1pbyxW-L9E1ldiKGclhWKpTGUMC_E_ohqwqfB3-LAGY43KVkRLutq2YuOKFE7e3N6gA.png" alt=""/></div></figure><p>‍</p><div class="w-embed"><p>
+Remember that in Unix, many things are <a target="_blank" href="https://en.wikipedia.org/wiki/Everything_is_a_file">treated as files</a>, i.e. they have the same read/write interface that files do. These file descriptors (fd) are not “normal files,” but virtual <a target="_blank" href="https://unix.stackexchange.com/questions/37829/how-do-character-device-or-character-special-files-work">character devices</a>. The fd for the leader just points to a buffer in memory, while the follower is a character device file with an actual path on disk. If you want to see what that path is, run the <code>tty</code> command from the terminal. You can write to this path from a different process and see the data you write appear in the other session!
+</p></div><p>‍</p><figure style="max-width:1600pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4480_6427349e1bf2f0f60af733a6_63bc912383a5bc18bff6a04f_VfiaucTOZPAhiAx_94cwMshnvtfv9F3cDeeguOEBR9im_94voW4Glnk6SzHCb2IOsYVn3bslNcEFJ5Yajj6houyQSEvfcUGsc0lWQEVMEF9RHRGyCf5NtlJtHRaB1L1qh6ddW17McdhI6UWNPxifkU9xE2KiKAH-vi0sRQqWUcJS9nWsGh-LCzL09GnM8g.gif" alt=""/></div></figure><p>‍</p><div class="w-embed"><h3 id="spawn-the-shell">Spawning the Shell</h3></div><p>Before receiving the user&#x27;s first command, the terminal has one remaining task: spawn the shell process. Shells are fully interactive programming language interpreters. It is here where the power of programming constructs, e.g. conditional statements, loops, parallelism, lies. The shell is also what creates the child processes for each command that the user wants to run. The shell is the first child process of the terminal session. The terminal will spawn it and set it to read and write from the PTY <strong>follower</strong>. It does this by setting the shell’s stdin, stderr and stdout (fd 0 through 2) to the PTY follower.</p><p>‍</p><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4463_6427349e1bf2f03d42f733b0_63b88a3e6e20f1d0888d84e0_Hj9n3b4cEXeE1v3moFrwJ9YLEvby65JANvJQRawDkTYUIM0-hEEBQHQJjTDcntNR2oXnSxmOcFjWHd7LVY7qImKPRfN2d8S-sSJiJxyBEzr66gQVkC0unNDdGl9JJeZvy0EnDjfJZLG8KMgCpXCN4lNt0cxQzzp6vICp9hfsloVspR6Anl05GHDm-cMXfA.png" alt=""/></div></figure><p>‍</p><p>At this point, the shell is ready to take over! It has its own initialization process.</p><div class="w-embed"><h3 id="shell-initialization">Shell Initialization</h3></div><p>When the shell initializes, it runs some startup scripts to enable users to customize the experience. This may involve setting environment variables, aliases, functions, or printing any information the user may want to see when the session starts. The exact paths of these scripts depend on a couple of things: which shell you’re using and whether or not the session is a login shell.</p><p>Login shells are shell sessions wherein this shell process is the one the user is logging into the system with; the process is the first process under this user ID. For example, if you log into a server running the Linux distribution Ubuntu Server, which doesn’t have a GUI environment, you’ll be logging in with a shell and that is a login shell. On the other hand, if you are already logged in and you start a subshell in a session, it will be a non-login shell.</p><p><strong>Note:</strong> Many terminal emulators and multiplexers are configured by default to start your sessions as login shells even if they technically <em>aren&#x27;t</em>. </p><div class="w-embed"><h3 id="login-vs-non-login-shells">Login vs Non-login Shells</h3></div><div class="w-embed"><p>
+Login shells have a different set of startup scripts from non-login shells, and their file paths depend on the shell. Also, most shells will have both system-wide scripts and user-specific ones. To take Zsh as an example, non-login shells run <code>/etc/zshrc</code> for all users and then <code>$HOME/.zshrc</code> for the logged-in user. Login shells will also run <code>/etc/zprofile</code> and <code>$HOME/.zprofile</code> respectively. Traditionally, there is one login shell session for a user, as any subsequent shells, for example if they use <code>screen</code> for multiplexing, will be non-login shells.
+</p></div><div class="w-embed"><p>
+Suppose you have a Raspberry Pi at home. You want it to sync with your Dropbox files, but you only need it to stay in sync while you are logged in. Suppose you have installed a Dropbox client daemon that talks to the Dropbox API to keep your files in sync. You would put a command to spawn that daemon in <code>$HOME/.zprofile</code>, because if you put it in <code>$HOME/.zshrc</code>, you would get multiple instances of that daemon if you opened multiple shells. Another example is that you may want to put expensive things in the login shell. For example, maybe on login you want to see some resource usage statistics, like disk usage with the <code>du</code> command. The <code>du</code> command can be rather slow, so you may only want to see this once when you log in rather than on every session. 
+<p></div><div class="w-embed"><p>
+Finally, the shell prepares itself to accept user input. This usually involves printing a prompt. It might look something like: <code>user@ubuntu:/var/log$</code>. Most shells store the content of the prompt in a variable, e.g. <code>PS1</code> for Bash and Zsh. Most shells also support dynamic information in the prompt in two ways:
+</p></div><div class="w-embed"><p>
+<ol>
+<li>They have placeholders to substitute variables for each prompt, e.g. <code>%d</code> for the working directory. See <a target="_blank" href="https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html">here for all Zsh</a> placeholders.</li>
+<li>If the shell has no placeholder for the particular information you want to show, most shells can run some arbitrary code before printing the prompt for each command. Therein you can re-assign <code>PS1</code> with the new information. For example, Zsh recognizes a variable <code>precmd_functions</code> which is an array of functions that run before each prompt. One use for this is adding the name of the active <a target="_blank" href="https://docs.conda.io/en/latest/">Conda</a> environment to the prompt.</li>
+</ol>
+</p></div><figure style="max-width:1552pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4483_6427349e1bf2f035c4f733a8_63bc91493fd7d0b6d5a023ac_fLV63ucqg9OsqhaQZic18xdiskia894ox-vR3q9aIBC0DqsLPIVeLao7fNA9ikllux74Ud2lXpAiZjMYHSg2-US4XdydJgF0Ddl6wVBrQcSTb6kFFRc5omMdkfkl5JoK4kGozRG2axn0-tyD_5ck-WhCAyZgUN4QyiRg-cGCFzIJrXptyblZiSx9nk7dVQ.gif" alt=""/></div></figure><p>Now that we know what happens when you <em>open</em> a terminal application, let’s explore what happens as you <em>interact</em> with the terminal.</p><div class="w-embed"><h2 id="running-a-command">Running a command</h2></div><div class="w-embed"><h3 id="entering-keystrokes">Entering keystrokes</h3></div><p>As a terminal user, the primary mode of interaction with a terminal emulator is with your keyboard device. Traditional terminals were limited to keyboard interaction by their hardware and while hardware has evolved (e.g. the addition of a mouse device), terminals still primarily rely on keyboard interaction. </p><p>When you type in the terminal, the keystrokes are first translated to ASCII characters (e.g. the backspace key is translated to the ASCII character 0x08). These characters are then written to the PTY leader by the terminal. Recall that the PTY <em>leader</em> is the end of the PTY that interfaces with the <em>terminal emulator</em>, while the PTY <em>follower</em> interfaces with the <em>shell</em>. The TTY driver then reads the characters from the PTY leader and stores them in its line discipline, which acts as an intermediate buffer between the PTY ends. The line discipline’s job is to interpret the characters from the PTY leader its own character set and then process them. How a character is processed by the line discipline is solely dependent on the character itself.</p><p>Let’s consider two categories of line discipline characters</p><div class="w-embed"><p>
+<ol>
+<li>special characters<sup><a href="#footnote-seven">7</a></sup> (e.g. ERASE, INTR)</li>
+<li>everything else (e.g. characters like “l” and “s”)</li>
+</ol>
+</p></div><div class="w-embed"><p>
+Depending on the special character, the line discipline will decide whether it needs to write back to the PTY leader, write through to the PTY follower, or both. For example, when the line discipline receives a BS character (ASCII 0x08) which is entered by the <code>backspace</code> key, it interprets it as an <code>ERASE</code> character. To process it, the line discipline will edit its internal buffer by removing the last character and then writing the delete intent back to the PTY leader. The terminal emulator can then read the change from the PTY leader and reflect it in the terminal display. Notice that the PTY follower was never written to in this case.
+</p></div><div class="w-embed"><p>
+On the other hand, when the line discipline receives an ETX character (ASCII 0x03) which is entered by the keys <code>CTRL-C</code> (and displayed as ^C), the line discipline will interpret it as an <code>INTR</code> (short for <strong>INT</strong>E<strong>R</strong>RUPT) character: it’ll send a SIGINT to the PTY follower in order to interrupt any processes running in the foreground (i.e. programs reading input from and writing output to the terminal). Note that background processes are unaffected.<sup><a href="#footnote-eight">8</a></sup> The line discipline will also write the ETX + linefeed characters back to the PTY leader, which is why the terminal emulator then displays <code>^C</code> and moves to the next line.
+</p></div><p>For all non-special characters, like the friendly “l” and “s”, the line discipline will just write the character back to the PTY leader. Since they are written back to the leader, the terminal program reads them back out and into the display which creates the “echo” effect of characters as they’re typed. Otherwise, you wouldn’t actually be able to see characters while you type! </p><div class="w-embed"><p style="margin-left: 30px">
+Gotcha: While the line discipline is a useful construct, most modern shells actually disable the line discipline’s editor and “echoing” feature. Instead, characters are buffered by the shell process itself so that the shell can implement features like tab completions and <a target="_blank" href="https://fishshell.com/docs/current/interactive.html#autosuggestions">autosuggestions</a> which <i>need</i> to see characters as they’re typed. That being said, parts of the line discipline are still used. For example, the handling of some special characters, like ^C, is usually still delegated to the line discipline. That way, if the shell process is too busy to handle user input (e.g. it’s in an infinite loop), the foreground process can still be sent an interrupt signal. A shell can control these terminal settings via the <a href="https://man7.org/linux/man-pages/man3/termios.3.html">termios</a> interface.<sup><a href="#footnote-nine">9</a>
+</sup>
+</p></div><div class="w-embed"><p>
+You might be wondering why we, as terminal users, would care about a line discipline. Well, since the line discipline acts as an intermediary between the PTY ends, that means we can actually configure it to change how characters are interpreted (among other things). For example, let’s say I wanted to use ASCII 0x0E (entered as <code>CTRL-N</code> and displayed as ^N) to send an interrupt. The line discipline can be configured to handle this!
+<p></div><p>‍</p><figure style="max-width:908pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4498_6427349e1bf2f04dddf733a7_63bc9188a859d833a8defe82_NF1IKO_vMJylfGBXXvQRvUfQ9LfT7cHp1q5SFWsmhJu3Uz8CJLvG4hDnQ7ZRalJ-ZQK_IrC9TaoKrik_Z24LKMzpoVK2qeDQdi-O-a7zfIy5Xd0U8Nw9bYRnMzKn7XSQgdpuvfYx7wopeO6gnVvTuXdcQD7RCs3qB01Dg8wKuZruIepekcuYl5rHrMAFiw.gif" alt=""/></div><figcaption>Notice how CTRL-C does <em>not </em>terminate the `sleep` once we change the stty configuration.</figcaption></figure><p>‍</p><p>In this case, when the line discipline receives ^N from the PTY leader, it interprets it as an INTR character and sends a SIGINT to the PTY follower.</p><div class="w-embed"><p>
+There’s still one special character that’s important for our journey: NL (short for <strong>N</strong>EW<strong>L</strong>INE), which is the special line discipline character that’s translated from the NL (ASCII 0x0A) and CR (ASCII 0x0D) characters (usually entered by the <code>Enter</code>, <code>CTRL-J</code> or <code>CTRL-M</code> keys).<sup><a href="#footnote-ten">10</a></sup>
+</p></div><div class="w-embed"><p style="margin-left: 30px">
+Gotcha: In Warp, entering keystrokes is not the same as entering keystrokes in a traditional terminal. While keystrokes are directly sent over the PTY as they are entered in a traditional terminal, Warp only sends the keystrokes over the PTY once <code>Enter</code> is entered (or a designated keystroke, e.g. <code>CTRL-C</code>). Instead, the input buffer is maintained at the app layer rather than at the TTY (as part of the line discipline) or shell layer. This allows Warp to provide an <a target="_blank" href="why-is-the-terminal-input-so-weird.html">IDE-like editing experience</a>.
+<p></div><div class="w-embed"><h3 id="hitting-enter">Hitting Enter</h3></div><p>This brings us to one of the final parts of our journey: executing a command. Like we’ve seen before, these seemingly simple actions we do everyday (like opening a terminal) are actually more complicated than expected.</p><div class="w-embed"><p>
+Carrying where we left off: once the <code>Enter</code> key is pressed, the terminal will send the CR ASCII character to the line discipline which will interpret it the same as an NL character. To process this character, the line discipline will forward its internal buffer along with the line feed to the program listening on the PTY follower (i.e. the shell). From this point, our discussion will focus on the shell's role in executing a command.
+</p></div><div class="w-embed"><h3 id="parsing-a-command">Parsing a command</h3></div><p>Once the shell receives the user input and linefeed, it begins to parse the command to figure out what it means.</p><p>First, the command is tokenized and syntactically/semantically analyzed. For a simple command like “ls”, that’s easy! But for a more complicated command, the shell needs to make sure it actually makes sense:</p><div class="w-embed"><p>
+<ul>
+<li><code>ls > foo.txt</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(correct)</li>
+<li><code>ls ></code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(incorrect syntax; token missing after <code>></code>)</li>
+<li><code>ls | foo.txt</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(incorrect semantics; both sides of a pipe need to be runnable processes)</li>
+</ul>
+</p></div><div class="w-embed"><p>
+Note that each shell comes with its own programming language so syntax and semantic analysis is done differently from shell to shell (e.g. the conditional AND operator is written as <code>&&</code> in Bash while it’s written as <code>and</code> in fish)
+</p></div><p>Next, tokens that aren’t shell keywords nor paths need to be resolved for meaning. That is, the shell needs to determine what these tokens actually refer to. To do so, the shell searches through a few different primitives to find what a token references: </p><div class="w-embed"><p>
+<ul>
+<li><b>aliases</b>: a mapping between a user-defined word and other tokens, often used to abbreviate complicated commands<br>e.g. <code>alias ll="ls -lh"</code></li>
+<li><b>functions</b>: a sequence of shell statements grouped together for a particular purpose (akin to “functions” in other programming languages)<br>e.g. <code>function mkcd() { mkdir -p $@ && cd ${@:$#} }</code></li>
+<li><b>environment variables</b>: a set of global variables to retain data throughout a shell’s lifetime<br>e.g. <code>HOME=/Users/bob</code> (referenced by <code>$HOME</code>)</li>
+<li><b>builtins</b>: predefined set of commands implemented within the shell executable itself<br>e.g. <code>echo</code>, <code>cd</code>, <code>pwd</code>, <code>exit</code>, <code>kill</code></li>
+<li><b>PATH executables</b>: external commands that the shell can locate (via the $PATH variable<sup><a href="#footnote-eleven">11</a></sup>) and run<br>e.g. <code>brew</code>, <code>git</code>, <code>docker</code>, <code>k8s</code></li>
+</ul>
+</p></div><p>It’s worth noting that aliases, functions and environment variables will expand to more tokens, so this resolution process is actually recursive! </p><div class="w-embed"><p>
+If you’re ever unsure what a token references, you can use the <code>type</code> command to see how the shell will resolve that token:
+</p></div><p>‍</p><figure style="max-width:908pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea447d_6427349e1bf2f03882f733aa_63bc91bfa859d85daddf0790_0co0XuMB4xmCQvZNv7-vSUrcG-EzEwrVMuqNO_rVlMhgGwfy3ZcZbLhMX76GYDvfz-RlsAurHlg5GDOOmnv81JR-OG4HoM1UyBz13ie1l-hW8gQ-N-5APOqLTB36011VXDfN8-EMGi_awQm3GxamOpeBPld1oIvy5tuO5uvsviKYBSJlY0zm_owbjDFW9w.gif" alt=""/></div><figcaption><a href="https://app.warp.dev/block/3R8oLrzGaDvl2jS8OANCYa" target="_blank">https://app.warp.dev/block/3R8oLrzGaDvl2jS8OANCYa</a></figcaption></figure><p>‍</p><div class="w-embed">If you’d like to persist aliases, functions and environment variables (e.g. changes to <code>$PATH</code>) across shell sessions, you can do so by writing them in your shell's resource file (see <a target="_blank" href="https://www.warp.dev/terminus/bash-aliases#making-aliases-permanent">here</a> for an example of how to do this in Bash and Zsh).</div><p>Out of the 5 groups mentioned above, executables are the most interesting. Unlike builtins which are handled within the shell process, executables are separate programs (files with the executable bit set) that need to be located on the filesystem and executed as a separate process (i.e. as a forked process). When the shell locates the executable, it will fork a process and run the executable in the child process, passing along any command arguments.</p><div class="w-embed"><p>
+To visualize these different processes, you can think of the terminal emulator as the root of a process tree where one if its children is the shell itself and any programs you run are descendants thereof. In fact, you can visualize this tree with the <code>pstree</code> command! All you have to do is provide the process ID of the terminal. Here is an example of a terminal with 3 tabs (i.e. 3 sessions):
+</p></div><figure style="max-width:2038pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4469_6427349e1bf2f01507f733b9_63bdcc86a5c6ce4b662722db_Screen%252520Shot%2525202023-01-10%252520at%2525203.35.53%252520PM.png" loading="lazy" alt=""/></div><figcaption><a href="https://app.warp.dev/block/RFg1c0MUKy63DsBb8Hj7I5" target="_blank">https://app.warp.dev/block/RFg1c0MUKy63DsBb8Hj7I5</a></figcaption></figure><div class="w-embed"><p>
+In this example, the terminal emulator process (Warp) has PID 84860 and the tabs/shell processes have PIDs 84890, 85525 and 86041. In one of the tabs (PID 86041), we’re running <code>tmux</code> and hence, it’s a direct child of that shell process itself, as expected!
+</p>
+<br>
+<p style="margin-left: 30px">
+Gotcha: at some point, you might have wondered why some “commands” are both builtins and executables. For example, <code>echo</code> is usually both a shell builtin but also available as an executable. Shells will offer builtin alternatives to executables when they can be more efficiently run within the shell process itself rather than forking and running another process. Some commands, like <code>cd</code>, just can’t be executables because they need to mutate the shell process’s state. If <code>cd</code> were to be run as an executable, it would run in a child process and modify the <i>child process’s</i> working directory as opposed to modifying the <i>shell process’s</i> working directory.
+</p></div><div class="w-embed"><h3 id="returning-output">Returning Output</h3></div><div class="w-embed"><p>
+Since our command <code>ls</code> is pretty simple, we don’t need to do much tokenization/resolution. Let’s assume <code>ls</code> resolves to <code>/bin/ls</code>. As mentioned before, the shell will fork a child process and have it run <code>/bin/ls</code> within. Since the child process inherits its parents’ file descriptors, the output produced by the child process will get written to the PTY follower, which is shuffled along to the line discipline. Instead of processing these bytes, the line discipline will just forward them to the PTY leader. The terminal emulator app will then read the characters from the PTY leader and display them on the screen.
+</p></div><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea447a_6427349e1bf2f018e2f733b6_63b88a3f1bad169254ac0b38_tVmZdakAxrvnzkC1tOh_hbZB66GTs6MNJUjvlP31W1Fe-eB2yBkiULOoRy8Evn84Sc7zfER8C17hK3BS3DCFtUwNHhEFkmPt9NQuuGs0R6aBx1PP5S18U5id5JvdLSnRZrP7xnvXg8i24dsdlhiSigbU1klTrptx-SAJ_-64rm4K9ReE2OF4YsV_NzggSA.png" alt=""/></div></figure><div class="w-embed"><p>
+Hopefully you have a better high-level understanding of how the character output produced by <code>ls</code> makes its way to your terminal screen! But we’re still missing a few things. Notice that in the following command/output pair, the output is all the same color:
+</p></div><figure style="max-width:1600pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea445a_6427349e1bf2f06eb0f733b8_63bc9e2def91875af017fd95_x-kBniv0s2J3BhmHHIxNjbR8jmyI1C-JllT9C8-pMXs5pOA_ajA0rEcpcizA-JnN-VkpnMQqMN5sW5ulBfAgtjLAT1A09s3Y2WOyodgg26hoFuQfHMgG7ekLBZnO2eoiq6v4SuuPo1nP1igNY0ks9o_sDPvRswHCYsMa2tcersPPr1_K6ZPmnmkMIFsIqg.png" alt=""/></div><figcaption><a href="https://app.warp.dev/block/YQf4xeJwtIK5vYEQrAYA39" target="_blank">https://app.warp.dev/block/YQf4xeJwtIK5vYEQrAYA39</a></figcaption></figure><p>But oftentimes, output will have text decorations like colors and bolding. For example, in the following command/output pair, the output is intentionally colored (directories are a different color from simple files, which are a different color from executables): </p><figure style="max-width:1600pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4466_6427349e1bf2f09782f733b2_63bc9e3e8eab053777fd9a5d_0ofDI0vO0J47jtX0VQxAJPTTyFLcHagIHh21qQXHCdze7XWsl6LjmF-x7N0AVoQdwNI8G58bGkaU94JUY-sFGBd2_ww2Khs9tKlHjH2JOy3A4i2U97tbNF59iJON_f1ScL1BqwiHcvbyuUlTC9z3Zt4Y8gKyOZBc0Q2o0Y4sUdj2q6ppwo2Dp1A_RvbqYg.png" alt=""/></div><figcaption><a href="https://app.warp.dev/block/OjfO0sTU2UzCvPoguX2uYX" target="_blank">https://app.warp.dev/block/OjfO0sTU2UzCvPoguX2uYX</a></figcaption></figure><div class="w-embed"><p>
+So how did <code>ls</code> emit these colors? And how did the terminal emulator know what to do with them? The answer is escape sequences!
+</p></div><div class="w-embed"><h3 id="escape-sequences">Escape Sequences</h3></div><p>It turns out that the shell (and other programs) can emit more than just plain-old-characters for the terminal to print. They can emit <em>escape sequences</em> to have <em>control</em> over the terminal, including text decorations, moving the cursor, scrolling, etc.</p><div class="w-embed"><p>
+In this case, the directories are printed a different color because there is an escape sequence to first change the foreground color before the characters for the directory name are emitted. So by the time the characters for the directory name reach the terminal, the terminal will know to print these characters with a certain color. It’s the terminal's job to actually render the characters on the screen with an appropriate color (an incompatible terminal would just ignore the escape sequences). Let’s look at the escape sequences emitted by the output of <code>ls --color</code>:
+</p></div><figure style="max-width:1600pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970eea514bb4722ea4452_6427349e1bf2f06089f733b1_63bc9eb28d77f2f67e2ac148_umw6YIbaE_ZNQCR3i41wzjiLKRZMk7S8HCHrboMvX33OlsJLAF57BCvmjocXSYDWrSIWGdnxH8yOPAIRrITiPZxT-cW_F48PACgNsY2nba2CO6hpFNS-JJKnbdkpUeadx0sPIxBWQYcvIWB-tERF4m2jrnecl7RBMFZ_LcQqYGTxTK1I62z9D245l9MZDw.png" alt=""/></div><figcaption><a href="https://app.warp.dev/block/a7kW0Jk6vyu6UQx4hbZmUQ" target="_blank">https://app.warp.dev/block/a7kW0Jk6vyu6UQx4hbZmUQ</a></figcaption></figure><div class="w-embed"><p>
+First, note that escape sequences are characterized as a sequence of bytes that start with the ASCII ESCAPE character (<code>\x1b</code> in hexadecimal and <code>\033</code> in octal). That’s why they’re called escape sequences!
+</p></div><div class="w-embed"><p>
+All of the escape sequences in this output have the format <code>ESC[c<sub>1</sub>;...;c<sub>k</sub>m</code>. These are called <a target="_blank" href="https://vt100.net/docs/vt510-rm/SGR.html">Select Graphic Rendition</a> (SGR) escape sequences and are used to assign attributes, like text decorations, to characters. The c<sub>i</sub>’s are the codes that control the rendering. For example, the code <code>1</code> is used to turn on bolding. The code <code>3x</code> is used to set the foreground color (where x ∈ [0, 7] is an ANSI color).
+</p></div><p>Let’s dissect the escape sequences above, one by one:</p><p>‍</p><figure style="max-width:496pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="https://assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64daac7013d4ddb79ba2faf0_Group 1 (1).png" loading="lazy" alt=""/></div></figure><p>‍</p><div class="w-embed"><p>
+The first escape sequence is used to turn on bolding which explains why <code>dir</code> is bolded in the final output. The second escape sequence sets the foreground color, specifically to cyan. The next part is an unescaped sequence of bytes and is simply the name of the directory <code>dir/</code>. The next escape sequence combines setting the foreground and background colors back to their defaults. And the final escape sequence is used to reset all the SGR attributes.
+</p></div><div class="w-embed"><p style="margin-left: 30px">
+As an exercise to the reader, try to come up with the escape sequence needed to print the name of the executable with its color (see <a target="_blank" href="https://app.warp.dev/block/HLtX9TtkHfuY2UYzM4H3Zv">here</a> for the answer).
+</p></div><p>With so many different programs and various terminal applications, there needs to be a specification that guides CLI developers and terminal builders (that’s us!) to interact in a consistent and correct manner with one another.<a href="#footnote-twelve"><sup>12</sup></a> The ANSI X3.64 was one of the first popular specificationsthat provided a guide on how to control the terminal via escape sequences.<a href="#footnote-thirteen"><sup>13</sup></a> It was adopted by the popular <a href="https://en.wikipedia.org/wiki/VT100" target="_blank">VT100 terminal</a>. The spec itself, however, didn’t actually include all that many escape sequences. As terminals evolved from physical devices to software and gained access to better hardware like displays with color, the specs also kept evolvingto give CLIs even more control.<a href="#footnote-fourteen"><sup>14</sup></a> Back when it was first written, the X3.64 spec didn’t need to include escape sequences for colored text because the physical terminals at the time could only support monochromatic text! Nowadays, if you’re going to build a terminal emulator, you’ll likely want to implement the widely-adopted <a href="https://www.xfree86.org/current/ctlseqs.html" target="_blank">xterm spec</a> which includes escape sequences to color text, for example.</p><div class="w-embed"><h3 id="closing-the-terminal">Closing the terminal</h3></div><p>Now that you know all the gnarly details about what happens when you enter “ls”, you might just want to close the terminal and forget about it (we hope you don’t feel the same way about this blog). But closing a terminal is its own can of worms! When you close your terminal, you’re also quitting any active shell sessions. And before a shell quits, it might run a logout script (if any), write the commands from the session into a history file and so on. The actual teardown will be pretty boring: killing child processes and cleaning up file descriptors. We omitted some details here, but that’s pretty much it.</p><div class="w-embed"><hr class="solid"></div><p>‍<sup>‍</sup></p><div class="w-embed"><p>
+<sup 
+id="footnote-one">1
+</sup> 
+<sub>
+<a target="_blank" href="https://en.wikipedia.org/wiki/IBM_2741">https://en.wikipedia.org/wiki/IBM_2741</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-two">2
+</sup> 
+<sub>
+<a target="_blank" href="https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP2040.html">https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP2040.html</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-three">3
+</sup> 
+<sub>
+<a target="_blank" href="https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP2025.html">https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP2025.html</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-four">4
+</sup> 
+<sub>
+<a target="_blank" href="https://www.sobyte.net/post/2022-05/tty/">https://www.sobyte.net/post/2022-05/tty/</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-five">5
+</sup> 
+<sub>
+<a target="_blank" href="https://en.wikipedia.org/wiki/VT100">https://en.wikipedia.org/wiki/VT100</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-six">6
+</sup> 
+<sub>
+You might come across the terms “master” and “slave” instead of “leader” and “follower” (respectively) in other readings.
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-seven">7
+</sup> 
+<sub>
+See <a target="_blank" href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_09">here</a> for a more complete list of special characters.
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-eight">8
+</sup> 
+<sub>
+To see this, try running <code>sleep 100 &</code> and then CTRL-C. The process for <code>sleep 100</code> will still be running in the background (can be confirmed with <code>ps</code>).
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-nine">9
+</sup> 
+<sub>
+See <a target="_blank"  href="https://github.com/zsh-users/zsh/blob/d23bcf11714063498a9aec17a360af485026fef2/Src/Zle/zle_main.c#L241">here</a> for an example of how zsh does this. 
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-ten">10
+</sup> 
+<sub>
+Technically, there’s a dedicated CR line discipline character, but it behaves just like NL in most cases.
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-eleven">11
+</sup> 
+<sub>
+The $PATH variable is a list of directory paths that the shell will search through when it’s trying to find an executable.
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-twelve">12
+</sup> 
+<sub>
+Terminal applications will usually set the <a target="_blank" href="https://app.warp.dev/block/DXnyenPCOXO3Bl820B2AvW"><code>$TERM</code></a> variable which CLIs can query to check which spec the terminal emulator app is following and take advantage of its features.
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-thirteen">13
+</sup> 
+<sub>
+<a target="_blank" href="https://en.wikipedia.org/wiki/ANSI_escape_code#History ">https://en.wikipedia.org/wiki/ANSI_escape_code#History</a>
+</sub>
+</p></div><div class="w-embed"><p>
+<sup 
+id="footnote-fourteen">14
+</sup> 
+<sub>
+Since most terminal specs are supersets of previous widely-accepted specs, they are often backwards-compatible. See <a target="_blank" href="https://github.com/fish-shell/fish-shell/issues/2559#issuecomment-159113976">here</a> for an example of fish running on a VT220!
+</sub>
+</p></div></div></div></div></section><section class="section"><div class="w-layout-blockcontainer container-lg w-container"><div class="w-layout-grid blog-post-social-icons"><a href="https://twitter.com/warpdotdev" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg></div></a><a href="https://discord.com/invite/warpdotdev" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path></svg></div></a><a href="https://github.com/warpdotdev/Warp" target="_blank" class="blog-post-social-link w-inline-block"><div class="blog-post-social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" fill="currentColor"></path></svg></div></a></div></div></section><section class="section pt-0"><div class="w-layout-blockcontainer container-lg w-container"><h2 class="text-title-sm font-weight-normal">Related</h2><div class="mt-8 w-dyn-list"><div role="list" class="related-blog-post-list w-dyn-items"><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="how-warp-works.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e7b2afda0d7e0a91f6_6427349e1bf2f05ac1f73293_how%2520it%2520works%2520%255Bcover%255D%25202.jpg" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">How Warp Works</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Engineering</div></div></a></div><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="how-to-draw-styled-rectangles-using-the-gpu-and-metal.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e6d48f3e1b7d34151f_6427349e1bf2f01d77f7329d_How%2520to%2520draw%2520styled%2520rectangles%2520using%2520the%2520GPU%2520and%2520Metal%2520%255BCover%255D.jpg" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">How to draw styled rectangles using the GPU and Metal</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Engineering</div></div></a></div><div id="w-node-c799702d-2a73-d213-f794-d80d643ae4eb-97f94051" role="listitem" class="w-dyn-item"><a href="adventures-text-rendering-kerning-glyph-atlases.html" class="blog-main_link w-inline-block"><div class="blog-refresh_image-wrapper"><img src="assets-global.website-files.com/64b7506ad75bbfcf43a51e90/64c970e42b35859686a6621e_6427349e1bf2f03e43f73302_Screen%2520Shot%25202022-07-27%2520at%252012.03.53%2520AM.png" loading="lazy" alt="" class="full-width-image aspect-16-9"/></div><div class="blog-refresh_details"><h2 class="text-subtitle text-lighten-90 mt-4">Adventures in Text Rendering: Kerning and Glyph Atlases</h2><div fs-cmsfilter-field="categories" class="refresh-style-tag mt-8">Engineering</div></div></a></div></div></div></div></section><section class="section section__pre-footer divider-top"><div class="w-layout-blockcontainer container-lg w-container"><div class="grid"><div id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8ce-a6add8cb"><div class="grid gap-y-0"><div id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8d0-a6add8cb" class="predownload-feature-headline"><div class="feature-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cb002e67afff45c7554892_feature-icon-check-verified-02.svg" loading="lazy" width="20" height="20" alt="" class="feature-icon-image"/></div><div class="text-subtitle text-lighten-70 text-align-center text-balance">Trusted by hundreds of thousands of professional developers</div><div class="download-cta-group-waitlist download-cta-group-waitlist__hero-layout hidden"><div class="waitlist-form-header"><div class="waitlist-form-header-text">Join the Windows waitlist</div><a data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg" loading="lazy" alt=""/></a></div><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form" data-analytics-form="Windows Waitlist Form Submitted" action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="476f119b-5a49-9061-469a-3883d8acf404"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Sign up for waitlist"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp when the release is available to download.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div><h2 id="w-node-_4b1665ac-ccc4-7eab-64c2-3408a6add8d5-a6add8cb" class="text-title text-align-center mt-4">Download Warp <br/>to get started</h2></div><div class="mt-12"><div data-cta-root-tag="download-buttons" class="cta-root"><div class="download-cta-group-buttons"><div data-for-os="mac" class="download-cta-container"><div class="download-button-group download-button-group__compact"><div class="download-button-wrapper"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="http://app.warp.dev/get_warp?&amp;package=dmg" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1a5ed579320eb9440f33e_apple-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div><div class="button-v3-text__primary">Download for Mac</div></a></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div><div data-for-os="linux" class="download-cta-container"><div class="download-button-group"><div class="download-button-wrapper"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">.deb</div><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><div class="download-button-help-text">Debian, Ubuntu</div></div><div class="download-button-wrapper"><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">.rpm</div><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><div class="download-button-help-text">Fedora, Red Hat</div></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div><div data-for-os="windows" class="download-cta-container"><div class="download-button-group download-button-group__compact"><div class="download-button-wrapper"><a href="#windows-waitlist-form" class="button-v3 button-v3__primary w-inline-block"><div class="button-v3-text__primary">Join the Windows waitlist</div></a></div><div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4" class="download-dropdown w-dropdown"><div class="download-dropdown-toggle w-dropdown-toggle"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg" loading="lazy" alt="" class="download-dropdown-toggle-icon"/></div><address class="download-dropdown-list w-dropdown-list"><div class="download-dropdown-list-group download-dropdown-list-group__first"><a data-property-download_package="dmg" data-analytics="Download in Hero Clicked" data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg" target="_blank" class="download-dropdown-list-item w-inline-block"><div>macOS</div><div class="download-dropdown-list-item-pkg"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a></div><div class="download-dropdown-list-group"><a data-property-download_package="deb" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=deb" target="_blank" class="download-dropdown-list-item w-inline-block"><div>Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.deb</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>.rpm</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="pkg.tar.zst" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=pacman" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div class="download-dropdown-list-item-pkg-label"><div>.pkg.tar.zst</div><div class="download-dropdown-list-item-pkg-help">Arch Linux</div></div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked" data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage" target="_blank" class="download-dropdown-list-item w-inline-block"><div class="download-dropdown-platform-hidden-label">Linux x64</div><div class="download-dropdown-list-item-pkg"><div>AppImage</div><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg" loading="lazy" width="20" height="20" alt=""/></div></a><a data-activate-os="windows" href="#windows-waitlist-form" class="download-dropdown-list-item text-align-center w-inline-block"><div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">Warp for Windows is coming soon.<br/>‍<strong data-activate-os="windows" class="text-weight-medium">Sign up for the waitlist</strong><br/></div></a></div></address></div></div></div></div><div class="download-cta-group-waitlist hidden"><div class="waitlist-form-header"><div class="waitlist-form-header-text">Join the Windows waitlist</div><a data-element-tag="waitlist-form-close-button" href="#" class="button-v3 w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdb5dd4762b83493afcecc_x-close-icon.svg" loading="lazy" alt=""/></a></div><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-" data-name="Windows Waitlist Form" data-analytics-form="Windows Waitlist Form Submitted" action="https://subscribedtowindowswaitlist-3fkj7yiwuq-uc.a.run.app/" class="mt-6" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="b854ce33-8049-1529-3f69-2687ea46a250"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Sign up for waitlist"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp when the release is available to download.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div><div data-cta-root-tag="send-download-link" class="cta-root"><div class="download-cta-group-waitlist"><div class="waitlist-form-wrapper w-form"><form data-include-anonymousid="" method="post" name="wf-form-Mobile-Download-Link-Form" data-name="Mobile Download Link Form" data-analytics-form="Mobile Email Download Form Submitted" action="https://senddownloadlink-3fkj7yiwuq-uc.a.run.app/" id="wf-form-Mobile-Download-Link-Form" data-wf-page-id="65d72e8571139abe97f94051" data-wf-element-id="1ecc1edc-ecbc-152b-1f58-b2c52c49efe1"><input class="form-input-refresh w-input" maxlength="256" name="field" data-name="field" placeholder="Enter your email" type="email" required=""/><div class="button-v3 button-v3__full-width button-v3__primary relative"><input type="submit" data-wait="Please wait…" class="button-v3-text__primary is-form-submit w-button" value="Send download link"/><div class="button-v3-icon-float-right"><div class="button-v3-icon"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cae024839252de67cd67e2_arrow-narrow-right.svg" loading="lazy" width="20" height="20" alt=""/></div></div></div></form><div class="waitlist-form-success w-form-done"><div class="text-align-left">Success! You will receive an email from Warp with the download link.</div></div><div class="waitlist-form-error w-form-fail"><div class="text-align-left">Oops! Something went wrong while submitting the form.</div></div></div></div></div></div></div></div><div class="section__pre-footer-background-image"><img src="assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png" loading="lazy" sizes="(max-width: 479px) 87vw, (max-width: 991px) 92vw, 720px" srcset="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-500.png 500w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-800.png 800w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456-p-1080.png 1080w, https://assets-global.website-files.com/64b6f3636f598299028e8577/65cd5dbefc7f1f47524d3d2e_Frame%201000002456.png 1440w" alt=""/></div></div></section><footer class="footer divider-top"><div class="footer-container"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145260-c414525e" class="footer_content-top"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145261-c414525e" class="footer-left-content"><a href="#" class="footer-logo-link w-inline-block"><img src="https://assets-global.website-files.com/64b6f3636f598299028e8577/653024a36ae7b9b3ea53d451_Warp - Glyph.svg" loading="lazy" alt="Warp glyph" class="footer-logo"/></a><div class="footer_status-wrapper"><div id="operational" class="footer_status-component operational"><div class="footer_status-item"><div class="footer_status-dot"></div><div>All Systems Operational</div></div></div><div id="partial-outage" class="footer_status-component partial-outage"><div class="footer_status-item"><div class="footer_status-dot is-yellow"></div><div>Partial Systems Outage</div></div></div><div id="major-outage" class="footer_status-component major-outage"><div class="footer_status-item"><div class="footer_status-dot is-red"></div><div>Major Systems Outage</div></div></div><div class="w-embed w-script"><script>
+  // Function to update div block visibility based on status
+  function updateStatus() {
+    fetch('https://status.warp.dev/api/v2/status.json', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      const statusDescription = data.status.description;
+      const footerStatusComponents = document.querySelectorAll('.footer_status-component');
+
+      // Hide all div blocks with the class name "footer_status-component"
+      footerStatusComponents.forEach(component => {
+        component.style.display = 'none';
+      });
+
+      // Show div block based on the status description
+      if (statusDescription === 'All Systems Operational') {
+        document.querySelector('.footer_status-component.operational').style.display = 'block';
+      } else if (statusDescription === 'Partial System Outage') {
+        document.querySelector('.footer_status-component.partial-outage').style.display = 'block';
+      } else if (statusDescription === 'Major Service Outage') {
+        document.querySelector('.footer_status-component.major-outage').style.display = 'block';
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching status data:', error);
+    });
+  }
+
+  // Call the function to initially set the div block visibility
+  updateStatus();
+</script></div></div></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145278-c414525e" class="footer_link-wrapper"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c4145279-c414525e" class="footer_link-column is-1"><div class="footer-column-title">Product</div><a href="warp-drive.html" class="footer_link-refresh">Warp Drive</a><a href="warp-ai.html" class="footer_link-refresh">Warp AI</a><a href="security.html" class="footer_link-refresh">Security</a><a href="https://docs.warp.dev/features/warp-ai" target="_blank" class="footer_link-refresh">Full Feature List</a><a href="https://docs.warp.dev/getting-started/changelog" target="_blank" class="footer_link-refresh">Changelog</a><a href="mac-terminal.html" class="footer_link-refresh">Mac Terminal</a><a href="text-editor.html" class="footer_link-refresh">Terminal Text Editor</a><a href="mac-terminal-themes.html" class="footer_link-refresh">Mac Terminal Themes</a><a href="linux-terminal.html" class="footer_link-refresh">Linux Terminal</a></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414528c-c414525e" class="footer_link-column is-2"><div class="footer-column-title">Explore</div><a href="https://docs.warp.dev/getting-started/readme" target="_blank" class="footer_link-refresh">User Manual</a><a href="pricing.html" class="footer_link-refresh">Pricing</a><a href="how-warp-works.html" target="_blank" class="footer_link-refresh">How Warp Works</a><a href="https://www.commands.dev/" target="_blank" class="footer_link-refresh">Commands.dev</a><a href="terminus.html" class="footer_link-refresh">Terminus</a><a href="compare-terminal-tools.html" class="footer_link-refresh">Compare Terminal Tools</a></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c414529d-c414525e" class="footer_link-column is-3"><div class="footer-column-title">Company</div><a href="about.html" class="footer_link-refresh">About</a><a href="https://warpdev.notion.site/Public-Warp-How-We-Work-b872d41a1da743fca18220a731aeba48" target="_blank" class="footer_link-refresh">How We work</a><a href="careers.html" class="footer_link-refresh">Careers</a><a href="contact.html" class="footer_link-refresh">Contact</a><a href="blog.html" class="footer_link-refresh">Blog</a><a href="privacy/overview.html" class="footer_link-refresh">Privacy</a><a href="faq.html" class="footer_link-refresh">FAQs</a><a href="terms-of-service.html" class="footer_link-refresh">Terms</a></div></div></div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b0-c414525e" class="footer_content-bottom"><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b1-c414525e" class="footer-legal-text">All Rights Reserved ©️ 2024</div><div id="w-node-_77c43ce5-4c0e-c3c9-53be-2ef3c41452b3-c414525e" class="w-layout-grid footer_social-list"><a Title="X" href="https://twitter.com/warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon is-twitter w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_279_74)">
+<path d="M9.51577 6.77566L15.4681 0H14.0581L8.8875 5.88201L4.76082 0H0L6.24171 8.89549L0 15.9999H1.41002L6.86679 9.78701L11.2258 15.9999H15.9866M1.91893 1.04126H4.08512L14.057 15.0098H11.8903" fill="currentColor"/>
+</g>
+<defs>
+<clipPath id="clip0_279_74">
+<rect width="15.9866" height="16" fill="currentColor"/>
+</clipPath>
+</defs>
+<title>X</title>
+</svg></div></a><a Title="Youtube" href="https://www.youtube.com/@warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--carbon" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+<path fill="currentColor" d="M29.41 9.26a3.5 3.5 0 0 0-2.47-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.94.59a3.5 3.5 0 0 0-2.47 2.47A36.13 36.13 0 0 0 2 16a36.13 36.13 0 0 0 .59 6.74a3.5 3.5 0 0 0 2.47 2.47c2.18.59 10.94.59 10.94.59s8.76 0 10.94-.59a3.5 3.5 0 0 0 2.47-2.47A36.13 36.13 0 0 0 30 16a36.13 36.13 0 0 0-.59-6.74ZM13.2 20.2v-8.4l7.27 4.2Z"></path>
+<title>Youtube</title>
+</svg></div></a><a Title="TikTok " href="https://www.tiktok.com/@warp.dev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"></path>
+<title>Tiktok</title>
+</svg></div></a><a Title="Discord" href="https://discord.com/invite/warpdotdev" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"></path>
+<title>Discord</title>
+</svg></div></a><a Title="Github" href="https://github.com/warpdotdev/Warp" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" fill="currentColor"></path>
+<title>Github</title>
+</svg></div></a><a Title="RSS" href="rss.xml" target="_blank" class="footer_social-link w-inline-block"><div class="footer-alt_social-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18" fill="currentColor"></circle><path fill="currentColor" d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path>
+<title>RSS</title>
+</svg></div></a></div></div></div></footer><script src="d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c810bb.js?site=64b6f3636f598299028e8577" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="assets-global.website-files.com/64b6f3636f598299028e8577/js/warp-dev.95b7f2bf0.js" type="text/javascript"></script><script type="text/javascript">
+  _linkedin_partner_id = "4810452";
+  window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+  window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+  (function (l) {
+    if (!l) {
+      window.lintrk = function (a, b) {
+        window.lintrk.q.push([a, b]);
+      };
+      window.lintrk.q = [];
+    }
+    var s = document.getElementsByTagName("script")[0];
+    var b = document.createElement("script");
+    b.type = "text/javascript";
+    b.async = true;
+    b.src = "snap.licdn.com/li.lms-analytics/insight.min.js";
+    s.parentNode.insertBefore(b, s);
+  })(window.lintrk);
+</script>
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display: none"
+    alt=""
+    src="https://px.ads.linkedin.com/collect/?pid=4810452&amp;fmt=gif"
+  />
+</noscript>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript
+  ><iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-WCCX3ZH"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe
+></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script>
+  !(function () {
+    var analytics = (window.analytics = window.analytics || []);
+    if (!analytics.initialize)
+      if (analytics.invoked)
+        window.console &&
+          console.error &&
+          console.error("Segment snippet included twice.");
+      else {
+        analytics.invoked = !0;
+        analytics.methods = [
+          "trackSubmit",
+          "trackClick",
+          "trackLink",
+          "trackForm",
+          "pageview",
+          "identify",
+          "reset",
+          "group",
+          "track",
+          "ready",
+          "alias",
+          "debug",
+          "page",
+          "once",
+          "off",
+          "on",
+          "addSourceMiddleware",
+          "addIntegrationMiddleware",
+          "setAnonymousId",
+          "addDestinationMiddleware",
+        ];
+        analytics.factory = function (e) {
+          return function () {
+            var t = Array.prototype.slice.call(arguments);
+            t.unshift(e);
+            analytics.push(t);
+            return analytics;
+          };
+        };
+        for (var e = 0; e < analytics.methods.length; e++) {
+          var key = analytics.methods[e];
+          analytics[key] = analytics.factory(key);
+        }
+        analytics.load = function (key, e) {
+          var t = document.createElement("script");
+          t.type = "text/javascript";
+          t.async = !0;
+          t.src = "https://app.warp.dev/_seg/cdn/" + key + "/analytics.min.js";
+          var n = document.getElementsByTagName("script")[0];
+          n.parentNode.insertBefore(t, n);
+          analytics._loadOptions = e;
+        };
+        analytics._writeKey = "ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e";
+        analytics._cdn = "https://app.warp.dev/_seg/cdn";
+        analytics.SNIPPET_VERSION = "4.15.3";
+        analytics.load("ujkrOrATqKywWQZQWiHzOkxtIgVJsB2e", {
+          integrations: {
+            "Segment.io": { apiHost: "app.warp.dev/_seg/api/v1" },
+          },
+        });
+        analytics.page();
+      }
+  })();
+
+  $(document).ready(function () {
+    function sendAnalytics(event, attributes) {
+      let properties;
+      $.each(attributes, (_, attr) => {
+        if (attr.name.startsWith("data-property-")) {
+          if (!properties) {
+            properties = {};
+          }
+          const property = attr.name.split("data-property-")[1];
+          properties[property] = attr.value;
+        }
+      });
+      analytics.track(event, properties);
+    }
+
+    $("[data-analytics]").on("click", (e) => {
+      const event = e.currentTarget.dataset.analytics;
+      const attributes = e.currentTarget.attributes;
+      sendAnalytics(event, attributes);
+    });
+
+    $("form[data-analytics-form]").on("submit", (e) => {
+      const event = e.currentTarget.dataset.analyticsForm;
+      const attributes = e.currentTarget.attributes;
+      sendAnalytics(event, attributes);
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".toggle-header-menu").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const body = document.body;
+
+        if (body.style.overflow === "hidden") {
+          body.style.overflow = "";
+          return;
+        }
+
+        body.style.overflow = "hidden";
+      });
+    });
+
+    const createSVG = (width, height, radius) => {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+      const rectangle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
+
+      svg.setAttributeNS(
+        "http://www.w3.org/2000/svg",
+        "viewBox",
+        `0 0 ${width} ${height}`
+      );
+
+      rectangle.setAttribute("x", "0");
+      rectangle.setAttribute("y", "0");
+      rectangle.setAttribute("width", "100%");
+      rectangle.setAttribute("height", "100%");
+      rectangle.setAttribute("rx", `${radius}`);
+      rectangle.setAttribute("ry", `${radius}`);
+      rectangle.setAttribute("pathLength", "10");
+
+      svg.appendChild(rectangle);
+
+      return svg;
+    };
+
+    document
+      .querySelectorAll(".button-gradient, .button-transparent")
+      .forEach((button) => {
+        const style = getComputedStyle(button);
+
+        const lines = document.createElement("div");
+
+        lines.classList.add("lines");
+
+        const groupTop = document.createElement("div");
+        const groupBottom = document.createElement("div");
+
+        const svg = createSVG(
+          button.offsetWidth,
+          button.offsetHeight,
+          parseInt(style.borderRadius, 10)
+        );
+
+        groupTop.appendChild(svg);
+        groupTop.appendChild(svg.cloneNode(true));
+        groupTop.appendChild(svg.cloneNode(true));
+        groupTop.appendChild(svg.cloneNode(true));
+
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+        groupBottom.appendChild(svg.cloneNode(true));
+
+        lines.appendChild(groupTop);
+        lines.appendChild(groupBottom);
+
+        button.appendChild(lines);
+
+        button.addEventListener("pointerenter", () => {
+          button.classList.add("start");
+        });
+
+        svg.addEventListener("animationend", () => {
+          button.classList.remove("start");
+        });
+      });
+  });
+</script>
+
+<script>
+  /**
+   * Custom Form Handling:
+   *
+   * This code provides an option to opt out of Webflow's native form handler
+   * and use a custom form handler instead. By default, the custom form handler is used.
+   * Adding the `data-webflow-form` attribute to the `form` element opts in
+   * to use Webflow's native form handler.
+   *
+   * This code gives us control over which forms will submit data to
+   * our external CRM system. It also enables us to continue using Webflow's
+   * native form submission for selected forms.
+   *
+   * This code is applied site-wide and should not be duplicated across different pages.
+   * Duplicating this code will cause multiple submissions.
+   */
+
+  $("form").submit(function (e) {
+    const $form = $(this); // The submitted form
+
+    if ($form.data("webflow-form") != null) {
+      return true;
+    }
+
+    const $submit = $("[type=submit]", $form); // Submit button of form
+    const buttonText = $submit.val(); // Original button text
+    const buttonWaitingText = $submit.attr("data-wait"); // Waiting button text value
+    const formMethod = $form.attr("method"); // Form method (GET/POST)
+    const formAction = $form.attr("action"); // Form action (the URL we are posting to)
+    const formDataArray = $form.serializeArray(); // Form data
+
+    if ($form.data("include-anonymousid") != null) {
+      const anonymousIdCookie = document.cookie
+        .split("; ")
+        .find((c) => c.startsWith("ajs_anonymous_id="));
+
+      if (anonymousIdCookie) {
+        formDataArray.push({
+          name: "anonymousid",
+          value: anonymousIdCookie.replace("ajs_anonymous_id=", ""),
+        });
+      }
+    }
+
+    // Set waiting text
+    if (buttonWaitingText) {
+      $submit.val(buttonWaitingText);
+    }
+
+    $.ajax(formAction, {
+      data: $.param(formDataArray),
+      method: formMethod,
+    })
+      .done((res) => {
+        $form
+          .hide() // optional hiding of form
+          .siblings(".w-form-done")
+          .show() // Show success
+          .siblings(".w-form-fail")
+          .hide(); // Hide failure
+      })
+      .fail((res) => {
+        $form
+          .siblings(".w-form-done")
+          .hide() // Hide success
+          .siblings(".w-form-fail")
+          .show(); // show failure
+      })
+      .always(() => {
+        // Reset text
+        $submit.val(buttonText);
+      });
+
+    // Prevent Webflow's default form handler from executing
+    return false;
+  });
+
+  // need to enqueue it to Webflow otherwise `submit.disabled` won't take effect
+  Webflow.push(() => {
+    // Validate the form action URL and display an error if the URL is invalid.
+    for (const f of document.querySelectorAll("form")) {
+      // Ignore native Webflow forms
+      if (f.dataset.hasOwnProperty("webflowForm")) {
+        continue;
+      }
+
+      const action = f.getAttribute("action");
+      try {
+        // Check that the action is a valid URL
+        new URL(action.html);
+      } catch {
+        console.error(
+          `Invalid form action: "${action}" for form ${f.name}. Submissions will fail.`
+        );
+
+        // show error
+        $(f)
+          .siblings(".w-form-fail")
+          .text(
+            "Form configuration error. Please contact support for assistance."
+          )
+          .show();
+
+        // disable the submit button
+        const submit = f.querySelector("input[type=submit]");
+        if (submit) {
+          submit.disabled = true;
+        }
+      }
+    }
+  });
+</script>
+
+<!-- handle switching platform-specific CTA when clicking on a link -->
+<style>
+  .waitlist_component-wrapper[data-show-os] .waitlist_component {
+    display: none;
+  }
+  .waitlist_component-wrapper[data-show-os="linux"]
+    .waitlist_component[data-for-os="linux"],
+  .waitlist_component-wrapper[data-show-os="mac"]
+    .waitlist_component[data-for-os="mac"],
+  .waitlist_component-wrapper[data-show-os="windows"]
+    .waitlist_component[data-for-os="windows"] {
+    display: block !important;
+  }
+</style>
+<script>
+  for (const w of document.querySelectorAll(".waitlist_component-wrapper")) {
+    w.addEventListener("click", (event) => {
+      const os = event.target.dataset.activateOs;
+      if (os) {
+        event.preventDefault();
+        w.setAttribute("data-show-os", os);
+      }
+    });
+  }
+</script>
+<!-- handle open/close Windows waitlist form -->
+<style>
+  /* sanity in case someone "clean up" CSS classes in Webflow */
+  .download-cta-group-buttons.hidden,
+  .download-cta-group-waitlist.hidden {
+    display: none;
+  }
+</style>
+<script>
+  (() => {
+    const $roots = $(".cta-root[data-cta-root-tag='download-buttons']");
+    const groups = new Map(
+      $roots.toArray().map((root) => [
+        root,
+        {
+          buttons: root.querySelector(".download-cta-group-buttons"),
+          waitlist: root.querySelector(".download-cta-group-waitlist"),
+        },
+      ])
+    );
+
+    function showButtons({ buttons, waitlist }) {
+      buttons.classList.remove("hidden");
+      waitlist.classList.add("hidden");
+    }
+
+    function showWaitlist({ buttons, waitlist }) {
+      buttons.classList.add("hidden");
+      waitlist.classList.remove("hidden");
+    }
+
+    $roots.on("click", "[href='#windows-waitlist-form']", (event) => {
+      event.preventDefault();
+      showWaitlist(groups.get(event.delegateTarget));
+    });
+
+    $roots.on(
+      "click",
+      "[data-element-tag='waitlist-form-close-button']",
+      (event) => {
+        event.preventDefault();
+        showButtons(groups.get(event.delegateTarget));
+      }
+    );
+
+    // if the page loads with `?windows_waitlist=true`, open the waitlist
+    // by default regardless of the platform.
+    const { searchParams } = new URL(window.html);
+    // loop through search params instead of doing .get to handle case sensitivity
+    for (const [k, v] of searchParams) {
+      if (
+        k.toLowerCase() === "windows_waitlist" &&
+        v.toLowerCase() === "true"
+      ) {
+        for (const group of groups.values()) {
+          showWaitlist(group);
+        }
+      }
+    }
+  })();
+</script>
+
+<script src="cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+<script>
+  // define the load gist function
+  var loadGist = function (elem) {
+    var gistUrl = $(elem)
+      .text()
+      .match(/\bhttps?:\/\/\S+(.js)/gi);
+    if (
+      typeof gistUrl === "undefined" ||
+      gistUrl === null ||
+      gistUrl.length == 0
+    )
+      return;
+    //load gist
+    $(elem).show();
+    $(elem).empty();
+    postscribe(elem, "<script src=" + gistUrl + "><\/script>");
+  };
+
+  var gists = $('p:contains("CODE:")');
+  gists.hide();
+  gists.toArray().forEach(loadGist);
+</script>
+</body></html>

@@ -197,29 +197,7 @@
     }
   </style>
 
-  <!-- Support OS detection -->
-  <style>
-    html.os-linux [data-for-os="mac"],
-    html.os-linux [data-for-os="windows"] {
-      display: none !important;
-    }
 
-    html.os-mac [data-for-os="linux"],
-    html.os-mac [data-for-os="windows"] {
-      display: none !important;
-    }
-
-    html.os-windows [data-for-os="linux"],
-    html.os-windows [data-for-os="mac"] {
-      display: none !important;
-    }
-
-    html.os-linux [data-except-os="linux"],
-    html.os-mac [data-except-os="mac"],
-    html.os-windows [data-except-os="windows"] {
-      display: none !important;
-    }
-  </style>
   <script>
     (() => {
       if (/linux/i.test(navigator.userAgent)) {
@@ -436,30 +414,7 @@
   <!-- End Reddit Pixel -->
   <!-- [Attributes by Finsweet] Copy to clipboard -->
   <script defer src="cdn.jsdelivr.net/npm/%40finsweet/attributes-copyclip%401/copyclip.js"></script>
-  <script>
-    function showOS(os, buttonId) {
-      const osIds = ['dmacos', 'dwindows', 'dlinux'];
-      const buttonIds = ['sMac', 'sWindow', 'sLinux'];
 
-      osIds.forEach(id => {
-        const element = document.getElementById(id);
-        if (id === `d${os}`) {
-          element.classList.remove('hidden');
-        } else {
-          element.classList.add('hidden');
-        }
-      });
-
-      buttonIds.forEach(id => {
-        const button = document.getElementById(id);
-        if (id === buttonId) {
-          button.classList.add('soft_icon_bg');
-        } else {
-          button.classList.remove('soft_icon_bg');
-        }
-      });
-    }
-  </script>
 
   <style>
     .hero-animation-button.is-active {
@@ -893,35 +848,34 @@
                             <span>Linux</span>
                           </div>
                         </div>
-                        <div id="dmacos" class="cmd">
-                          <div style="padding: 1.4rem;">curl -fsSL warpdev.com/install.sh | sh</div>
-                          <div class="copy_part">
+
+                        <div id="dmacos" class="cmd hidden">
+                          <div style="padding: 1.4rem;" id="macos-command">curl -fsSL warpdev.com/install.sh | sh</div>
+                          <div class="copy_part" onclick="Copy('macos')">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset="">Copy
+                              alt="" srcset=""> <span id="macos-copy-text">Copy</span>
                           </div>
                         </div>
+
                         <div id="dwindows" class="cmd hidden">
-                          <div style="padding: 1.4rem;">iwr https://warpdev.com/install.ps1 |iex</div>
-                          <div class="copy_part">
+                          <div style="padding: 1.4rem;" id="windows-command">iwr https://warpdev.com/install.ps1 |iex
+                          </div>
+                          <div class="copy_part" onclick="Copy('windows')">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset="">Copy
+                              alt="" srcset=""> <span id="windows-copy-text">Copy</span>
                           </div>
-
                         </div>
 
                         <div id="dlinux" class="cmd hidden">
-                          <div style="padding: 1.4rem;">iwr warpdev.com/install.ps1 | iex</div>
-                          <div class="copy_part">
+                          <div style="padding: 1.4rem;" id="linux-command">iwr warpdev.com/install.ps1 | iex</div>
+                          <div class="copy_part" onclick="Copy('linux')">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset="">Copy
+                              alt="" srcset=""> <span id="linux-copy-text">Copy</span>
                           </div>
                         </div>
-                        <!-- <a class="button-v3 button-v3__primary w-inline-block">
-                          <div class="button-v3-text__primary">Install Now</div>
-                        </a> -->
                       </div>
                     </div>
                   </div>

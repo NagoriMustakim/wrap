@@ -1148,10 +1148,61 @@
                   </div>
                   <div data-for-os="windows" class="download-cta-container">
                     <div class="download-button-group download-button-group__compact">
-                      <div class="download-button-wrapper"> <a href="#top-page" class="button-v3 button-v3__primary w-inline-block"
-                          style="width: 13rem; justify-content: center; border-radius: 6px;">
-                          <div class="button-v3-text__primary" style="flex: none;">Install Now</div>
-                        </a></div>
+                      
+                      <div class="download-button-wrapper">
+                        <div class="text_primary ">Install software</div>
+                        <div class="inst_soft">
+                          <div onclick="showOS('macos', 'sMac')" id="sMac" class="soft_icon">
+                            <img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/664d7eea439f2faf5bc913f2_mac-logo-lighten-70.svg"
+                              alt="">
+                            <span style="margin-top: 4px;">MacOS</span>
+                          </div>
+                          <div onclick="showOS('windows', 'sWindow')" id="sWindow" class="soft_icon">
+                            <img
+                              src="assets-global.website-files.com/64b6f3636f598299028e8577/svg/Windows_icon_logo.png"
+                              style="height: 25px; width: 25px;">
+                            <span>Windows</span>
+                          </div>
+                          <div onclick="showOS('linux', 'sLinux')" id="sLinux" class="soft_icon">
+                            <img
+                              src="assets-global.website-files.com/64b6f3636f598299028e8577/svg/linuxpng-removebg-preview.png"
+                              alt="" style="height: 20px; width: 20px; margin-top: 2px;">
+                            <span>Linux</span>
+                          </div>
+                        </div>
+
+                        <div id="dmacos" class="cmd hidden">
+                          <div style="padding: 1.4rem;" id="macos-command">curl -fsSL warpdev.com/install.sh | sh</div>
+                          <div class="copy_part" onclick="Copy('macos')">
+                            <img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
+                              alt="" srcset=""> <span id="macos-copy-text">Copy</span>
+                          </div>
+                        </div>
+
+                        <div id="dwindows" class="cmd hidden">
+                          <div style="padding: 1.4rem;" id="windows-command">iwr https://warpdev.com/install.ps1 |iex
+                          </div>
+                          <div class="copy_part" onclick="Copy('windows')">
+                            <img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
+                              alt="" srcset=""> <span id="windows-copy-text">Copy</span>
+                          </div>
+                        </div>
+
+                        <div id="dlinux" class="cmd hidden">
+                          <div style="padding: 1.4rem;" id="linux-command">iwr warpdev.com/install.ps1 | iex</div>
+                          <div class="copy_part" onclick="Copy('linux')">
+                            <img
+                              src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
+                              alt="" srcset=""> <span id="linux-copy-text">Copy</span>
+                          </div>
+                        </div>
+                      </div>
+
+
+
                       <!-- <div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4"
                         class="download-dropdown w-dropdown">
                         <div class="download-dropdown-toggle w-dropdown-toggle"><img

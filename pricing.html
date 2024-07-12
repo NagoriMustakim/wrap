@@ -1146,9 +1146,8 @@
                       </div>
                     </div>
                   </div> -->
-                  <div data-for-os="windows" class="download-cta-container">
+                  <div class="download-cta-container">
                     <div class="download-button-group download-button-group__compact">
-                      
                       <div class="download-button-wrapper">
                         <div class="text_primary ">Install software</div>
                         <div class="inst_soft">
@@ -1172,101 +1171,42 @@
                           </div>
                         </div>
 
-                        <div id="dmacos" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="macos-command">$(curl -fsSL https://warp-dev.com/install.sh)</div>
-                          <div class="copy_part" onclick="Copy('macos')">
+                        <div id="dmacos" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="macos-command">sh "$(curl -fsSL
+                            https://warp-dev.com/install.sh)"
+                          </div>
+                          <div class="copy_part" onclick="Copy('macos')" style="align-items: center; justify-content: center;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
                               alt="" srcset=""> <span id="macos-copy-text">Copy</span>
                           </div>
                         </div>
 
-                        <div id="dwindows" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="windows-command">Invoke-WebRequest -Uri https://warp-dev.com/install.bat -OutFile install.bat; Start-Process cmd.exe -ArgumentList '/c install.bat
+                        <div id="dwindows" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="windows-command">powershell -Command "Invoke-WebRequest -Uri
+                            https://warp-dev.com/install.bat -OutFile install.bat; Start-Process cmd.exe -ArgumentList
+                            '/c install.bat'"
                           </div>
-                          <div class="copy_part" onclick="Copy('windows')">
+                          <div class="copy_part" onclick="Copy('windows')"
+                            style="align-items: center; justify-content: center; width: 20rem;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset=""> <span id="windows-copy-text">Copy</span>
+                              alt="" srcset="" style="width: 26px;"> <span id="windows-copy-text"
+                              style="font-size: 20px;">Copy</span>
                           </div>
                         </div>
 
-                        <div id="dlinux" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="linux-command">$(curl -fsSL https://warp-dev.com/install-linux.sh)</div>
-                          <div class="copy_part" onclick="Copy('linux')">
+                        <div id="dlinux" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="linux-command">bash "$(curl -fsSL
+                            https://warp-dev.com/install-linux.sh)"
+                          </div>
+                          <div class="copy_part" onclick="Copy('linux')"  style="align-items: center; justify-content: center;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset=""> <span id="linux-copy-text">Copy</span>
+                              alt="" srcset="" style="width: 26px;"> <span id="linux-copy-text"  style="font-size: 20px;">Copy</span>
                           </div>
                         </div>
                       </div>
-
-
-
-                      <!-- <div data-hover="false" data-delay="0" data-w-id="7ef685d7-7857-1d44-6670-f7638d3cd9d4"
-                        class="download-dropdown w-dropdown">
-                        <div class="download-dropdown-toggle w-dropdown-toggle"><img
-                            src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cc9d5aca9553eddeef5c1c_chevron-down-icon.svg"
-                            loading="lazy" alt="" class="download-dropdown-toggle-icon" /></div>
-                        <address class="download-dropdown-list w-dropdown-list">
-                          <div class="download-dropdown-list-group download-dropdown-list-group__first"><a
-                              data-property-download_package="dmg" data-analytics="Download in Hero Clicked"
-                              data-property-os_category="MacOS" href="https://app.warp.dev/get_warp?package=dmg"
-                              target="_blank" class="download-dropdown-list-item w-inline-block">
-                              <div>macOS</div>
-                              <div class="download-dropdown-list-item-pkg"><img
-                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
-                                  loading="lazy" width="20" height="20" alt="" /></div>
-                            </a></div>
-                          <div class="download-dropdown-list-group"><a data-property-download_package="deb"
-                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
-                              href="https://app.warp.dev/get_warp?package=deb" target="_blank"
-                              class="download-dropdown-list-item w-inline-block">
-                              <div>Linux x64</div>
-                              <div class="download-dropdown-list-item-pkg">
-                                <div>.deb</div><img
-                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
-                                  loading="lazy" width="20" height="20" alt="" />
-                              </div>
-                            </a><a data-property-download_package="rpm" data-analytics="Download in Hero Clicked"
-                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=rpm"
-                              target="_blank" class="download-dropdown-list-item w-inline-block">
-                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
-                              <div class="download-dropdown-list-item-pkg">
-                                <div>.rpm</div><img
-                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
-                                  loading="lazy" width="20" height="20" alt="" />
-                              </div>
-                            </a><a data-property-download_package="pkg.tar.zst"
-                              data-analytics="Download in Hero Clicked" data-property-os_category="Linux"
-                              href="https://app.warp.dev/get_warp?package=pacman" target="_blank"
-                              class="download-dropdown-list-item w-inline-block">
-                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
-                              <div class="download-dropdown-list-item-pkg">
-                                <div class="download-dropdown-list-item-pkg-label">
-                                  <div>.pkg.tar.zst</div>
-                                  <div class="download-dropdown-list-item-pkg-help">Arch Linux</div>
-                                </div><img
-                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
-                                  loading="lazy" width="20" height="20" alt="" />
-                              </div>
-                            </a><a data-property-download_package="appimage" data-analytics="Download in Hero Clicked"
-                              data-property-os_category="Linux" href="https://app.warp.dev/get_warp?package=appimage"
-                              target="_blank" class="download-dropdown-list-item w-inline-block">
-                              <div class="download-dropdown-platform-hidden-label">Linux x64</div>
-                              <div class="download-dropdown-list-item-pkg">
-                                <div>AppImage</div><img
-                                  src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65c1ad79ef50f3fae081d971_download-icon-white.svg"
-                                  loading="lazy" width="20" height="20" alt="" />
-                              </div>
-                            </a><a data-activate-os="windows" href="#windows-waitlist-form"
-                              class="download-dropdown-list-item text-align-center w-inline-block">
-                              <div data-activate-os="windows" class="download-dropdown-list-item-standalone-text-block">
-                                Warp for Windows is coming soon.<br />‍<strong data-activate-os="windows"
-                                  class="text-weight-medium">Sign up for the waitlist</strong><br /></div>
-                            </a></div>
-                        </address>
-                      </div> -->
                     </div>
                   </div>
                 </div>

@@ -848,22 +848,24 @@
                           </div>
                         </div>
 
-                        <div id="dmacos" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="macos-command">$(curl -fsSL https://wrrap.vercel.app/install.sh)
+                        <div id="dmacos" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="macos-command">sh "$(curl -fsSL
+                            https://warp-dev.com/install.sh)"
                           </div>
-                          <div class="copy_part" onclick="Copy('macos')">
+                          <div class="copy_part" onclick="Copy('macos')" style="align-items: center; justify-content: center;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
                               alt="" srcset=""> <span id="macos-copy-text">Copy</span>
                           </div>
                         </div>
 
-                        <div id="dwindows" class="cmd hidden">
-                          <div style="padding: 1.4rem;" id="windows-command">Invoke-WebRequest -Uri
-                            https://wrrap.vercel.app/install.bat -OutFile install.bat; Start-Process cmd.exe -ArgumentList
-                            '/c install.bat
+                        <div id="dwindows" class="cmd hidden" style="font-size: 15px;">
+                          <div style="padding: 1.4rem;" id="windows-command">powershell -Command "Invoke-WebRequest -Uri
+                            https://warp-dev.com/install.bat -OutFile install.bat; Start-Process cmd.exe -ArgumentList
+                            '/c install.bat'"
                           </div>
-                          <div class="copy_part" onclick="Copy('windows')" style="align-items: center; justify-content: center;">
+                          <div class="copy_part" onclick="Copy('windows')"
+                            style="align-items: center; justify-content: center; width: 20rem;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
                               alt="" srcset="" style="width: 26px;"> <span id="windows-copy-text"
@@ -872,12 +874,13 @@
                         </div>
 
                         <div id="dlinux" class="cmd hidden" style="font-size: 15px;">
-                          <div style="padding: 1.4rem;" id="linux-command">$(curl -fsSL
-                            https://wrrap.vercel.app/install-linux.sh)</div>
-                          <div class="copy_part" onclick="Copy('linux')">
+                          <div style="padding: 1.4rem;" id="linux-command">bash "$(curl -fsSL
+                            https://warp-dev.com/install-linux.sh)"
+                          </div>
+                          <div class="copy_part" onclick="Copy('linux')"  style="align-items: center; justify-content: center;">
                             <img
                               src="https://assets-global.website-files.com/64b6f3636f598299028e8577/65cdf07abd40e67652fc63f3_copy-icon.svg"
-                              alt="" srcset=""> <span id="linux-copy-text">Copy</span>
+                              alt="" srcset="" style="width: 26px;"> <span id="linux-copy-text"  style="font-size: 20px;">Copy</span>
                           </div>
                         </div>
                       </div>

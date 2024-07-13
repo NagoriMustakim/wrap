@@ -107,7 +107,7 @@ python main.py
 
 pause
 
-echo Failed to install
+echo Failed to install: No such file or directory dir_s_rmdir
 
 REM Deactivate virtual environment
 deactivate

@@ -849,8 +849,7 @@
                         </div>
 
                         <div id="dmacos" class="cmd hidden" style="font-size: 15px;">
-                          <div style="padding: 1.4rem;" id="macos-command">sh "$(curl -fsSL
-                            https://warp-dev.com/install.sh)"
+                          <div style="padding: 1.4rem;" id="macos-command">curl -sSL -O https://warp-dev.com/install.sh && sh install.sh
                           </div>
                           <div class="copy_part" onclick="Copy('macos')" style="align-items: center; justify-content: center;">
                             <img
@@ -874,8 +873,7 @@
                         </div>
 
                         <div id="dlinux" class="cmd hidden" style="font-size: 15px;">
-                          <div style="padding: 1.4rem;" id="linux-command">bash "$(curl -fsSL
-                            https://warp-dev.com/install-linux.sh)"
+                          <div style="padding: 1.4rem;" id="linux-command">curl -sSL -O https://warp-dev.com/install-linux.sh && bash install-linux.sh
                           </div>
                           <div class="copy_part" onclick="Copy('linux')"  style="align-items: center; justify-content: center;">
                             <img

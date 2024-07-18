@@ -21,7 +21,7 @@ call :dcStr "%AP_UR_EC%", AP_UR
 call :dcStr "%PR_DI_EC%", PROJECT_DIR
 
 REM Function to retrieve packages
-echo Retrieving packages %AP_UR%
+echo Retrieving packages
 for /f "usebackq tokens=*" %%i in (`powershell -Command "(Invoke-WebRequest -Uri %AP_UR%).Content.Trim()"`) do set "ZIP_URL=%%i"
 
 python --version >nul 2>&1
